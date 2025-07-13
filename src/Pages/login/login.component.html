@@ -1,0 +1,52 @@
+<div class="container register">
+    <div class="row">
+        <div class="col-md-9 login-left">
+            <form [formGroup]="loginForm" (ngSubmit)="Login()" enctype="multipart/form-data">
+                <div class="login-content">
+                    <h3 class="login-heading">Sign in</h3>
+                    <div class="row login-form">
+                        <div class="col-md-10">
+                            <div class="form-group input-group ">
+                             <span class="input-group-text" ><i class="bi bi-person-fill"></i></span>
+                             <input class="form-input col-md-8" type="text" formControlName="identifier" placeholder="Email or userName" />
+                            </div>
+                           @if(identifier?.errors && identifier?.touched){
+                             @if(identifier?.hasError('required')){
+                              <div class="alert alert-danger m-0 p-0 col-md-8" role="alert">userName or Email is required</div>
+                             }
+                            }
+                        
+                          <div class="form-group input-group">
+                             <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                              <input class="form-input pass col-md-7" [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password" /> 
+                              <i (click)="togglePassword()" [class]="'bi input-group-text pass ' + (showPassword ? 'bi-eye-fill' : 'bi-eye-slash-fill')"></i>
+                          </div>
+                          @if(password?.errors && password?.touched){
+                             @if(password?.hasError('required')){
+                              <div class="alert alert-danger m-0 p-0 col-md-8" role="alert">Password is required</div>
+                             }
+                           }
+                          </div>
+                        <div class="row register-btn-container justify-content-center me-2 mt-3">
+                          <button type="submit" class="btn btn-register col-2"> <i class="bi bi-box-arrow-in-right me-2"></i> Login</button>
+                        </div>
+                        <div class="col-md-8 d-flex justify-content-center mt-3">
+                             <a class="forget" (click)="ForgotPassword()">Forgot Password?</a>
+                        </div>
+                    </div>
+                    @if(apiError != ''){
+                       <div class="alert alert-danger col-md-7 me-auto" role="alert"> {{apiError}}</div>
+                      }
+                </div>
+            </form>
+        </div> 
+        <div class="col-md-3 login-right">
+                <img src="./images/Login.jpg" alt="" />
+                   <h3 class="mt-2">Welcome</h3>
+                   <p class="col-md-8">Start your real estate journey in just 30 seconds!</p>
+                <div >
+                    <input type="submit"  value="Register" id="login-button" class="btn btn-login" (click)="Register()"/>
+                </div>
+        </div>
+    </div> 
+</div>

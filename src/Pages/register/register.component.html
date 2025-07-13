@@ -1,0 +1,151 @@
+<div class="container register">
+    <div #overlay class="overlay">
+        @if(!registrationSuccess){
+           <div  #doorLeft  class="w-100 h-100 d-flex justify-content-end register-door-left">
+                <img src="./images/registerdoorLEFT.jpg" alt="" >
+           </div>
+           <div #doorRight (click)="openDoor()" class="d-flex justify-content-start w-100 h-100 register-door-right">
+                <img src="./images/registerdoorright.jpg" alt="" >
+           </div>
+        }@else{
+          <div class="register-key show">
+                <img src="./images/getkey.jpg" alt="">
+                <h5 class="text-success">Register Successfully!</h5>
+          </div>
+        }
+           
+    </div>
+    <div class="row">
+        <div class="col-md-9 register-left">
+            <form [formGroup]="registerForm" (ngSubmit)="Register()" enctype="multipart/form-data">
+                <div class="register-role row justify-content-end">
+                  <div class="role col-md-4 d-flex justify-content-end">
+                    <div class="role-toggle">
+                      <input type="radio" id="owner" value="Owner" (change)="updateRole('Owner')" [checked]="selectedRole === 'Owner'" />
+                      <label for="owner">Owner</label>
+                      <input type="radio" id="renter" value="Renter" (change)="updateRole('Renter')" [checked]="selectedRole === 'Renter'" />
+                      <label for="renter">Renter</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="register-content">
+                    <h3 class="register-heading">Register as a {{selectedRole}}</h3>
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                           <div class="form-group col-md-8">
+                             <input class="form-input" type="text" formControlName="firstName" placeholder="First Name" />
+                           </div>
+                           @if(firstName?.errors && firstName?.touched){
+                             @if(firstName?.hasError('required')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">First Name is required</div>
+                             }@else if(firstName?.hasError('minlength')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">Min Length is 3</div>
+                             }@else if(firstName?.hasError('maxlength')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">Max Length is 20</div>
+                             }@else if(firstName?.hasError('pattern')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">First Name is alphabet letters only</div>
+                             }
+                           }
+
+                           <div class="form-group col-md-8">
+                             <input class="form-input" type="text" formControlName="lastName" placeholder="Last Name" />
+                           </div>
+                           @if(lastName?.errors && lastName?.touched){
+                             @if(lastName?.hasError('required')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">Last Name is required</div>
+                             }@else if(lastName?.hasError('minlength')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">Min Length is 3</div>
+                             }@else if(lastName?.hasError('maxlength')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">Max Length is 20</div>
+                             }@else if(lastName?.hasError('pattern')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">Last Name is alphabet letters only</div>
+                             }
+                           }
+
+                           <div class="form-group col-md-8">
+                             <input class="form-input" type="text" formControlName="userName" placeholder="User Name" />
+                           </div>
+                           @if(userName?.errors && userName?.touched){
+                             @if(userName?.hasError('required')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">User Name is required</div>
+                             }@else if(userName?.hasError('minlength')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">Min Length is 3</div>
+                             }@else if(userName?.hasError('maxlength')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">Max Length is 20</div>
+                             }@else if(userName?.hasError('pattern')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">User Name is alphabet letters and numbers and specail characters</div>
+                             }
+                           }
+
+                           <div class="form-group col-md-8">
+                             <input class="form-input" type="text" formControlName="phone" placeholder="phone" />
+                           </div>
+                           @if(phone?.errors && phone?.touched){
+                             @if(firstName?.hasError('pattern')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">phone ex 01xxxxxxxxx </div>
+                             }
+                            }
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group col-md-8">
+                             <input class="form-input" type="text" formControlName="email" placeholder="Email" />
+                           </div>
+                           @if(email?.errors && email?.touched){
+                             @if(email?.hasError('required')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">Email is required</div>
+                             }@else if(email?.hasError('email')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">Email invalid</div>
+                             }
+                           }
+
+                          <div class="form-group col-md-8 pass">
+                              <input class="form-input" [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password" /> 
+                              <i (click)="togglePassword()" [class]="'bi ' + (showPassword ? 'bi-eye-fill' : 'bi-eye-slash-fill')"></i>
+                          </div>
+                          @if(password?.errors && password?.touched){
+                             @if(password?.hasError('required')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">Password is required</div>
+                             }@else if(password?.hasError('pattern')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">Password must be at least 8 characters long, include uppercase, lowercase, number, and special character.</div>
+                             }
+                           }
+
+                          <div class="form-group col-md-8 ">
+                              <input class="form-input" [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword" placeholder="confirmPassword" /> 
+                              <i (click)="toggleConfirmPassword()" [class]="'bi ' + (showConfirmPassword ? 'bi-eye-fill' : 'bi-eye-slash-fill')"></i>
+                          </div>
+                          @if(confirmPassword?.errors && confirmPassword?.touched){
+                             @if(confirmPassword?.hasError('required')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">confirmPassword is required</div>
+                             }@else if(confirmPassword?.hasError('misMatch')){
+                              <div class="alert alert-danger m-0 p-0 col-6" role="alert">confirmPassword is misMatch</div>
+                             }
+                           }
+
+                           <div class="form-group col-md-8">
+                              <label class="custom-file-upload">
+                                Upload Image
+                                <input type="file" id="file-input" (change)="updateFileName($event)" accept=".jpg,.jpeg,.png,.gif,.webp" />
+                              </label>
+                              <span class="file-name">{{ fileName }}</span>
+                           </div>
+
+                        </div>
+                        <div class="row register-btn-container justify-content-end">
+                          <button type="submit" class="btn btn-register col-2">Register</button>
+                        </div>
+                    </div>
+                    @if(apiError){
+                       <div class="alert alert-danger col-md-7 " role="alert"> {{apiError}}</div>
+                      }
+                </div>
+            </form>
+        </div> 
+        <div class="col-md-3 register-right">
+                <img src="./images/register.jpg" alt=""/>
+                <div class="d-flex justify-content-end ">
+                    <input type="submit"  value="Login" id="login-button" class="btn btn-login" (click)="Login()"/>
+                </div>
+        </div>
+    </div> 
+</div>

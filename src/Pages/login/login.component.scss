@@ -1,0 +1,116 @@
+.register{
+    border-radius: 20px;
+    background: linear-gradient(to right, #3a74b3 0%, #3a74b3 10%, #7fa8d1 30%, #ffffff 100%);
+    margin-top: 3%;
+    padding: 3%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    position: relative;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+  
+  .login-left {
+      background-color: #ffffff;
+      border-top-right-radius: 12% 50%;
+      border-bottom-right-radius: 12% 50%;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      padding: 20px 10px;
+
+      .login-content{
+        padding-top: 40px;
+        .login-heading{
+          font-size: 28px;
+          font-family:sans-serif;
+        
+        }
+        .login-form{
+          display: flex;
+          flex-direction: column;
+          margin-top: 60px;
+          align-items: center;
+          justify-content: center;
+          .form-input {
+            outline: none;
+            border: 0.1px solid #d3d0d0;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            padding: 10px;
+           }
+           .form-input.pass{
+            border-right: none;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border: 0.1px solid #d3d0d0;
+           }
+          .form-input:focus {
+            outline: none;
+          }
+         .form-group {
+            margin-bottom: 5px;
+            margin-top: 5px;
+           i{
+             color: #d3d0d0;
+           }
+           .input-group-text.pass{
+            border-left: none;
+            background-color: #ffffff;
+           }
+          }
+          
+         .register-btn-container {
+            width: 90%;
+            .btn-register {
+            background-color: #3a74b3;
+            color: white;
+            margin-left: 5px;
+            margin-top: 5px;
+
+            &:hover{
+              background-color: #2a5a8b;
+              color: white;
+            }
+           }
+          }
+          .forget{
+            color: #3a74b3;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 10px;
+            text-decoration: none;
+            &:hover{
+              color: #2a5a8b;
+              text-decoration: underline;
+            }
+          }
+          
+        }
+      }
+
+   }
+
+  .login-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+
+    img{
+      width: 80%;
+    }
+    .btn-login {
+      background-color: #3a74b3;
+      color: white;
+      margin-left: 5px;
+      margin-top: 5px;
+
+      &:hover{
+        background-color: #2a5a8b;
+         color: white;
+      }
+    }
+
+  }
+}

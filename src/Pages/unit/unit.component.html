@@ -1,0 +1,31 @@
+<div class="card-unit">
+    <img [src]="currentImage" loading="lazy" type="image/webp" alt="Unit Image">
+
+    <div class="overlay">
+        <p><i class="bi bi-geo-alt-fill"></i> Location: {{item()?.street}}, {{item()?.area}}</p>
+        <p><i class="bi bi-activity"></i> Status: {{item()?.status}}</p>
+        <a [routerLink]="'/details/' + item()?.id">Details</a>
+    </div>
+
+    <div class="price">
+       <p>{{item()?.price}}EGP</p>
+    </div>
+    <div class="btn-group">
+      <button (click)="onEdit()" > <i class="bi bi-pencil"></i></button>
+      <button (click)="onDeleteClick()"><i class="bi bi-trash"></i></button>
+    </div>
+
+</div>
+
+@if (showDeleteConfirm) {
+    <div class="popup-delete ">
+      <p>Are you Sure you want delete it?</p>
+      <div class="btn-group">
+        <button type="button" class="btn btn-danger" (click)="onConfirmDelete()">Yes</button>
+        <button type="button" class="btn btn-light" (click)="onCancelDelete()">No</button>
+      </div>
+    </div>
+}
+
+
+

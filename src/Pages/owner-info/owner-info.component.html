@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="Usercontent">
+        <div class="image">
+           <img [src]="'http://localhost:5267/Images/' + user?.image"alt="">
+        </div>
+        <div>
+            <p><strong>User Name:</strong> {{ user?.userName }}</p>
+            <p><strong>First Name:</strong> {{ user?.firstName }}</p>
+            <p><strong>Last Name:</strong> {{ user?.lastName }}</p>
+            <p><strong>Email:</strong> {{ user?.email }}</p>
+            <p><strong>Phone:</strong> {{user?.phoneNumber}}</p>
+        </div>
+        <!-- <div class="btn-edit">
+             <button (click)="toggleEdit()">
+               <i class="bi bi-pencil"></i> Edit
+             </button>
+        </div> -->
+    </div>
+   
+</div>

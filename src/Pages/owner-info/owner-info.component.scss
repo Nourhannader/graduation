@@ -1,0 +1,45 @@
+.Usercontent{
+    width: 30%;
+    margin: 40px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+    background-color: rgba(234, 238, 243, 0.5);
+    border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -ms-border-radius: 40px;
+    -o-border-radius: 40px;
+
+    .image{
+        margin-bottom: 20px;
+       img{
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        }
+    }
+    .btn-edit{
+        button{
+            outline: none;
+            border: none;
+            color: white;
+            background-color: #3a74b3;
+            padding: 5px 15px;
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            -o-border-radius: 20px;
+            
+            &:hover{
+                background-color: #2965a5;
+            }
+        }
+    }
+}
