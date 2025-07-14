@@ -1,3 +1,15 @@
 .unit-content{
     position: relative;
 }
+.btn-filter{
+    background-color:gainsboro;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}

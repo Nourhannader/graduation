@@ -1,7 +1,9 @@
 import { log } from 'console';
 import { Unit } from '../../Interface/unit';
-import { Component, inject, input, OnInit, OnDestroy, ElementRef } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject, Input, OnInit, OnDestroy, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { nextTick } from 'process';
+import { UnitsService } from '../../Service/units.service';
 
 @Component({
   selector: 'app-unit',
@@ -10,7 +12,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './unit.component.scss'
 }) 
 export class UnitComponent implements OnInit,OnDestroy {
-  item=input<Unit>()
+  @Input() item!: Unit;
   currentImage: string = '';
   private imageIndex = 0;
   private imageInterval: any;
@@ -18,10 +20,14 @@ export class UnitComponent implements OnInit,OnDestroy {
   showDeleteConfirm : boolean = false;
   private observer?: IntersectionObserver;
 
+
+  _unitsService = inject(UnitsService);
+  _router = inject(Router);
+
   constructor(private elRef: ElementRef) {}
   
   ngOnInit(): void {
-    const unit = this.item();
+    const unit = this.item;
     if(!unit) return;
 
     this.images = unit
@@ -69,8 +75,19 @@ export class UnitComponent implements OnInit,OnDestroy {
   }
 
   onConfirmDelete() {
-  const unit = this.item();
-  console.log('Confirmed delete for:', unit);
+  const unit = this.item;
+  //call api
+  if (unit) {
+    this._unitsService.deleteUnit(unit.id).subscribe({
+      next:(res) => {
+        console.log('Unit deleted successfully:', res);
+        //this._router.navigate(['userHome/units']);
+        //this.onDelete.emit(unit.id); // Emit the deleted unit's ID
+      },error:(err) => {
+        console.error('Error deleting unit:', err);
+      }
+    });
+  }
   this.showDeleteConfirm = false;
   }
 

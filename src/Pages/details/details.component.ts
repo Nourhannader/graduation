@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Unit } from '../../Interface/unit';
 import { ActivatedRoute } from '@angular/router';
 import { UnitsService } from '../../Service/units.service';
+import { log } from 'node:console';
 
 @Component({
   selector: 'app-details',
@@ -22,15 +23,26 @@ export class DetailsComponent implements OnInit{
 
   ngOnInit(): void {
     this.unitId=Number(this._ActivatedRoute.snapshot.paramMap.get('id'));
-    this.unit=this._UnitsService.getUnitById(this.unitId)
-    if(!this.unit) return
-    this.images = this.unit
+    this._UnitsService.getUnitById(this.unitId).subscribe({
+      next:(data)=>{
+        this.unit=data;
+        console.log(this.unit);
+
+        if(!this.unit) return
+        this.images = this.unit
       ? [this.unit.image1, this.unit.image2, this.unit.image3].filter(img => !!img) as string[]
       : [];
 
       if (this.images.length > 0) {
       this.currentImage = this.images[0];
       }
+  
+      },
+      error:(err)=>{
+        console.error('Error fetching unit details:', err);
+      }
+    })
+    
 
   }
 

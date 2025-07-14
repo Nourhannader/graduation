@@ -1,8 +1,11 @@
-<div class="container mt-4">
+<div class="container mt-2">
+    <div class="d-flex justify-content-end mb-3">
+        <button class="btn-filter">Filter</button>
+    </div>
      <div class="row row-cols-1 row-cols-md-4 g-4 unit-content  ">
        @for (unit of units;track $index) {
         <div class="col ">
-            <app-unit [item]="unit"></app-unit>
+            <app-unit  [item]="unit"></app-unit>
         </div>
     }
     </div>

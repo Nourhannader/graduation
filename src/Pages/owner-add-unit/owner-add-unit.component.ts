@@ -37,6 +37,15 @@ export class OwnerAddUnitComponent {
   } )
 
 
+selectedImages: { [key: string]: File } = {};
+
+onFileSelected(event: any, imageKey: string) {
+  const file: File = event.target.files[0];
+  if (file) {
+    this.selectedImages[imageKey] = file;
+  }
+}
+
 //////////////////
    apiError:string=''
   //_authService=inject(AuthService)
@@ -66,25 +75,25 @@ export class OwnerAddUnitComponent {
         formData.append('flatNumber',this.AddUnitForm.get('flatNumber')?.value)
       }
 
-      if(this.AddUnitForm.get('renterSSN')?.value!=null)
-      {
-        formData.append('renterSSN',this.AddUnitForm.get('renterSSN')?.value)
+      if (
+        this.AddUnitForm.get('renterSSN')?.value != null &&
+        this.AddUnitForm.get('status')?.value === 'Busy' &&
+        this.AddUnitForm.get('renterSSN')?.value !== '' &&
+        this.AddUnitForm.get('renterSSN')?.value !== 'null' &&
+        this.AddUnitForm.get('renterSSN')?.value !== 'undefined'
+      ) {
+        formData.append('renterSSN', this.AddUnitForm.get('renterSSN')?.value);
       }
 
-      if(this.AddUnitForm.get('image1')?.value!=null)
-      {
-        formData.append('image1',this.AddUnitForm.get('image1')?.value)
+      if (this.selectedImages['image1']) {
+        formData.append('image1', this.selectedImages['image1']);
       }
-
-      if(this.AddUnitForm.get('image2')?.value!=null)
-      {
-        formData.append('image2',this.AddUnitForm.get('image2')?.value)
-      }
-
-      if(this.AddUnitForm.get('image3')?.value!=null)
-      {
-        formData.append('image3',this.AddUnitForm.get('image3')?.value)
-      }
+      if (this.selectedImages['image2']) {
+      formData.append('image2', this.selectedImages['image2']);
+     }
+    if (this.selectedImages['image3']) {
+     formData.append('image3', this.selectedImages['image3']);
+    }
 
 
       console.log(formData)

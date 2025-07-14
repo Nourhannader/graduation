@@ -172,13 +172,13 @@
             }
     </div>
     <div class="singleInputDiv">
-        <input formControlName="image1" type="file" class="form-control mb-3" id="image1Input" placeholder="first image">
+        <input formControlName="image1" type="file" class="form-control mb-3" id="image1Input" placeholder="first image" (change)="onFileSelected($event, 'image1')">
     </div>
     <div class="singleInputDiv">
-        <input formControlName="image2" type="file" class="form-control mb-3" id="image2Input" placeholder="second image">
+        <input formControlName="image2" type="file" class="form-control mb-3" id="image2Input" placeholder="second image" (change)="onFileSelected($event, 'image2')">
     </div>
     <div class="singleInputDiv">
-        <input formControlName="image3" type="file" class="form-control mb-3" id="image3Input" placeholder="third image">
+        <input formControlName="image3" type="file" class="form-control mb-3" id="image3Input" placeholder="third image" (change)="onFileSelected($event, 'image3')">
     </div>
 
     @if(AddUnitForm.get('status')?.value=='busy')

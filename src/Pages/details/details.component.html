@@ -3,7 +3,7 @@
        <div class="row content">
           <div class="col-4 slider-image">
             <div>
-              <img  [src]="currentImage" alt="Image" />
+              <img  [src]="'http://localhost:5267/Images/' + currentImage" alt="Image" />
             </div>
             <div class="slider-controls">
              <button (click)="prevImage()"><i class="bi bi-arrow-left-circle-fill"></i></button>

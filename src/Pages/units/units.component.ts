@@ -3,6 +3,7 @@ import { UnitComponent } from '../unit/unit.component';
 import { Unit } from '../../Interface/unit';
 import { UnitsService } from '../../Service/units.service';
 
+
 @Component({
   selector: 'app-units',
   imports: [UnitComponent],
@@ -20,7 +21,15 @@ export class UnitsComponent implements OnInit {
 
 
   getAll(){
-    this.units=this._unitsService.getAllUnit();
+    this._unitsService.getAllUnit().subscribe({
+      next:(data)=>{
+        this.units=data;
+        console.log(this.units);
+      },error:(err)=>{
+        console.error('Error fetching units:', err);  }
+    });
   }
 
+
+  
 }
