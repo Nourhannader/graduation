@@ -4,7 +4,7 @@
     <div class="overlay">
         <p><i class="bi bi-geo-alt-fill"></i> Location: {{item()?.street}}, {{item()?.area}}</p>
         <p><i class="bi bi-activity"></i> Status: {{item()?.status}}</p>
-        <a [routerLink]="'/details/' + item()?.id">Details</a>
+        <a [routerLink]="'/ownerHome/details/' + item()?.id">Details</a>
     </div>
 
     <div class="price">

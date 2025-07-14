@@ -10,18 +10,20 @@ import { OwnerComponent } from '../Pages/owner/owner.component';
 import { OwnerAddUnitComponent } from '../Pages/owner-add-unit/owner-add-unit.component';
 
 export const routes: Routes = [
-    {path:'',redirectTo:'units',pathMatch:"full"},
-    {path:'units',loadComponent:() => import('../Pages/units/units.component').then(m => m.UnitsComponent)},
-    {path:'details/:id',component:DetailsComponent},
+    {path:'',redirectTo:'ownerHome',pathMatch:"full"}, 
     {path:'register',component:RegisterComponent},
     {path:'login',component:LoginComponent},
-    {path:'owner',loadComponent: () => import('../Pages/owner-info/owner-info.component').then(m => m.OwnerInfoComponent)},
     // /////////////////////////////
-    { path: 'ownerHome', component: OwnerComponent, title:"Owner Home"},
+    { path: 'ownerHome', component: OwnerComponent, title:"Owner Home",children:[
+        {path:'',redirectTo:'owner',pathMatch:"full"},
+        {path:'units',loadComponent:() => import('../Pages/units/units.component').then(m => m.UnitsComponent)},
+        {path:'details/:id',component:DetailsComponent},
+        {path:'owner',loadComponent: () => import('../Pages/owner-info/owner-info.component').then(m => m.OwnerInfoComponent)},
+        { path: 'EditCommunity', component: OwnerEditCommunityComponent, title:"Edit Community"},
+        { path: 'AddUnit', component: OwnerAddUnitComponent, title:"Add Unit"},
+    ]},
 
-    { path: 'EditCommunity', component: OwnerEditCommunityComponent, title:"Edit Community"},
-
-    { path: 'AddUnit', component: OwnerAddUnitComponent, title:"Add Unit"},
+   
 
     
 

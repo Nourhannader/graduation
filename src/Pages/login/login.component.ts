@@ -56,7 +56,7 @@ export class LoginComponent {
       next:(response)=>{
         console.log(response);
           localStorage.setItem('token',response.token);
-          this._router.navigate(['/']);
+          this._router.navigate(['/ownerHome']);
       },error:(err)=>{
         console.log(err);
         this.apiError=err.error.Error[0];
