@@ -1,10 +1,14 @@
+import { Observable } from 'rxjs';
 import { Unit } from '../Interface/unit';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UnitsService {
+
+  _HttpClient=inject(HttpClient)
 
   constructor() { }
 
@@ -87,5 +91,13 @@ getUnitById(id:number):Unit | undefined {
   const units: Unit[] = this.getAllUnit();
   return units.find(u => u.id === id);
 }
+
+  AddUnit(info:FormData):Observable<any>{
+      const headers=new HttpHeaders().set('Authorization',`Bearer ${localStorage.getItem("token")}`);
+
+      return this._HttpClient.post('http://localhost:5267/api/Unit',info,{headers});
+  }
+
+
 
 }

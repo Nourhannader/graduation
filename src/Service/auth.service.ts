@@ -11,8 +11,9 @@ export class AuthService {
   constructor() { }
 
   register(info:FormData):Observable<any>{
-     return this._HttpClient.post('http://localhost:5267/api/Account/Register',info);
+      return this._HttpClient.post('http://localhost:5267/api/Account/Register',info);
   }
+
   Login(info:UserLogin):Observable<any>{
     return this._HttpClient.post('http://localhost:5267/api/Account/Login',info);
   }
