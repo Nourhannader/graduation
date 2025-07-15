@@ -1,6 +1,6 @@
 import { log } from 'console';
 import { Unit } from '../../Interface/unit';
-import { Component, inject, Input, OnInit, OnDestroy, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, inject, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { nextTick } from 'process';
 import { UnitsService } from '../../Service/units.service';
@@ -81,8 +81,7 @@ export class UnitComponent implements OnInit,OnDestroy {
     this._unitsService.deleteUnit(unit.id).subscribe({
       next:(res) => {
         console.log('Unit deleted successfully:', res);
-        //this._router.navigate(['userHome/units']);
-        //this.onDelete.emit(unit.id); // Emit the deleted unit's ID
+        
       },error:(err) => {
         console.error('Error deleting unit:', err);
       }

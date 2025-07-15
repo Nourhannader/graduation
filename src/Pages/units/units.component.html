@@ -1,6 +1,32 @@
 <div class="container mt-2">
-    <div class="d-flex justify-content-end mb-3">
-        <button class="btn-filter">Filter</button>
+    <div class="d-flex justify-content-between mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search units..." (input)="updateSearch($event)">
+                <span class="input-group-text" (click)="searchUnits()"><i class="bi bi-search"></i></span>
+            </div>
+            <div class="filter">
+                <button class="btn-filter" (click)="toggleFilters()" >Filter</button>
+                @if(showFilters){
+                    <div class="filter-options">
+                     <p> <input type="radio" name="all" value="all" (change)="selectAll()"> ALL</p>
+                    <div>
+                        Status:
+                        <ul class="list-unstyled">
+                            <li><input type="radio" name="status" value="Empty" (change)="updateStatus($event)"> Empty</li>
+                            <li><input type="radio" name="status" value="Busy" (change)="updateStatus($event)"> Busy</li>
+                        </ul>
+                    </div>
+                    <div>
+                        Type:
+                        <ul class="list-unstyled">
+                            <li><input type="radio" name="type" value="For Rent" (change)="updateType($event)" > For Rent</li>
+                            <li><input type="radio" name="type" value="For Sale" (change)="updateType($event)" > For Sale</li>
+                        </ul>
+                    </div>
+                    <button class="btn-apply" (click)="filterUnits()" >Apply</button>
+                </div>
+                }
+            </div>
     </div>
      <div class="row row-cols-1 row-cols-md-4 g-4 unit-content  ">
        @for (unit of units;track $index) {

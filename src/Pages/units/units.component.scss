@@ -13,3 +13,51 @@
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
 }
+.input-group {
+    width: 400px;
+
+    input{
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+.filter{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .filter-options{
+        position: absolute;
+        width: 300px;
+        background-color: gainsboro;
+        margin-top: 15px;
+        top: 100%;
+        right: 0;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        justify-self: center;
+        align-items: center;
+
+        ul {
+            margin-left: 20px;
+        }
+
+        .btn-apply{
+            background-color: #3a74b3;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            
+            cursor: pointer;
+            &:hover 
+            {
+                background-color: #2d649e;
+            }
+        }
+    }
+}
