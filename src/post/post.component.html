@@ -1,0 +1,77 @@
+<div class="post-card">
+
+  <div *ngIf="error" class="error-message">
+    <i class="fas fa-exclamation-triangle"></i>
+    {{ error }}
+    <button class="close-btn" (click)="error = null">&times;</button>
+  </div>
+
+  <div class="post-header">
+    <img [src]="getUserAvatar(post.userImage)" class="user-avatar">
+    <div class="user-info">
+      <span class="user-name">{{ post.userName }}</span>
+      <span class="post-time">{{ formatDate(post.publishDate) }}</span>
+    </div>
+
+    <div class="post-actions">
+      <button class="actions-btn" (click)="toggleEdit()">
+        <i class="fas fa-edit"></i>
+      </button>
+      <button class="actions-btn" (click)="deletePost()" [disabled]="isDeleting">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="post-content">
+    <p>{{ post.content  }}</p>
+  </div>
+
+  <div *ngIf="post.postImage" class="post-image">
+    <img [src]="post.postImage" alt="Post image">
+  </div>
+
+  <div class="post-stats">
+    <button class="stat-btn" (click)="toggleLike()" [disabled]="isLiking">
+      <i class="fas fa-heart"></i>
+      {{ post.reactCount }}
+    </button>
+
+    <button class="stat-btn" (click)="toggleComments()">
+      <i class="fas" [ngClass]="showComments ? 'fa-comment-dots' : 'fa-comment'"></i>
+      {{ comments.length }}
+    </button>
+  </div>
+
+  <div *ngIf="showComments" class="comment-section">
+
+
+    <div *ngFor="let comment of comments; let i = index" class="comment">
+      <img [src]="getUserAvatar(comment.userImage)" class="comment-avatar">
+      <div class="comment-content">
+        <div class="comment-header">
+          <span class="comment-user">{{ comment.userName }}</span>
+          <span class="comment-time">{{ formatDate(comment.publishDate) }}</span>
+        </div>
+        <p>{{ comment.content }}</p>
+        <button class="delete-comment-btn" (click)="deleteComment(comment.commentId, i)">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="add-comment">
+      <input
+        type="text"
+        [(ngModel)]="newComment"
+        placeholder="Write a comment..."
+        (keyup.enter)="addComment()"
+        [disabled]="isAddingComment">
+      <button class="send-comment-btn"
+              (click)="addComment()"
+              [disabled]="!newComment.trim() || isAddingComment">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<!-- Facebook-style Create Post Box -->
+<div
+  class="facebook-post-box d-flex align-items-center justify-content-between"
+  data-bs-toggle="modal"
+  data-bs-target="#createPostModal"
+  style="cursor: pointer;">
+
+  <div class="d-flex align-items-center flex-grow-1">
+    <img src="assets/user-profile.jpg" alt="Profile" class="rounded-circle me-2" width="40" height="40">
+    <input
+      type="text"
+      class="form-control fake-input"
+      placeholder="What's on your mind?"
+      readonly>
+  </div>
+
+  <button type="button" class="btn btn-primary ms-3 photo-btn" style="pointer-events: none;">
+    <i class="fas fa-plus-circle me-1"></i> Photo
+  </button>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content create-post-modal">
+
+      <form (ngSubmit)="addPost()" #postForm="ngForm">
+        <div class="modal-header create-post-header">
+          <h5 class="modal-title create-post-title mb-0" id="createPostModalLabel">Create Post</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body create-post-body">
+
+          <!-- User Info -->
+          <div class="user-info">
+            <img src="user-avatar.jpg" alt="Nahla Mohamed" class="user-avatar">
+            <div>
+              <div class="privacy-badge">
+                <i class="fas fa-globe-americas me-1"></i>Public
+              </div>
+            </div>
+          </div>
+
+          <!-- Error Message -->
+          <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            {{ error }}
+            <button type="button" class="btn-close" (click)="error = null"></button>
+          </div>
+
+          <!-- Textarea -->
+          <div class="post-textarea-container">
+            <textarea
+              id="description"
+              [(ngModel)]="description"
+              name="description"
+              class="form-control post-textarea"
+              placeholder="What's on your mind?"
+              rows="4"
+              required
+              [disabled]="isSubmitting">
+            </textarea>
+          </div>
+
+          <!-- Photo Upload -->
+          <div class="add-photo-section">
+            <label class="photo-upload-label">
+              <i class="fas fa-image me-2"></i>Add Photo
+              <input
+                type="file"
+                id="image"
+                (change)="onFileSelected($event)"
+                accept="image/*"
+                class="d-none"
+                [disabled]="isSubmitting">
+            </label>
+            <div class="photo-hint">Or drag and drop</div>
+            <div class="photo-hint">Or paste image URL here...</div>
+          </div>
+
+          <!-- Image Preview -->
+          <div *ngIf="selectedImageUrl" class="image-preview-container mt-3">
+            <img [src]="selectedImageUrl" class="post-image-preview" alt="Image Preview">
+          </div>
+
+        </div>
+
+        <div class="modal-footer create-post-footer">
+          <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-post"
+            [disabled]="isSubmitting || !description.trim()">
+            <span *ngIf="!isSubmitting">Post</span>
+            <span *ngIf="isSubmitting">
+              <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+              Publishing...
+            </span>
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

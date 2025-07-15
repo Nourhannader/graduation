@@ -1,0 +1,19 @@
+<div class="container">
+  <app-add-post (postAdded)="onPostAdded($event)"></app-add-post>
+
+  <div *ngIf="loading"> Loading....</div>
+  <div *ngIf="error" class="text-danger">{{ error }}</div>
+
+  <div *ngIf="!loading && !error">
+    <div *ngIf="posts.length === 0">there is no posts yet</div>
+
+    <app-post
+      *ngFor="let post of posts"
+      [post]="post"
+      (postDeleted)="onPostDeleted($event)"
+      
+      (postUpdated)="onPostUpdated($event)"
+    >
+  </app-post>
+  </div>
+</div>

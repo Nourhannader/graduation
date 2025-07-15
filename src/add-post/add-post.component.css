@@ -1,0 +1,150 @@
+.facebook-post-box {
+  background: linear-gradient(to right, #3a74b3 0%, #3a74b3 10%, #7fa8d1 30%, #ffffff 100%);
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: 0.3s ease;
+}
+
+.facebook-post-box:hover {
+  opacity: 0.95;
+}
+
+.fake-input {
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-size: 15px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  pointer-events: none; 
+}
+
+.photo-btn {
+  border-radius: 10px;
+  font-weight: 500;
+  pointer-events: none; 
+}
+
+.create-post-modal {
+  border-radius: 10px;
+}
+
+.create-post-header {
+  border-bottom: none;
+  padding: 15px 20px;
+}
+
+.create-post-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.create-post-body {
+  padding: 0 20px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.user-name {
+  font-weight: 600;
+}
+
+.privacy-badge {
+  background: #f0f2f5;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.post-textarea-container {
+  margin-bottom: 15px;
+}
+
+.post-textarea {
+  border: none;
+  resize: none;
+  font-size: 16px;
+  padding: 10px 0;
+  box-shadow: none;
+}
+
+.post-textarea:focus {
+  box-shadow: none;
+}
+
+.add-photo-section {
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.photo-upload-label {
+  display: block;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.photo-hint {
+  color: #65676b;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.image-preview-container {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.post-image-preview {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.create-post-footer {
+  border-top: none;
+  padding: 15px 20px;
+  justify-content: flex-end;
+}
+
+.btn-cancel {
+  background: #f0f2f5;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+}
+
+.btn-post {
+  background: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+}
+
+.btn-post:disabled {
+  background: #e4e6eb;
+  color: #bcc0c4;
+}
+
+.btn-cancel:hover {
+  background: #e4e6eb;
+}
+
+.btn-post:hover:not(:disabled) {
+  background: #166fe5;
+}
