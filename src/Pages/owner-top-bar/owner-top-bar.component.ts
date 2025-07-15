@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AuthService } from '../../Service/auth.service';
-import { Owner } from '../../Interface/owner';
+import { Owner } from '../../interfaces/owner';
+import { AuthService } from '../../Services/auth.service';
+
 
 @Component({
   selector: 'app-owner-top-bar',

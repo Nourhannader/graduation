@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Unit } from '../../Interface/unit';
 import { ActivatedRoute } from '@angular/router';
-import { UnitsService } from '../../Service/units.service';
-import { log } from 'node:console';
+import { UnitsService } from '../../Services/units.service';
+import { Unit } from '../../interfaces/unit';
+
 
 @Component({
   selector: 'app-details',

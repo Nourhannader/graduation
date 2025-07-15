@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../Service/auth.service';
+import { AuthService } from '../../Services/auth.service';
 
 
 @Component({

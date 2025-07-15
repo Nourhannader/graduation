@@ -1,8 +1,9 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../Service/auth.service';
 import { Router } from '@angular/router';
-import { UserLogin } from '../../Interface/user-login';
+import { AuthService } from '../../Services/auth.service';
+import { UserLogin } from '../../interfaces/user-login';
+
 
 
 @Component({

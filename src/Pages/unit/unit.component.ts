@@ -1,9 +1,7 @@
-import { log } from 'console';
-import { Unit } from '../../Interface/unit';
 import { Component, inject, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { nextTick } from 'process';
-import { UnitsService } from '../../Service/units.service';
+import { Unit } from '../../interfaces/unit';
+import { UnitsService } from '../../Services/units.service';
 
 @Component({
   selector: 'app-unit',

@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs';
-import { Unit } from '../Interface/unit';
+
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Unit } from '../interfaces/unit';
 
 @Injectable({
   providedIn: 'root'

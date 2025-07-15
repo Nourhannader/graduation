@@ -2,8 +2,8 @@ import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../Service/auth.service';
-import { UnitsService } from '../../Service/units.service';
+import { UnitsService } from '../../Services/units.service';
+
 
 @Component({
   selector: 'app-owner-add-unit',
@@ -77,7 +77,7 @@ onFileSelected(event: any, imageKey: string) {
 
       if (
         this.AddUnitForm.get('renterSSN')?.value != null &&
-        this.AddUnitForm.get('status')?.value === 'Busy' &&
+        this.AddUnitForm.get('status')?.value === 'busy' &&
         this.AddUnitForm.get('renterSSN')?.value !== '' &&
         this.AddUnitForm.get('renterSSN')?.value !== 'null' &&
         this.AddUnitForm.get('renterSSN')?.value !== 'undefined'

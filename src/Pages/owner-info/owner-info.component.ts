@@ -1,7 +1,8 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, inject, OnInit } from '@angular/core';
-import { Owner } from '../../Interface/owner';
-import { AuthService } from '../../Service/auth.service';
+import { Owner } from '../../interfaces/owner';
+import { AuthService } from '../../Services/auth.service';
+;
 
 @Component({
   selector: 'app-owner-info',

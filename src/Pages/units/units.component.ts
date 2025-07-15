@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UnitComponent } from '../unit/unit.component';
-import { Unit } from '../../Interface/unit';
-import { UnitsService } from '../../Service/units.service';
-import { filter } from 'rxjs';
+import { Unit } from '../../interfaces/unit';
+import { UnitsService } from '../../Services/units.service';
+
+
 
 
 @Component({

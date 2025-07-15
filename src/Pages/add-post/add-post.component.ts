@@ -1,7 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PostService, Post } from '../Services/post.service';
+import { Post, PostService } from '../../Services/post.service';
+
 
 @Component({
   selector: 'app-add-post',

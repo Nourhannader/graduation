@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PostService, Post } from '../Services/post.service';
-import { PostComponent } from '../post/post.component';
+import { PostService, Post } from '../../Services/post.service';
 import { AddPostComponent } from '../add-post/add-post.component';
+import { PostComponent } from '../../post/post.component';
 
 @Component({
   selector: 'app-community',
   standalone: true,
-  imports: [CommonModule, PostComponent, AddPostComponent],
+  imports: [CommonModule,PostComponent, AddPostComponent],
   templateUrl: './community.component.html',
   styleUrls: ['./community.component.css'],
 })
@@ -25,7 +25,7 @@ export class CommunityComponent implements OnInit {
   loadPosts() {
     this.loading = true;
     this.postService.getAllPosts().subscribe({
-      next: (res) => {
+      next: (res: Post[]) => {
         this.posts = res;
         this.loading = false;
       },
