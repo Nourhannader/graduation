@@ -51,7 +51,7 @@ export class AddPostComponent {
     const formData = new FormData();
     formData.append('content', this.description.trim());
     if (this.selectedFile) {
-      formData.append('postImage', this.selectedFile);
+      formData.append('image', this.selectedFile);
     }
 
     this.postService.createPost(formData).subscribe({

@@ -86,7 +86,7 @@ export class PostComponent {
     this.isDeleting = true;
     this.postService.deletePost(this.post.postId).subscribe({
       next: () => {
-        this.postDeleted.emit(this.post.postId);
+        this.postDeleted.emit(String(this.post.postId));
       },
       error: (err) => {
         this.error = 'Error deleting post:';
@@ -99,7 +99,7 @@ export class PostComponent {
   toggleLike() {
     this.isLiking = true;
 
-    this.postService.reactToPost(this.post.postId).subscribe({
+    this.postService.reactToPost(Number(this.post.postId)).subscribe({
       next: (updatedPost) => {
         this.postUpdated.emit(updatedPost);
         this.isLiking = false;
@@ -144,10 +144,11 @@ export class PostComponent {
     this.error = null;
 
     const commentData = {
-      content: this.newComment.trim()
+      content: this.newComment.trim(),
+      postId: this.post.postId
     };
 
-    this.postService.addComment(this.post.postId, commentData).subscribe({
+    this.postService.addComment(commentData).subscribe({
       next: (newComment) => {
         this.comments.push(newComment);
         this.newComment = '';
@@ -164,7 +165,7 @@ export class PostComponent {
 
 
 
-  deleteComment(commentId: string, index: number) {
+  deleteComment(commentId: number, index: number) {
     if (!confirm('  are you sure for deleting comment  ')) return;
 
     this.postService.deleteComment(commentId).subscribe({

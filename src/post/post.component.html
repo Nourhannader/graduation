@@ -28,7 +28,7 @@
   </div>
 
   <div *ngIf="post.postImage" class="post-image">
-    <img [src]="post.postImage" alt="Post image">
+    <img [src]="'http://localhost:5267/Images/' + post.postImage" alt="Post image">
   </div>
 
   <div class="post-stats">

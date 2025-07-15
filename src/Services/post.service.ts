@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Post {
-  postId: string;
+  postId: number;
   content: string;
   postImage?: string;
   reactCount: number;
@@ -14,7 +14,7 @@ export interface Post {
 }
 
 export interface Comment {
-  commentId: string;
+  commentId: number;
   content: string;
   userName: string;
   userImage: string;
@@ -41,43 +41,44 @@ export class PostService {
   }
 
   // ✅ تعديل بوست
-  updatePost(postId: string, postData: { content: string; postImage?: string }): Observable<Post> {
+  updatePost(postId: number, postData: { content: string; postImage?: string }): Observable<Post> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
     return this.http.put<Post>(`http://localhost:5267/api/Post/${postId}`, postData, { headers });
   }
 
   // ✅ حذف بوست
-  deletePost(postId: string): Observable<void> {
+  deletePost(postId: number): Observable<void> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
     return this.http.delete<void>(`http://localhost:5267/api/Post/${postId}`, { headers });
   }
 
+  ////////////
   // ✅ إضافة أو إزالة لايك (React Toggle)
-  reactToPost(postId: string): Observable<Post> {
+  reactToPost(postId: number): Observable<Post> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.post<Post>(`http://localhost:5267/api/Post/${postId}/react`, {}, { headers });
+    return this.http.post<Post>(`http://localhost:5267/api/React`,{postId}, { headers });
   }
 
   // ✅ جلب كل الكومنتات الخاصة ببوسـت
-  getComments(postId: string): Observable<Comment[]> {
+  getComments(postId: number): Observable<Comment[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.get<Comment[]>(`http://localhost:5267/api/Post/${postId}/comments`, { headers });
+    return this.http.get<Comment[]>(`http://localhost:5267/api/Comment/${postId}`, { headers });
   }
 
   // ✅ إضافة تعليق
-  addComment(postId: string, commentData: { content: string }): Observable<Comment> {
+  addComment( commentData: { content: string }): Observable<Comment> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.post<Comment>(`http://localhost:5267/api/Post/${postId}/comments`, commentData, { headers });
+    return this.http.post<Comment>(`http://localhost:5267/api/Comment`, commentData, { headers });
   }
 
   // ✅ تعديل تعليق
-  updateComment(commentId: string, content: string): Observable<Comment> {
+  updateComment(commentId: number, content: string): Observable<Comment> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
     return this.http.put<Comment>(`http://localhost:5267/api/Comment/${commentId}`, { content }, { headers });
   }
 
   // ✅ حذف تعليق
-  deleteComment(commentId: string): Observable<void> {
+  deleteComment(commentId: number): Observable<void> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
     return this.http.delete<void>(`http://localhost:5267/api/Comment/${commentId}`, { headers });
   }

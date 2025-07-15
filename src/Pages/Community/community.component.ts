@@ -41,7 +41,7 @@ export class CommunityComponent implements OnInit {
   }
 
   onPostDeleted(postId: string) {
-    this.posts = this.posts.filter(p => p.postId !== postId);
+    this.posts = this.posts.filter(p => p.postId !== Number(postId));
   }
 
   onPostUpdated(updated: Post) {
