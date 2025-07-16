@@ -62,6 +62,7 @@ export class UnitComponent implements OnInit,OnDestroy {
   onEdit(){
     console.log('edit');
     
+    this._router.navigate([`/ownerHome/editUnit/${this.item.id}`]) 
   }
   
   onDeleteClick() {

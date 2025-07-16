@@ -12,15 +12,15 @@
                     <div>
                         Status:
                         <ul class="list-unstyled">
-                            <li><input type="radio" name="status" value="Empty" (change)="updateStatus($event)"> Empty</li>
-                            <li><input type="radio" name="status" value="Busy" (change)="updateStatus($event)"> Busy</li>
+                            <li><input type="radio" name="status" value="empty" (change)="updateStatus($event)"> Empty</li>
+                            <li><input type="radio" name="status" value="busy" (change)="updateStatus($event)"> Busy</li>
                         </ul>
                     </div>
                     <div>
                         Type:
                         <ul class="list-unstyled">
                             <li><input type="radio" name="type" value="For Rent" (change)="updateType($event)" > For Rent</li>
-                            <li><input type="radio" name="type" value="For Sale" (change)="updateType($event)" > For Sale</li>
+                            <li><input type="radio" name="type" value="For Sell" (change)="updateType($event)" > For Sell</li>
                         </ul>
                     </div>
                     <button class="btn-apply" (click)="filterUnits()" >Apply</button>

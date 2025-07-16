@@ -46,7 +46,13 @@ getUnitById(id:number): Observable<Unit> {
     return this._HttpClient.delete(`http://localhost:5267/api/Unit/${id}`, { headers });
   }
 
-  
+      EditUnit(id:number,info:FormData):Observable<any>
+  {
+      const headers=new HttpHeaders().set('Authorization',`Bearer ${localStorage.getItem("token")}`);
+
+      return this._HttpClient.put(`http://localhost:5267/api/Unit/${id}`,info, {headers});
+  }
+
 
 
 }

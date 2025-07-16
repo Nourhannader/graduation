@@ -8,6 +8,7 @@ export interface Unit {
        area :string | null,
        flatNumber :string|null
        buildingNumber :string|null
+       renterSSN:string|null
         image1 :string|null
         image2 :string|null
         image3 :string|null
