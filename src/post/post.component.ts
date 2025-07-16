@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { PostService, Post, Comment } from '../Services/post.service';
 

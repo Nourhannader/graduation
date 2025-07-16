@@ -65,19 +65,16 @@ export class PostService {
     return this.http.get<Comment[]>(`http://localhost:5267/api/Comment/${postId}`, { headers });
   }
 
-  // ✅ إضافة تعليق
   addComment( commentData: { content: string }): Observable<Comment> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
     return this.http.post<Comment>(`http://localhost:5267/api/Comment`, commentData, { headers });
   }
 
-  // ✅ تعديل تعليق
   updateComment(commentId: number, content: string): Observable<Comment> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
     return this.http.put<Comment>(`http://localhost:5267/api/Comment/${commentId}`, { content }, { headers });
   }
 
-  // ✅ حذف تعليق
   deleteComment(commentId: number): Observable<void> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
     return this.http.delete<void>(`http://localhost:5267/api/Comment/${commentId}`, { headers });
