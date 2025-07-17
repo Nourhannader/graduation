@@ -4,7 +4,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { UnitsService } from '../../Services/units.service';
 
-
 @Component({
   selector: 'app-owner-add-unit',
   imports: [ReactiveFormsModule,JsonPipe],
@@ -100,7 +99,7 @@ onFileSelected(event: any, imageKey: string) {
       this._unitsService.AddUnit(formData).subscribe({
         next:(res)=>{
           console.log(res);
-          // this._router.navigate(['./login'])
+          this._router.navigate(['/ownerHome/units'])
         },
         error:(err)=>{
           console.log(err)

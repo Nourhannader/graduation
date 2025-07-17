@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UnitsService } from '../../Services/units.service';
 import { Unit } from '../../interfaces/unit';
 
@@ -18,6 +18,7 @@ export class DetailsComponent implements OnInit{
   private imageIndex = 0;
   images:string[]=[]
   
+    _router=inject(Router)
   _ActivatedRoute=inject(ActivatedRoute)
   _UnitsService=inject(UnitsService);
 
@@ -55,6 +56,11 @@ export class DetailsComponent implements OnInit{
     this.imageIndex =
       (this.imageIndex - 1 + this.images.length) % this.images.length;
       this.currentImage=this.images[this.imageIndex]
+  }
+
+    edit()
+  {
+    this._router.navigate([`/ownerHome/editUnit/${this.unitId}`])
   }
 
 }

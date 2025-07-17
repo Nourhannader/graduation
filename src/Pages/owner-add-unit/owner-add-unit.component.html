@@ -50,7 +50,18 @@
     </div>
 
     <div class="singleInputDiv">
-        <input formControlName="type" type="text" class="form-control mb-3" id="typeInput" placeholder="type">
+    <div id="radioInput2" class=" mb-3">
+                    <label for="type">Type</label>
+                    <label for="" class="labelRadio">
+                    <input formControlName="type" type="radio"  value="For Rent">
+                        Rent
+                    </label>
+                    <label for="" class="labelRadio">
+                    <input formControlName="type" type="radio"  value="For Sell">
+                        Sell
+                    </label>
+
+        <!-- <input formControlName="type" type="text" class="form-control mb-3" id="typeInput" placeholder="type"> -->
             @if(AddUnitForm.get('type')?.errors && AddUnitForm.get('type')?.touched)
             {
             <div class="alert alert-danger p-1" role="alert">
@@ -61,6 +72,7 @@
                 </div>
             }
     </div>
+
     <div class="singleInputDiv">
         <input formControlName="city" type="text" class="form-control mb-3" id="cityInput" placeholder="city">
             @if(AddUnitForm.get('city')?.errors && AddUnitForm.get('city')?.touched)
@@ -73,6 +85,7 @@
                 </div>
             }
     </div>
+
     <div class="singleInputDiv">
         <input formControlName="area" type="text" class="form-control mb-3" id="areaInput" placeholder="area">
             @if(AddUnitForm.get('area')?.errors && AddUnitForm.get('area')?.touched)
@@ -85,6 +98,7 @@
                 </div>
             }
     </div>
+
     <div class="singleInputDiv">
         <input formControlName="street" type="text" class="form-control mb-3" id="streetInput" placeholder="street">
             @if(AddUnitForm.get('street')?.errors && AddUnitForm.get('street')?.touched)
@@ -97,6 +111,7 @@
                 </div>
             }
     </div>
+
     <div class="singleInputDiv">
         <input formControlName="buildingNumber" type="text" class="form-control mb-3" id="buildingNumberInput" placeholder="building number">
             @if(AddUnitForm.get('buildingNumber')?.errors && AddUnitForm.get('buildingNumber')?.touched)
@@ -109,6 +124,7 @@
                 </div>
             }
     </div>
+
     <div class="singleInputDiv">
         <input formControlName="flatNumber" type="text" class="form-control mb-3" id="flatNumberInput" placeholder="unit number">
     </div>
@@ -119,7 +135,7 @@
 
     </div>
 
-
+    </div>
 <!-- ---------------------- -->
 
     <div class="halfFormSide">
@@ -192,9 +208,11 @@
 
     </div>
 
+
+
+
+
 </div>
-
-
 
 
 <button [disabled]="!AddUnitForm.valid" >Add</button>
