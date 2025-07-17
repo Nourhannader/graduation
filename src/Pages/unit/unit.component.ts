@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { Component, inject, Input, OnInit, OnDestroy, ElementRef, EventEmitter, Output } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Unit } from '../../interfaces/unit';
 import { UnitsService } from '../../Services/units.service';
@@ -11,6 +11,8 @@ import { UnitsService } from '../../Services/units.service';
 }) 
 export class UnitComponent implements OnInit,OnDestroy {
   @Input() item!: Unit;
+
+  @Output() delete = new EventEmitter<number>();
   currentImage: string = '';
   private imageIndex = 0;
   private imageInterval: any;
@@ -74,16 +76,18 @@ export class UnitComponent implements OnInit,OnDestroy {
 
   onConfirmDelete() {
   const unit = this.item;
+
   //call api
   if (unit) {
-    this._unitsService.deleteUnit(unit.id).subscribe({
-      next:(res) => {
-        console.log('Unit deleted successfully:', res);
+    this.delete.emit(unit.id);
+    // this._unitsService.deleteUnit(unit.id).subscribe({
+    //   next:(res) => {
+    //     console.log('Unit deleted successfully:', res);
         
-      },error:(err) => {
-        console.error('Error deleting unit:', err);
-      }
-    });
+    //   },error:(err) => {
+    //     console.error('Error deleting unit:', err);
+    //   }
+    // });
   }
   this.showDeleteConfirm = false;
   }
