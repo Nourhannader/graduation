@@ -109,4 +109,17 @@ export class UnitsComponent implements OnInit {
   }
 
   
+  DeleteUnit(id: number) {
+    console.log('Delete unit with ID:', id);
+    this._unitsService.deleteUnit(id).subscribe({
+      next: (res) => {
+        console.log('Unit deleted successfully:', res);
+        this.getAll(); 
+      },
+      error: (err) => {
+        console.error('Error deleting unit:', err);
+      }
+    });
+  }
+
 }

@@ -4,6 +4,10 @@
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   transition: 0.3s ease;
+width: 100%;
+margin: auto;
+
+  max-width: 600px;;
 }
 
 .facebook-post-box:hover {
@@ -16,17 +20,18 @@
   font-size: 15px;
   background-color: #fff;
   border: 1px solid #ccc;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .photo-btn {
   border-radius: 10px;
   font-weight: 500;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .create-post-modal {
   border-radius: 10px;
+
 }
 
 .create-post-header {

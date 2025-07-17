@@ -1,1 +1,12 @@
+<div id="containerDiv">
+<form [formGroup]="EditNameForm" (ngSubmit)="UpdateName()">
+    <div class="singleInputDiv">
+            <h2>Your Community Name</h2>
+            <input formControlName="Name" [value]="currentName" type="text" placeholder="community name" class="CommunityInput">
+    </div>
+    <button [disabled]="!EditNameForm.valid">Edit</button>
+</form>
+<div id="secondDiv">
+</div>
 
+</div>
