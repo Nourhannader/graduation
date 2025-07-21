@@ -1,21 +1,24 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, output } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
 import { PostService, Post, Comment } from '../Services/post.service';
+import { EditPostComponent } from '../Pages/edit-post/edit-post.component';
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,EditPostComponent],
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent {
+export class PostComponent  {
   @Input() post!: Post;
+  @Output() toggleLiked = new EventEmitter<number>();
   @Output() postDeleted = new EventEmitter<string>();
-  @Output() postUpdated = new EventEmitter<Post>();
+  @Output() postUpdated = new EventEmitter<number>();
+  @Output() fireUser=new EventEmitter<number>();
 
   editing = false;
   showComments = false;
@@ -37,48 +40,9 @@ export class PostComponent {
   error: string | null = null;
 
   constructor(private postService: PostService, private cdr: ChangeDetectorRef) {}
-
-
-
-  toggleEdit() {
-    if (!this.editing) {
-      this.editDescription = this.post.content;
-      this.editImage = this.post.postImage || '';
-    }
-    this.editing = !this.editing;
-    this.error = null;
-  }
-
-  saveEdit() {
-    if (!this.editDescription.trim()) {
-      this.error = 'post fill';
-      return;
-    }
-
-    const updateData = {
-      content: this.editDescription.trim(),
-      postImage: this.editImage.trim() || undefined
-    };
-
-    this.postService.updatePost(this.post.postId, updateData).subscribe({
-      next: (updatedPost) => {
-        this.postUpdated.emit(updatedPost);
-        this.editing = false;
-        this.error = null;
-      },
-      error: (err) => {
-        
-        this.error = 'Error updating post' ;
-        console.error('Error updating post', err);
-      }
-    });
-  }
-
-  cancelEdit() {
-    this.editing = false;
-    this.editDescription = '';
-    this.editImage = '';
-    this.error = null;
+  
+  onUpdate(postId:number){
+    this.postUpdated.emit(postId);
   }
 
   deletePost() {
@@ -88,6 +52,7 @@ export class PostComponent {
     this.postService.deletePost(this.post.postId).subscribe({
       next: () => {
         this.postDeleted.emit(String(this.post.postId));
+        this.fireUser.emit(this.post.postId);
       },
       error: (err) => {
         this.error = 'Error deleting post:';
@@ -101,8 +66,10 @@ export class PostComponent {
     this.isLiking = true;
 
     this.postService.reactToPost(Number(this.post.postId)).subscribe({
-      next: (updatedPost) => {
-        this.postUpdated.emit(updatedPost);
+      next: (res) => {
+        console.log('Post liked/unliked:', res.message);
+        this.post.reactCount = res.message === 'added' ? this.post.reactCount + 1 : this.post.reactCount - 1;
+        this.fireUser.emit(this.post.postId);
         this.isLiking = false;
       },
       error: (err) => {
@@ -120,6 +87,7 @@ export class PostComponent {
       this.loadingComments = true;
       this.postService.getComments(this.post.postId).subscribe({
         next: (comments) => {
+          console.log('Comments loaded:', comments);
           this.comments = comments;
           this.loadingComments = false;
         },
@@ -131,9 +99,9 @@ export class PostComponent {
       });
     }
 
-    setTimeout(() => {
-      this.cdr.detectChanges();
-    }, 0);
+    // setTimeout(() => {
+    //   this.cdr.detectChanges();
+    // }, 0);
   }
 
 
@@ -151,7 +119,9 @@ export class PostComponent {
 
     this.postService.addComment(commentData).subscribe({
       next: (newComment) => {
-        this.comments.push(newComment);
+        this.getAllComments();
+        this.post.commentCount++;
+        this.fireUser.emit(this.post.postId);
         this.newComment = '';
         this.isAddingComment = false;
       },
@@ -167,11 +137,12 @@ export class PostComponent {
 
 
   deleteComment(commentId: number, index: number) {
-    if (!confirm('  are you sure for deleting comment  ')) return;
-
+    
     this.postService.deleteComment(commentId).subscribe({
       next: () => {
         this.comments.splice(index, 1);
+        this.post.commentCount--;
+        this.fireUser.emit(this.post.postId);
       },
       error: (err) => {
         this.error = '   ';
@@ -180,11 +151,18 @@ export class PostComponent {
     });
   }
 
+  getAllComments(): void {
+    this.postService.getComments(this.post.postId).subscribe({
+      next: (comments) => {
+        this.comments = comments;
+      },
+      error: (err) => {
+        this.error = 'Error loading comments';
+        console.error('Error loading comments:', err);
+      }
+  })
+}
 
-
-  getUserAvatar(user: any): string {
-    return user?.avatar || 'https://via.placeholder.com/40x40/667eea/ffffff?text=U';
-  }
 
 
   

@@ -1,14 +1,13 @@
-<!-- Facebook-style Create Post Box -->
-<button class="btn btn-primary w-100 rounded-pill" (click)="openModal()">
-  <i class="fas fa-plus-circle me-2"></i> Create Post
+<button class="actions-btn" (click)="openModal()">
+  <i class="fas fa-edit"></i>
 </button>
-  
-<!-- Modal -->
+
+
 <div  class="modal fade" #createPostModal id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-centered" >
     <div class="modal-content create-post-modal">
 
-      <form (ngSubmit)="addPost()" #postForm="ngForm">
+      <form (ngSubmit)="editPost()" #postForm="ngForm">
         <div class="modal-header create-post-header">
           <h5 class="modal-title create-post-title mb-0" id="createPostModalLabel">Create Post</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -44,6 +43,8 @@
               rows="4"
               required
               [disabled]="isSubmitting">
+
+              {{description}}
             </textarea>
           </div>
 
@@ -65,7 +66,7 @@
 
           <!-- Image Preview -->
           <div *ngIf="selectedImageUrl" class="image-preview-container mt-3">
-            <img [src]="selectedImageUrl" class="post-image-preview" alt="Image Preview">
+            <img [src]="selectedImageUrl.startsWith('http') ? selectedImageUrl : selectedImageUrl" class="post-image-preview" alt="Image Preview">
           </div>
 
         </div>
@@ -78,7 +79,7 @@
             type="submit"
             class="btn btn-post"
             [disabled]="isSubmitting || !description.trim()">
-            <span *ngIf="!isSubmitting">Post</span>
+            <span *ngIf="!isSubmitting">Update</span>
             <span *ngIf="isSubmitting">
               <span class="spinner-border spinner-border-sm me-2" role="status"></span>
               Publishing...
@@ -90,4 +91,3 @@
     </div>
   </div>
 </div>
-

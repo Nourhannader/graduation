@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Post } from './../../Services/post.service';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PostService, Post } from '../../Services/post.service';
+import { PostService } from '../../Services/post.service';
 import { AddPostComponent } from '../add-post/add-post.component';
 import { PostComponent } from '../../post/post.component';
+import { AuthService } from '../../Services/auth.service';
+import { CommunityService } from '../../Services/community.service';
+import { UserCommunity } from '../../interfaces/user-community';
+import { TopUser } from '../../interfaces/top-user';
+
 
 @Component({
   selector: 'app-community',
@@ -11,21 +17,44 @@ import { PostComponent } from '../../post/post.component';
   templateUrl: './community.component.html',
   styleUrls: ['./community.component.css'],
 })
-export class CommunityComponent implements OnInit {
+export class CommunityComponent implements OnInit , OnDestroy {
   posts: Post[] = [];
+  topUsers: TopUser[] = [];
+  user :UserCommunity={
+    name: '',
+    email: '',
+    image: '',
+    userName: '',
+    commentCount: 0,
+    reactCount: 0,
+    postCount: 0
+  };
   loading: boolean = false;
   error: string | null = null;
+  showFirstImage: boolean = true;
+  private intervalId: any;
+
+
+
+  _AuthService=inject(AuthService)
+  _communityService=inject(CommunityService)
 
   constructor(private postService: PostService) {}
 
   ngOnInit() {
+    this.intervalId = setInterval(() => {
+      this.showFirstImage = !this.showFirstImage;
+    }, 500); 
     this.loadPosts();
+    this.GetUserCommunity();
+    this.GetTopUsers();
   }
 
   loadPosts() {
     this.loading = true;
     this.postService.getAllPosts().subscribe({
       next: (res: Post[]) => {
+        console.log('Posts loaded:', res);
         this.posts = res;
         this.loading = false;
       },
@@ -36,15 +65,54 @@ export class CommunityComponent implements OnInit {
     });
   }
 
-  onPostAdded(post: Post) {
-    this.posts = [post, ...this.posts];
+  onFireUser(postId:number){
+   this.GetUserCommunity();
+   this.GetTopUsers();
+  }
+
+  onPostAdded(postId: number) {
+   this.loadPosts();
+   this.GetUserCommunity();
+   this.GetTopUsers();
   }
 
   onPostDeleted(postId: string) {
     this.posts = this.posts.filter(p => p.postId !== Number(postId));
   }
 
-  onPostUpdated(updated: Post) {
-    this.posts = this.posts.map(p => p.postId=== updated.postId ? updated : p);
+  onPostUpdated(postId: number) {
+    this.loadPosts();
   }
+
+  GetUserCommunity() {
+    this._communityService.GetUserCommunity().subscribe({
+      next: (res) => {
+        this.user = res;
+
+        localStorage.setItem('userName',res.name);
+        localStorage.setItem('image',res.image);
+        
+      },
+      error: (err) => {
+        console.error('Error fetching user community:', err);
+      }
+    });
+  }
+
+  GetTopUsers() {
+    this._communityService.GetTopUsers().subscribe({
+      next: (res) => {
+        console.log('Top Users Response:', res);
+        this.topUsers = res;
+        console.log('Top Users:', this.topUsers);
+      },
+      error: (err) => {
+        console.error('Error fetching top users:', err);
+      }
+    });
+  }
+ 
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
+}
 }

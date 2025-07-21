@@ -22,8 +22,8 @@ export const routes: Routes = [
         {path:'editUnit/:id',component:OwnerEditUnitComponent},
         {path:'owner',loadComponent: () => import('../Pages/owner-info/owner-info.component').then(m => m.OwnerInfoComponent)},
         { path: 'EditCommunity', component: OwnerEditCommunityComponent, title:"Edit Community"},
-        { path: 'AddUnit', component: OwnerAddUnitComponent, title:"Add Unit"},
-        {path:'community',loadComponent:() => import('../Pages/Community/community.component').then(m => m.CommunityComponent), title:"Community"},
+        { path: 'AddUnit', component: OwnerAddUnitComponent, title:"Add Unit"}
+
 
     ]},
      {path:'community',loadComponent:() => import('../Pages/Community/community.component').then(m => m.CommunityComponent), title:"Community"},

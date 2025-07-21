@@ -1,7 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, AfterViewInit, ChangeDetectorRef, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Post, PostService } from '../../Services/post.service';
+import { Modal } from 'bootstrap';
 
 
 @Component({
@@ -11,20 +12,29 @@ import { Post, PostService } from '../../Services/post.service';
   templateUrl: './add-post.component.html',
   styleUrls: ['./add-post.component.css']
 })
-export class AddPostComponent {
 
-  showModal = false;
 
-  @Output() postAdded = new EventEmitter<Post>();
+export class AddPostComponent implements OnInit  {
 
+  @ViewChild('createPostModal',{static:false}) createPostModal!: ElementRef;
+
+  @Output() postAdded = new EventEmitter<number>();
+
+  
   description = '';
   isSubmitting = false;
   error: string | null = null;
-
   selectedFile: File | null = null;
   selectedImageUrl: string | null = null;
+  userName:string=''
+  image:string=''
 
-  constructor(private postService: PostService) {}
+  constructor(private postService: PostService , private cd:ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    this.userName = localStorage.getItem('userName') || ''
+    this.image=localStorage.getItem('image') ||''
+  }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -56,10 +66,11 @@ export class AddPostComponent {
 
     this.postService.createPost(formData).subscribe({
       next: (newPost) => {
-        this.postAdded.emit(newPost);
+        this.postAdded.emit(newPost.postId);
         this.resetForm();
         this.isSubmitting = false;
         this.closeModal();
+        
       },
       error: (err) => {
         this.error = 'faild  create post ';
@@ -81,15 +92,16 @@ export class AddPostComponent {
     }
   }
 
-  closeModal() {
-    const modalElement = document.getElementById('createPostModal');
-    if (modalElement) {
-      const modal = (window as any).bootstrap?.Modal.getInstance(modalElement);
-      if (modal) {
-        modal.hide();
-      }
-    }
-  }
+openModal() {
+  const modal = new Modal(this.createPostModal.nativeElement);
+  modal.show();
+}
+
+closeModal() {
+  const modal = Modal.getInstance(this.createPostModal.nativeElement);
+  if (modal) modal.hide();
+}
+
 
   onImageError(event: any) {
     event.target.style.display = 'none';

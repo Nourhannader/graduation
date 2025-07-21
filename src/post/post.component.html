@@ -7,18 +7,13 @@
   </div>
 
   <div class="post-header">
-    <img [src]="getUserAvatar(post.userImage)" class="user-avatar">
+    <img [src]="'http://localhost:5267/Images/' + post?.userImage" class="user-avatar">
     <div class="user-info">
       <span class="user-name">{{ post.userName }}</span>
       <span class="post-time">{{ formatDate(post.publishDate) }}</span>
     </div>
-
     <div class="post-actions">
-      <button class="actions-btn" (click)="toggleEdit()">
-        <i class="fas fa-edit"></i>
-      </button>
-
-      
+      <app-edit-post [postId]="post.postId" (postedited)="onUpdate($event)" ></app-edit-post>
       <button class="actions-btn" (click)="deletePost()" [disabled]="isDeleting">
         <i class="fas fa-trash"></i>
       </button>
@@ -41,7 +36,7 @@
 
     <button class="stat-btn" (click)="toggleComments()">
       <i class="fas" [ngClass]="showComments ? 'fa-comment-dots' : 'fa-comment'"></i>
-      {{ comments.length }}
+      {{ post.commentCount }}
     </button>
   </div>
 
@@ -49,7 +44,7 @@
 
 
     <div *ngFor="let comment of comments; let i = index" class="comment">
-      <img [src]="getUserAvatar(comment.userImage)" class="comment-avatar">
+      <img [src]="'http://localhost:5267/Images/' + comment.userImage" class="comment-avatar">
       <div class="comment-content">
         <div class="comment-header">
           <span class="comment-user">{{ comment.userName }}</span>
