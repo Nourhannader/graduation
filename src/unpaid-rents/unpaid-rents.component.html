@@ -1,0 +1,43 @@
+<div class="unpaid-rents-container">
+  <h3 class="section-title">
+    <i class="fas fa-money-bill-wave title-icon"></i> Unpaid Rents
+  </h3>
+
+  <div class="table-scroll-wrapper">
+    <table class="unpaid-rents-table">
+      <thead>
+        <tr class="table-header">
+          <th class="status-col">
+            <i class="fas fa-info-circle header-icon"></i> Status
+          </th>
+          <th class="value-col">
+            <i class="fas fa-coins header-icon"></i> Value
+          </th>
+          <th class="date-col">
+            <i class="far fa-calendar-times header-icon"></i> Due Date
+          </th>
+          <th class="action-col">
+            <i class="fas fa-bolt header-icon"></i> Action
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of unpaidRents" class="rent-row">
+          <td class="status-cell">
+            <i class="status-icon fas"
+               [class.fa-exclamation-circle]="r.rentStatus === 'OVERDUE'"
+               [class.fa-clock]="r.rentStatus === 'PENDING'"></i>
+            {{ r.rentStatus }}
+          </td>
+          <td class="value-cell">{{ r.rentValue }}</td>
+          <td class="date-cell">{{ r.dueDate }}</td>
+          <td class="action-cell">
+            <button class="pay-button" (click)="goToPayment(r.rentId)">
+              <i class="fas fa-arrow-right button-icon"></i> Pay Now
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

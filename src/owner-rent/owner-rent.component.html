@@ -1,0 +1,55 @@
+<div class="dashboard-container">
+  <form [formGroup]="rentForm" (ngSubmit)="onFilterChange()" class="filter-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Month</label>
+        <input type="number" formControlName="month" min="1" max="12" placeholder="MM" />
+      </div>
+
+      <div class="form-group">
+        <label>Year</label>
+        <input type="number" formControlName="year" placeholder="YYYY" />
+      </div>
+
+      <div class="form-group">
+        <label>Status</label>
+        <select formControlName="status">
+          <option value="all">All</option>
+          <option value="paid">Paid</option>
+          <option value="unpaid">Unpaid</option>
+        </select>
+      </div>
+
+      <button type="submit" class="filter-button">
+        <i class="fas fa-filter"></i> Filter
+      </button>
+    </div>
+  </form>
+
+  <div class="table-wrapper">
+    <table class="rent-table">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Tenant</th>
+          <th>Status</th>
+          <th>Paid On</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rent of filteredRents">
+          <td>{{ rent.rentMonth }}</td>
+          <td>{{ rent.renterName }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="rent.rentStatus">
+              {{ rent.rentStatus }}
+            </span>
+          </td>
+          <td>{{ rent.rentStatus === 'paid' ? rent.paymentDate : '-' }}</td>
+          <td>{{ rent.rentValue | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

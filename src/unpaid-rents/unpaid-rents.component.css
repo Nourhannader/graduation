@@ -1,0 +1,170 @@
+.unpaid-rents-container {
+  font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 28px;
+  margin: 24px auto;
+  max-width: 1000px;
+  border: 1px solid #f0f4f9;
+  animation: fadeIn 0.4s ease;
+}
+
+.section-title {
+  color: #3a74b3;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f5f9fd;
+}
+
+.title-icon {
+  margin-right: 12px;
+  color: #3a74b3;
+  font-size: 1.2em;
+}
+
+.table-scroll-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+.unpaid-rents-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+.table-header {
+  background: linear-gradient(135deg, #3a74b3 0%, #7fa8d1 100%);
+  color: white;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table-header th {
+  padding: 16px 20px;
+  text-align: left;
+  font-weight: 500;
+  position: relative;
+}
+
+.table-header th:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header-icon {
+  margin-right: 10px;
+  font-size: 0.9em;
+}
+
+.rent-row {
+  transition: all 0.25s ease;
+  border-bottom: 1px solid #f0f4f9;
+}
+
+.rent-row:nth-child(even) {
+  background-color: #fafcff;
+}
+
+.rent-row:hover {
+  background-color: #f5f9ff;
+}
+
+.rent-row td {
+  padding: 14px 20px;
+  color: #4a5568;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+.status-cell {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.status-icon {
+  margin-right: 10px;
+  font-size: 0.9em;
+}
+
+.fa-exclamation-circle {
+  color: #dc3545;
+}
+
+.fa-clock {
+  color: #ffc107;
+}
+
+.value-cell {
+  font-weight: 500;
+  color: #2d3748;
+}
+
+.date-cell {
+  color: #718096;
+}
+
+.action-cell {
+  text-align: right;
+}
+
+.pay-button {
+  background: linear-gradient(135deg, #3a74b3 0%, #7fa8d1 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(58, 116, 179, 0.2);
+}
+
+.pay-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(58, 116, 179, 0.3);
+}
+
+.button-icon {
+  margin-right: 6px;
+  font-size: 0.8em;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .unpaid-rents-container {
+    padding: 20px 15px;
+    border-radius: 8px;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .table-header th {
+    padding: 12px 15px;
+    font-size: 0.8rem;
+  }
+
+  .rent-row td {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+
+  .pay-button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}

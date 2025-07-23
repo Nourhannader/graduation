@@ -1,0 +1,47 @@
+<div class="tabs-container">
+  <div class="tabs">
+    <!-- History Tab -->
+    <button
+      class="tab-btn"
+      [class.active]="activeTab === 'history'"
+      (click)="activeTab = 'history'">
+            <i class="fas fa-history tab-icon"></i>
+
+      <span class="tab-label">History</span>
+    </button>
+
+    <!-- Unpaid Rents Tab -->
+    <button
+      class="tab-btn"
+      [class.active]="activeTab === 'unpaid'"
+      (click)="activeTab = 'unpaid'">
+            <i class="fas fa-exclamation-circle tab-icon"></i>
+
+      <span class="tab-label">Unpaid Rents</span>
+    </button>
+
+    <!-- Payment Tab -->
+    <button
+      class="tab-btn"
+      [class.active]="activeTab === 'payment'"
+      (click)="activeTab = 'payment'">
+            <i class="fas fa-credit-card tab-icon"></i>
+
+      <span class="tab-label">Payment</span>
+    </button>
+  </div>
+
+  <div class="tab-content">
+    <!-- History Content (First in order) -->
+    <app-renter-history *ngIf="activeTab === 'history'"></app-renter-history>
+
+    <!-- Unpaid Rents Content (Second in order) -->
+    <app-unpaid-rents
+      *ngIf="activeTab === 'unpaid'"
+      (navigateToPayment)="activeTab = 'payment'">
+    </app-unpaid-rents>
+
+    <!-- Payment Content (Third in order) -->
+    <app-payment *ngIf="activeTab === 'payment'"></app-payment>
+  </div>
+</div>
