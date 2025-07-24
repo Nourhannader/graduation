@@ -1,0 +1,57 @@
+<main class="container-fluid ads p-4">
+  <div class="filter-bar nav-filter  p-3 rounded-lg shadow-sm mb-4 d-flex flex-wrap align-items-center justify-content-between gap-3">
+    
+    <div class="position-relative flex-grow-1" style="max-width: 300px;">
+      <i class="search-icon bi bi-search position-absolute" style="left: 15px; top: 50%; transform: translateY(-50%);"></i>
+      <input type="text" class="form-control rounded-pill ps-5" placeholder="Search by location...">
+    </div>
+
+    <div class="d-flex flex-wrap gap-2">
+
+      <!-- Price Dropdown -->
+      <div class="dropdown position-relative">
+        <button class="btn btn-outline-secondary filter-btn dropdown-toggle bg-white rounded-pill" type="button" (click)="toggle('price')">
+          Any Price
+        </button>
+        <ul class="dropdown-menu show mt-2" *ngIf="showPrice" style="display: block; position: absolute;">
+          <li class="dropdown-item">Any Price</li>
+          <li class="dropdown-item">$100,000 - $200,000</li>
+          <li class="dropdown-item">$200,000 - $300,000</li>
+        </ul>
+      </div>
+
+      <!-- Beds Dropdown -->
+      <div class="dropdown position-relative">
+        <button class="btn btn-outline-secondary dropdown-toggle filter-btn  bg-white rounded-pill" type="button" (click)="toggle('beds')">
+          2-4 Beds
+        </button>
+        <ul class="dropdown-menu show mt-2" *ngIf="showBeds" style="display: block; position: absolute;">
+          <li class="dropdown-item">1 Bed</li>
+          <li class="dropdown-item">2 Beds</li>
+          <li class="dropdown-item">3 Beds</li>
+          <li class="dropdown-item">4+ Beds</li>
+        </ul>
+      </div>
+
+      <!-- Type Dropdown -->
+      <div class="dropdown position-relative">
+        <button class="btn btn-outline-secondary filter-btn  dropdown-toggle bg-white rounded-pill" type="button" (click)="toggle('types')">
+          All Types
+        </button>
+        <ul class="dropdown-menu show mt-2" *ngIf="showTypes" style="display: block; position: absolute;">
+          <li class="dropdown-item">House</li>
+          <li class="dropdown-item">Apartment</li>
+          <li class="dropdown-item">Condo</li>
+        </ul>
+      </div>
+
+      <button class="btn btn-outline-secondary bg-white rounded-pill" type="button">
+        More <i class="bi bi-sliders"></i> 
+      </button>
+
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+    <app-ads-single></app-ads-single>
+  </div>
+</main>

@@ -9,6 +9,8 @@ import { OwnerEditCommunityComponent } from '../Pages/owner-edit-community/owner
 import { OwnerComponent } from '../Pages/owner/owner.component';
 import { OwnerAddUnitComponent } from '../Pages/owner-add-unit/owner-add-unit.component';
 import { OwnerEditUnitComponent } from '../Pages/owner-edit-unit/owner-edit-unit.component';
+import { ReviewComponent } from '../Pages/review/review.component';
+import { AdvertisementsComponent } from '../Pages/advertisements/advertisements.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'ownerHome',pathMatch:"full"}, 
@@ -27,5 +29,7 @@ export const routes: Routes = [
 
     ]},
      {path:'community',loadComponent:() => import('../Pages/Community/community.component').then(m => m.CommunityComponent), title:"Community"},
+     {path:'review',component:ReviewComponent},
+     {path:'ads',component:AdvertisementsComponent}
     
 ];

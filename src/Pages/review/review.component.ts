@@ -1,0 +1,85 @@
+
+import { Component, inject, OnInit } from '@angular/core';
+import { ReviewService } from '../../Services/review.service';
+import { Review } from '../../interfaces/review';
+import { RatingstarComponent } from '../ratingstar/ratingstar.component';
+
+
+
+
+@Component({
+  selector: 'app-review',
+  imports: [RatingstarComponent],
+  templateUrl: './review.component.html',
+  styleUrl: './review.component.scss'
+})
+export class ReviewComponent implements OnInit {
+   reviews:Review[]=[];
+   slides:Review[][]=[];
+   userName: string | null | undefined;
+   currentSlideIndex: number = 0;
+   length:number=4;
+
+  _ReviewService=inject(ReviewService)
+
+
+  constructor(){}
+  ngOnInit(): void {
+    this.userName=localStorage.getItem('userName');
+    this.getAllReview();
+    
+  }
+
+  get review(): Review[] {
+  return this.slides[this.currentSlideIndex] || [];
+}
+
+  getAllReview(){
+    this.reviews= this._ReviewService.reviews;
+    this.slides = this.chunkArray(this.reviews, 6);
+    console.log(this.review[0]);
+    
+    console.log(this.slides[1])
+  }
+  
+  chunkArray(array: Review[], size: number): Review[][] {
+    const result = [];
+    for (let i = 0; i < array.length; i += size) {
+      result.push(array.slice(i, i + size));
+    }
+    return result;
+  }
+
+  getTimeDifference(publishDate: string | Date): string {
+  const now = new Date();
+  const published = new Date(publishDate);
+  const diffMs = now.getTime() - published.getTime(); 
+
+  const diffSeconds = Math.floor(diffMs / 1000);
+  const diffMinutes = Math.floor(diffSeconds / 60);
+  const diffHours = Math.floor(diffMinutes / 60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffDays > 0) return `${diffDays} day(s)`;
+  if (diffHours > 0) return `${diffHours} hour(s)`;
+  if (diffMinutes > 0) return `${diffMinutes} minute(s)`;
+  return `just now`;
+}
+
+  nextSlide() {
+    if (this.currentSlideIndex < this.slides.length - 1) {
+      this.currentSlideIndex++;
+    }
+  }
+
+  prevSlide() {
+    if (this.currentSlideIndex > 0) {
+      this.currentSlideIndex--;
+    }
+  }
+
+  delete(id:number){
+    alert("Clicked ID: " + id);
+  }
+
+}

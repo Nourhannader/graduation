@@ -1,0 +1,235 @@
+.review-container{
+    background-color: #f8f9fa;
+    width: 100%;
+    height:100%;
+    padding: 20px;
+
+    .btn-slider{
+        border: none;
+        outline: none;
+        background-color: transparent;
+
+        i{
+            font-size: 2rem;
+            color: rgb(218, 220, 248);
+        }
+    }
+    .date{
+        font-size: 12px;
+        font-weight: 400;
+        color: gainsboro;
+        margin-left: 10px;
+    }
+    .btn-remove{
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        button{
+            background-color: transparent;
+            border: none;
+            outline: none;
+
+            i{
+                color: rgb(53, 68, 112);
+            }
+        }
+    }
+    .remove{
+        position: relative;
+        &:hover .btn-remove{
+            display: flex;
+        }
+    }
+}
+#testimonials-grid-container{
+    .top-container{
+        .content-center{
+            background-color: white;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            -o-border-radius: 20px;
+
+
+            .image-overlap
+            {
+                position: relative;
+                margin-top: -2.5rem;
+                margin-bottom: 1rem;
+                z-index: 10;
+
+                img{
+                 object-fit: cover;
+                 border: 4px solid white; 
+                 box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+                }
+            }
+        }
+        .content-right{
+          .top{
+            background-color: white;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            -o-border-radius: 20px;
+
+             .image-overlap
+            {
+                position: relative;
+                margin-top: 1rem;
+                margin-left: -3rem;
+                margin-right: 10px;
+                z-index: 10;
+
+                img{
+                 object-fit: cover;
+                 border: 4px solid white; 
+                 box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+                }
+            }
+          }
+        }
+        .content-left{
+          .bottom{
+            background-color: white;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            -o-border-radius: 20px;
+
+             .image-overlap
+            {
+                position: relative;
+                margin-top: 1.5rem;
+                margin-left: -2rem;
+                z-index: 15;
+
+                img{
+                 object-fit: cover;
+                 border: 4px solid white;
+                 box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+                }
+            }
+          }
+        }
+        .center-container{
+            .content-center{
+               .bottom{
+              background-color: white;
+              box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+              padding: 0 20px;
+              justify-content: center;
+              align-items: center;
+              border-radius: 80px;
+              -webkit-border-radius: 80px;
+              -moz-border-radius: 80px;
+              -ms-border-radius: 80px;
+              -o-border-radius: 80px;
+              }  
+            }
+            
+        }
+        
+    }
+    .bottom-container{
+        .content2{
+            .content-info{
+              background-color: white;
+              position: relative;
+              margin-bottom: 30px;
+              box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+              border-radius: 20px;
+              -webkit-border-radius: 20px;
+             -moz-border-radius: 20px;
+             -ms-border-radius: 20px;
+             -o-border-radius: 20px;
+
+             &::after{
+                 content: '';
+                 position: absolute;
+                 bottom: -13px;
+                 left: 15%; 
+                 width: 0;
+                 height: 0;
+                 border-left: 15px solid transparent;
+                 border-right: 15px solid transparent;
+                 border-top: 15px solid white;
+             }
+            }
+
+             .image-overlap
+            {
+                position: relative;
+                z-index: 10;
+
+                img{
+                 object-fit: cover;
+                 border: 4px solid white; 
+                 box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+                }
+            }
+        }
+        .content3{
+            .content-info{
+              background-color: white;
+              position: relative;
+              margin-bottom: 30px;
+              box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+              border-radius: 20px;
+              -webkit-border-radius: 20px;
+             -moz-border-radius: 20px;
+             -ms-border-radius: 20px;
+             -o-border-radius: 20px;
+
+             &::after{
+                 content: '';
+                 position: absolute;
+                 bottom: -13px;
+                 right: 25%; 
+                 width: 0;
+                 height: 0;
+                 border-left: 15px solid transparent;
+                 border-right: 15px solid transparent;
+                 border-top: 15px solid white;
+             }
+            }
+
+             .image-overlap
+            {
+                position: relative;
+                z-index: 10;
+
+                img{
+                 object-fit: cover;
+                 border: 4px solid white; 
+                 box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+                }
+            }
+        }
+    }
+
+    .center-container{
+            .content-center{
+               .bottom{
+              background-color: white;
+              box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+              padding: 0 20px;
+              justify-content: space-evenly;
+              align-items: center;
+              border-radius: 80px;
+              -webkit-border-radius: 80px;
+              -moz-border-radius: 80px;
+              -ms-border-radius: 80px;
+              -o-border-radius: 80px;
+              }  
+            }
+            
+    }
+}

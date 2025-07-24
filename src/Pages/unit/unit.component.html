@@ -13,6 +13,10 @@
     <div class="btn-group">
       <button (click)="onEdit()" > <i class="bi bi-pencil"></i></button>
       <button (click)="onDeleteClick()"><i class="bi bi-trash"></i></button>
+      @if(item?.status === 'empty'){
+      <button  (click)="onAddAds()" ><i class="bi bi-badge-ad"></i></button>
+     }
+      
     </div>
 
 </div>

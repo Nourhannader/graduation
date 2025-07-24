@@ -1,0 +1,50 @@
+.card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-img-overlay-badges {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 8px;
+        }
+        .card-img-overlay-badges .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+        .card-img-overlay-badges .badge-primary {
+            background-color: #007bff; /* Blue for Perfect Fit */
+        }
+        .card-img-overlay-badges .badge-dark {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark for time ago */
+        }
+        .property-details {
+            display: flex;
+            justify-content: space-around;
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+        .property-details div {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .property-details i {
+            font-size: 1rem;
+        }
+        .form-check-inline {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .form-check-inline .form-check-input {
+            margin-top: 0;
+        }

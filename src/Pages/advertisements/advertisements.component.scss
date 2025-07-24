@@ -1,0 +1,23 @@
+.filter-bar {
+  background-color: #dad8d8;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  .form-control{ 
+  padding-left: 40px;
+  }
+  .search-icon {
+    position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+ }
+ .filter-btn{
+  &:hover{
+    color: #6c757d;
+  }
+ } 
+}

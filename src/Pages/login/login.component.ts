@@ -57,6 +57,7 @@ export class LoginComponent {
       next:(response)=>{
         console.log(response);
           localStorage.setItem('token',response.token);
+          localStorage.setItem('userName',response.userName)
           this._router.navigate(['/ownerHome']);
       },error:(err)=>{
         console.log(err);

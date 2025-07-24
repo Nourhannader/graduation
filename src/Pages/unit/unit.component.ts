@@ -1,3 +1,5 @@
+
+import { AdvertisementService } from './../../Services/advertisement.service';
 import { Component, inject, Input, OnInit, OnDestroy, ElementRef, EventEmitter, Output } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Unit } from '../../interfaces/unit';
@@ -22,12 +24,14 @@ export class UnitComponent implements OnInit,OnDestroy {
 
 
   _unitsService = inject(UnitsService);
+  _AdvertisementService = inject(AdvertisementService)
   _router = inject(Router);
 
   constructor(private elRef: ElementRef) {}
   
   ngOnInit(): void {
     const unit = this.item;
+    
     if(!unit) return;
 
     this.images = unit
@@ -81,17 +85,21 @@ export class UnitComponent implements OnInit,OnDestroy {
   //call api
   if (unit) {
     this.delete.emit(unit.id);
-    // this._unitsService.deleteUnit(unit.id).subscribe({
-    //   next:(res) => {
-    //     console.log('Unit deleted successfully:', res);
-        
-    //   },error:(err) => {
-    //     console.error('Error deleting unit:', err);
-    //   }
-    // });
+    
   }
   this.showDeleteConfirm = false;
   }
 
+  onAddAds(){
+    const unit=this.item
+
+    this._AdvertisementService.AddAds(unit.id).subscribe({
+      next:(res) =>{
+        console.log(res);
+      },error:(err) => {
+        console.log(err);
+      }
+    })
+  }
 
 }

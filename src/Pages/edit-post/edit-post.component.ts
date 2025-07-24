@@ -29,7 +29,7 @@ export class EditPostComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.userName = localStorage.getItem('userName') || ''
+    this.userName = localStorage.getItem('username') || ''
     this.image=localStorage.getItem('image') ||''
   }
 

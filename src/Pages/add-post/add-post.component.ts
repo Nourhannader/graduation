@@ -32,7 +32,7 @@ export class AddPostComponent implements OnInit  {
   constructor(private postService: PostService , private cd:ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.userName = localStorage.getItem('userName') || ''
+    this.userName = localStorage.getItem('username') || ''
     this.image=localStorage.getItem('image') ||''
   }
 

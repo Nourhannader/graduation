@@ -89,7 +89,7 @@ export class CommunityComponent implements OnInit , OnDestroy {
       next: (res) => {
         this.user = res;
 
-        localStorage.setItem('userName',res.name);
+        localStorage.setItem('username',res.name);
         localStorage.setItem('image',res.image);
         
       },

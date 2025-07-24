@@ -1,0 +1,188 @@
+<div class="review-container d-flex">
+  <div class="d-flex justify-content-center align-items-center">
+    <button
+      class="btn-slider"
+      (click)="prevSlide()"
+      [disabled]="currentSlideIndex === 0"
+    >
+      <i class="bi bi-arrow-left-circle"></i>
+    </button>
+  </div>
+  <div class="container pt-3 mx-auto">
+    <div
+      class="row g-4 justify-content-center mx-auto"
+      id="testimonials-grid-container"
+    >
+      <div class="row mt-5 top-container">
+        <div class="col-4 content-right">
+          <div class="top d-flex g-2 mb-2 remove">
+            <div class="text-center image-overlap">
+              <img
+                src="images/user1.jpg"
+                [alt]="review[0].fullName"
+                class="rounded-circle"
+                width="80"
+                height="80"
+              />
+            </div>
+            <div class="mt-3">
+              <h5 class="title mb-2">{{ review[0].fullName }}</h5>
+              <app-ratingstar [rating]="review[0].rate"></app-ratingstar>
+              <p class="text-muted small mt-2">{{ review[0].content }}</p>
+              <p class="date">{{ getTimeDifference(review[0].publishDate) }}</p>
+            </div>
+            @if(userName === review[0].userName){
+            <div class="btn-remove">
+              <button (click)="delete(review[0].id)"><i class="bi bi-x-circle-fill"></i></button>
+            </div>
+          }
+          </div>
+        </div>
+        <div class="col-4 d-flex justify-content-center">
+          <div class="col-10 content-center remove">
+            <div class="text-center image-overlap">
+              <img
+                src="images/user1.jpg"
+                [alt]="review[1].fullName"
+                class="rounded-circle"
+                width="120"
+                height="120"
+              />
+            </div>
+            <div class="text-center mt-3">
+              <h5 class="title mb-2">{{ review[1].fullName }}</h5>
+              <div class="d-flex justify-content-center">
+                <app-ratingstar [rating]="review[1].rate"></app-ratingstar>
+              </div>
+
+              <p class="text-muted small mt-2">{{ review[1].content }}</p>
+              <p class="date">{{ getTimeDifference(review[1].publishDate) }}</p>
+            </div>
+            @if(userName == review[1].userName){
+            <div class="btn-remove">
+              <button (click)="delete(review[1].id)"><i class="bi bi-x-circle-fill"></i></button>
+            </div>
+          }
+          </div>
+        </div>
+        <div class="col-4 content-left">
+          <div class="bottom d-flex g-2 mt-2 remove">
+            <div class="text-center image-overlap">
+              <img
+                src="images/user1.jpg"
+                [alt]="review[2].fullName"
+                class="rounded-circle"
+                width="80"
+                height="80"
+              />
+            </div>
+            <div class="mt-3">
+              <h5 class="title mb-2">{{ review[2].fullName }}</h5>
+              <app-ratingstar [rating]="review[0].rate"></app-ratingstar>
+              <p class="text-muted small mt-2">{{ review[2].content }}</p>
+              <p class="date">{{ getTimeDifference(review[2].publishDate) }}</p>
+            </div>
+            @if(userName == review[2].userName){
+            <div class="btn-remove">
+              <button (click)="delete(review[2].id)"><i class="bi bi-x-circle-fill"></i></button>
+             </div>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="row center-container d-flex justify-content-center">
+        <div class="col-5 content-center">
+          <div class="bottom mt-3 d-flex justify-content-between g-2 mt-2 col-10 remove">
+            <div class="">
+              <img
+                src="images/user1.jpg"
+                [alt]="review[3].fullName"
+                class="rounded-circle"
+                width="100"
+                height="100"
+              />
+            </div>
+            <div class="mt-3">
+              <div class="m-3 d-flex justify-content-between">
+                <h5 class="title mb-2">{{ review[3].fullName }}</h5>
+                <p class="date">
+                  {{ getTimeDifference(review[3].publishDate) }}
+                </p>
+              </div>
+              <p class="text-muted small mt-2">{{ review[3].content }}</p>
+              <div class="mb-3 text-left">
+                <app-ratingstar [rating]="review[3].rate"></app-ratingstar>
+              </div>
+            </div>
+            @if(userName == review[3].userName){
+            <div class="btn-remove">
+              <button (click)="delete(review[3].id)"><i class="bi bi-x-circle-fill"></i></button>
+             </div>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="row bottom-container mt-4">
+        <div class="col-6 content2 remove">
+          <div class="text-left col-8 mt-3 content-info px-3">
+            <p class="text-muted small mt-2">{{ review[4].content }}</p>
+            <div class="d-flex justify-content-between me-3">
+              <h5 class="title mb-2">{{ review[4].fullName }}</h5>
+              <p class="text-left date">
+                {{ getTimeDifference(review[4].publishDate) }}
+              </p>
+            </div>
+          </div>
+          <div class="d-flex justify-content-start image-overlap">
+            <img
+              src="images/user1.jpg"
+              class="rounded-circle"
+              [alt]="review[4].fullName"
+              width="100"
+              height="100"
+            />
+          </div>
+          @if(userName == review[4].userName){
+          <div class="btn-remove">
+              <button (click)="delete(review[4].id)"><i class="bi bi-x-circle-fill"></i></button>
+            </div>
+          }
+        </div>
+        <div class="col-6 content3 remove">
+          <div class="text-left col-8 mt-3 content-info px-3">
+            <p class="text-muted small mt-2">{{ review[5].content }}</p>
+            <div class="d-flex justify-content-between me-3">
+              <h5 class="title mb-2">{{ review[5].fullName }}</h5>
+              <p class="text-left date">
+                {{ getTimeDifference(review[5].publishDate) }}
+              </p>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center image-overlap">
+            <img
+              src="images/user1.jpg"
+              class="rounded-circle"
+              [alt]="review[5].fullName"
+              width="100"
+              height="100"
+            />
+          </div>
+          @if(userName == review[5].userName){
+          <div class="btn-remove">
+              <button (click)="delete(review[5].id)"><i class="bi bi-x-circle-fill"></i></button>
+          </div>
+        }
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <button
+      class="btn-slider"
+      (click)="nextSlide()"
+      [disabled]="currentSlideIndex === slides.length - 1"
+    >
+      <i class="bi bi-arrow-right-circle"></i>
+    </button>
+  </div>
+</div>
