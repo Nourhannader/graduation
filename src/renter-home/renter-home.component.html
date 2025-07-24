@@ -1,0 +1,54 @@
+<div class="renter-home">
+    <div class="renter-home-left">
+        <div class="renter-home-left-info">
+            <img [src]="'http://localhost:5267/Images/' + renter?.image"alt="">
+            <h2>{{renter?.firstName}} {{renter?.lastName}}</h2>
+            <p>{{renter?.email}}</p>
+        </div>
+        <div class="renter-home-left-rent">
+            <button><a>Rent</a></button>
+        </div>
+    </div>
+    <div class="renter-home-right">
+        @if(isNew==true)
+        {
+        <div class="renter-home-right-getStarted">
+            <button (click)="showGetStarted()">Get Started</button>
+            @if(start==true)
+            {
+               
+                <Form [formGroup]="GetStartedForm" (ngSubmit)="submitGetStarted()">
+                    <input formControlName="SSN" type="text" placeholder="Enter your SSN" >
+                    <div class="review-buttons">
+                        <button type="submit">Submit</button>
+                        <button (click)="cancelGetStarted()">Cancel</button>
+                     </div>
+                </Form>
+            }
+        </div>
+        }
+        @if(isNew==false)
+        {
+        <div class="renter-home-right-welcome">
+            <p>Welcome back {{renter?.firstName}}</p>
+        </div>   
+        }
+        <div class="renter-home-right-addReview">
+            <div >
+                <button (click)="showAddReview()">Add Review</button>
+            </div>
+            @if(addReview==true)
+            {
+                
+                <Form [formGroup]="AddReviewForm" (ngSubmit)="submitReview()">
+                    <input formControlName="content" type="text" placeholder="Write your review here..." >
+                    <input formControlName="rate" type="text" placeholder="Rate (1-5)" >
+                    <div class="review-buttons">
+                        <button type="submit">Submit</button>
+                        <button (click)="cancelReview()">Cancel</button>
+                     </div>
+                </Form>
+            }
+        </div>
+    </div>
+</div>

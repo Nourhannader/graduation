@@ -1,15 +1,30 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { UserLogin } from '../interfaces/user-login';
+import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-   _HttpClient=inject(HttpClient)
-  constructor() { }
+  userData:BehaviorSubject<string>=new BehaviorSubject('')
+  _HttpClient=inject(HttpClient)
+  _pLATFORM_ID=inject(PLATFORM_ID)
+
+  _router=inject(Router)
+
+  constructor() { 
+if(isPlatformBrowser(this._pLATFORM_ID))
+{
+  if(localStorage.getItem("token"))
+  {
+    this.userData.next(localStorage.getItem("token")!)
+  }
+}
+  }
 
   register(info:FormData):Observable<any>{
       return this._HttpClient.post('http://localhost:5267/api/Account/Register',info);
@@ -24,7 +39,15 @@ export class AuthService {
     return this._HttpClient.get('http://localhost:5267/api/Account/GetUserInfo', {headers});
   }
 
+  saveUser()
+  {
+    const token=localStorage.getItem("token")!
+    this.userData.next(token)
+  }
+
   Logout(){
-    localStorage.removeItem("token");
+    localStorage.removeItem("token")
+    this.userData.next('')
+    this._router.navigate(['./login'])
   }
 }

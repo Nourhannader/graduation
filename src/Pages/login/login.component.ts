@@ -56,9 +56,16 @@ export class LoginComponent {
     this._AuthService.Login(uerLogin).subscribe({
       next:(response)=>{
         console.log(response);
+          localStorage.setItem('role',response.role)
           localStorage.setItem('token',response.token);
           localStorage.setItem('userName',response.userName)
-          this._router.navigate(['/ownerHome']);
+          this._AuthService.saveUser()
+          if(response.role == 'Renter'){
+            this._router.navigate(['/RenterHome'])
+          } else{
+           this._router.navigate(['/ownerHome']);
+          }
+          
       },error:(err)=>{
         console.log(err);
         this.apiError=err.error.Error[0];

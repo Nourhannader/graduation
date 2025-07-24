@@ -259,4 +259,9 @@ export class ReviewService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
     return this._HttpClient.delete<DeleteReview>(`http://localhost:5267/api/Review/${id}`, { headers });
   }
+  
+  addReview(info: FormData): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
+    return this._HttpClient.post('http://localhost:5267/api/Review', info, { headers });
+  }
 }

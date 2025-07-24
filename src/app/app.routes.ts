@@ -11,6 +11,8 @@ import { OwnerAddUnitComponent } from '../Pages/owner-add-unit/owner-add-unit.co
 import { OwnerEditUnitComponent } from '../Pages/owner-edit-unit/owner-edit-unit.component';
 import { ReviewComponent } from '../Pages/review/review.component';
 import { AdvertisementsComponent } from '../Pages/advertisements/advertisements.component';
+import { RenterHomeComponent } from '../renter-home/renter-home.component';
+
 
 export const routes: Routes = [
     {path:'',redirectTo:'ownerHome',pathMatch:"full"}, 
@@ -30,6 +32,7 @@ export const routes: Routes = [
     ]},
      {path:'community',loadComponent:() => import('../Pages/Community/community.component').then(m => m.CommunityComponent), title:"Community"},
      {path:'review',component:ReviewComponent},
-     {path:'ads',component:AdvertisementsComponent}
-    
+     {path:'ads',component:AdvertisementsComponent},
+     {path:'RenterHome',component:RenterHomeComponent}
+    //  {path:'renterTabs',component:RenterTabsComponent}
 ];
