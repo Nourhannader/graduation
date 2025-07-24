@@ -1,0 +1,43 @@
+<div class="rent-history-card">
+  <h3 class="rent-history-title">
+    <i class="fas fa-file-invoice title-icon"></i> Rent History
+  </h3>
+
+  <div class="table-container">
+    <table class="rent-history-table">
+      <thead>
+        <tr class="table-header-row">
+          <th class="status-header">
+            <i class="fas fa-info-circle header-icon"></i> Status
+          </th>
+          <th class="value-header">
+             <i class="fas fa-coins header-icon"></i> Value
+          </th>
+          <th class="date-header">
+         <i class="far fa-calendar-times header-icon"></i> Due Date
+          </th>
+          <th class="date-header">
+            <i class="far fa-calendar-check header-icon"></i> Payment Date
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of historyRents" class="data-row">
+          <td class="status-cell"
+              [ngClass]="{
+                'paid-status': r.rentStatus.toLowerCase() === 'paid',
+                'unpaid-status': r.rentStatus.toLowerCase() === 'unpaid'
+              }">
+            {{ r.rentStatus }}
+          </td>
+          <td class="value-cell">{{ r.rentValue }}</td>
+          <td class="date-cell">{{ r.dueDate }}</td>
+          <td class="date-cell">
+            {{ r.rentStatus.toLowerCase() === 'paid' ? r.paymentDate : '' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
