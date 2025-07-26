@@ -8,6 +8,6 @@ export class RentService {
   constructor(private http: HttpClient) {}
 
   getMonthRents(month: number, year: number) {
-    return this.http.get<any[]>(`https://your-api.com/api/MonthRents?month=${month}&year=${year}`);
+    return this.http.get<any[]>(`https://5267/api/MonthRents?month=${month}&year=${year}`);
   }
 }

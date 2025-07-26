@@ -15,7 +15,7 @@ import { RenterHomeComponent } from '../renter-home/renter-home.component';
 
 
 export const routes: Routes = [
-    {path:'',redirectTo:'ownerHome',pathMatch:"full"}, 
+    {path:'',redirectTo:'ownerHome',pathMatch:"full"},
     {path:'register',component:RegisterComponent},
     {path:'login',component:LoginComponent},
     // /////////////////////////////
@@ -34,5 +34,7 @@ export const routes: Routes = [
      {path:'review',component:ReviewComponent},
      {path:'ads',component:AdvertisementsComponent},
      {path:'RenterHome',component:RenterHomeComponent}
-    //  {path:'renterTabs',component:RenterTabsComponent}
+     {path:'renterTabs',component:RenterTabsComponent}
 ];
+
+  
