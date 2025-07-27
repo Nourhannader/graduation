@@ -15,4 +15,5 @@ export interface Unit {
         electricityNum :string|null
         waterNum:string|null
         gasNum :string|null
+        isAds:boolean|false
 }

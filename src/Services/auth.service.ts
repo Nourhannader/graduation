@@ -47,6 +47,7 @@ if(isPlatformBrowser(this._pLATFORM_ID))
 
   Logout(){
     localStorage.removeItem("token")
+    localStorage.clear();
     this.userData.next('')
     this._router.navigate(['./login'])
   }

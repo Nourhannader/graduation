@@ -15,7 +15,7 @@ import { RatingstarComponent } from '../ratingstar/ratingstar.component';
 })
 export class ReviewComponent implements OnInit {
    reviews:Review[]=[];
-   slides:Review[][]=[];
+   review!:Review
    userName: string | null | undefined;
    currentSlideIndex: number = 0;
    length:number=4;
@@ -27,28 +27,16 @@ export class ReviewComponent implements OnInit {
   ngOnInit(): void {
     this.userName=localStorage.getItem('userName');
     this.getAllReview();
-    
+    this.review=this.reviews[this.currentSlideIndex]
   }
 
-  get review(): Review[] {
-  return this.slides[this.currentSlideIndex] || [];
-}
+
 
   getAllReview(){
     this.reviews= this._ReviewService.reviews;
-    this.slides = this.chunkArray(this.reviews, 6);
-    console.log(this.review[0]);
-    
-    console.log(this.slides[1])
+  
   }
   
-  chunkArray(array: Review[], size: number): Review[][] {
-    const result = [];
-    for (let i = 0; i < array.length; i += size) {
-      result.push(array.slice(i, i + size));
-    }
-    return result;
-  }
 
   getTimeDifference(publishDate: string | Date): string {
   const now = new Date();
@@ -67,14 +55,16 @@ export class ReviewComponent implements OnInit {
 }
 
   nextSlide() {
-    if (this.currentSlideIndex < this.slides.length - 1) {
+    if (this.currentSlideIndex < this.reviews.length - 1) {
       this.currentSlideIndex++;
+      this.review=this.reviews[this.currentSlideIndex]
     }
   }
 
   prevSlide() {
     if (this.currentSlideIndex > 0) {
       this.currentSlideIndex--;
+      this.review=this.reviews[this.currentSlideIndex]
     }
   }
 

@@ -1,0 +1,112 @@
+<div class="main-content">
+  <!-- Header -->
+  <div class="header">
+    <div class="d-flex align-items-center">
+      <div class="date-picker me-3">
+        {{ formatDate(selectedDate) }}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-chevron-down ms-2"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </div>
+      <div class="view-toggle">
+        <button class="btn active">Day</button>
+      </div>
+    </div>
+    <div class="actions d-flex align-items-center">
+      <button class="btn btn-primary" (click)="toggelShowAdd()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-plus me-1"
+        >
+          <path d="M12 5v14" />
+          <path d="M5 12h14" />
+        </svg>
+        Add Appointement
+      </button>
+      @if(showAdd){
+      <form [formGroup]="form">
+      <div class="addApp">
+        <div class="form-group">
+          <label for="ads">select unit</label>
+          <select class="form-control" id="ads" (change)="onSelectAd($event)">
+            <option disabled selected>Select unit</option>
+            @for(ad of AdsAvailable;track $index){
+                <option [value]="ad.adID" >{{ad.street}}, {{ad.buildingNumber}}B,{{ad.flatNumber}}F</option>
+            }
+            
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ads">select day</label>
+          <select class="form-control" id="ads" formControlName="day">
+            <option disabled selected>Select day</option>
+            @for(day of days;track $index){
+                <option [value]="day">{{day}}</option>
+            }
+            
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ads">select Hour</label>
+          <select class="form-control" id="ads" formControlName="hour">
+            <option disabled selected>Select Hour</option>
+            @for(time of timeSlots;track $index){
+                <option [value]="time">{{time}}</option>
+            }
+            
+          </select>
+        </div>
+        <div class="mt-3 mb-3">
+          <button class="btn btn-cancel" (click)="close()">Cancel</button>
+          <button class="btn btn-save" (click)="save()">Save</button>
+        </div>
+      </div>
+      </form>
+      }
+     
+    </div>
+  </div>
+
+  <!-- Calendar Grid -->
+  <div class="calendar-grid-container">
+    <div class="calendar-header">
+      <div class="time-col"></div>
+      @for(day of days;track $index){
+      <div class="day-col" data-day="2025-07-26">{{ day }}</div>
+      }
+    </div>
+    <div class="calendar-body" id="calendarBody">
+      <div class="time-col">
+        @for(time of timeSlots;track $index){
+        <div style="height: 80px">{{ time }}</div>
+        }
+      </div>
+      @for(day of days; track $index){
+      <div class="day-col" [id]="'day-' + day">
+        @for(time of timeSlots;track $index){
+        <div class="time-slot-line" [id]="time"></div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>

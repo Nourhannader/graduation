@@ -1,50 +1,104 @@
 .card {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .card-img-overlay-badges {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            display: flex;
-            gap: 8px;
-        }
-        .card-img-overlay-badges .badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-        }
-        .card-img-overlay-badges .badge-primary {
-            background-color: #007bff; /* Blue for Perfect Fit */
-        }
-        .card-img-overlay-badges .badge-dark {
-            background-color: rgba(0, 0, 0, 0.7); /* Dark for time ago */
-        }
-        .property-details {
-            display: flex;
-            justify-content: space-around;
-            font-size: 0.9rem;
-            color: #6c757d;
-            margin-bottom: 1rem;
-        }
-        .property-details div {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .property-details i {
-            font-size: 1rem;
-        }
-        .form-check-inline {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .form-check-inline .form-check-input {
-            margin-top: 0;
-        }
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+    padding: 5px;
+    background-color: #f0f2f3;
+    -webkit-transition: transform 0.2s;
+    -moz-transition: transform 0.2s;
+    -ms-transition: transform 0.2s;
+    -o-transition: transform 0.2s;
+}
+.card:hover {
+    transform: translateY(-5px);
+    -webkit-transform: translateY(-5px);
+    -moz-transform: translateY(-5px);
+    -ms-transform: translateY(-5px);
+    -o-transform: translateY(-5px);
+}
+.card-img-overlay-badges {
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    display: flex;
+    gap: 8px;
+}
+.card-img-overlay-badges .badge {
+    padding: 5px 10px;
+    border-radius: 40px;
+    font-size: 0.75rem;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -ms-border-radius: 40px;
+    -o-border-radius: 40px;
+}
+.slide-link{
+    position: absolute;
+    top: 58%;
+    left: 45%;
+    display: flex;
+}
+.slide-link button{
+    margin-left: 2px;
+    border: none;
+    outline: none;
+    width: 8px;
+    height: 8px;
+    background-color:#f0f2f3;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.card-img-top{
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.property-details {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 10px;
+    margin-top: 5px;
+ }
+.property-details div {
+   display: flex;
+   align-items: center;
+   background-color: white;
+   padding: 2px 8px;
+   gap: 2px;
+   border-radius:30px ;
+   -webkit-border-radius:30px ;
+   -moz-border-radius:30px ;
+   -ms-border-radius:30px ;
+   -o-border-radius:30px ;
+}
+.property-details i {
+    font-size: 1rem;
+    }
+.form-check-inline {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    }
+.form-check-inline .form-check-input {
+    margin-top: 0;
+}
+.price{
+    background-color: white;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
