@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router'
 import { AuthService } from '../Services/auth.service';
-
+import { CommonModule } from '@angular/common';
+import { NotificationDropdownComponent } from '../notification/notification-dropdown.component';
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink,RouterOutlet],
+  imports: [RouterLink, RouterOutlet, CommonModule, NotificationDropdownComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

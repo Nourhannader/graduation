@@ -12,6 +12,8 @@ import { OwnerEditUnitComponent } from '../Pages/owner-edit-unit/owner-edit-unit
 import { ReviewComponent } from '../Pages/review/review.component';
 import { AdvertisementsComponent } from '../Pages/advertisements/advertisements.component';
 import { RenterHomeComponent } from '../renter-home/renter-home.component';
+import { NotificationComponent } from '../notification/notification.component';
+
 
 
 export const routes: Routes = [
@@ -26,15 +28,15 @@ export const routes: Routes = [
         {path:'editUnit/:id',component:OwnerEditUnitComponent},
         {path:'owner',loadComponent: () => import('../Pages/owner-info/owner-info.component').then(m => m.OwnerInfoComponent)},
         { path: 'EditCommunity', component: OwnerEditCommunityComponent, title:"Edit Community"},
-        { path: 'AddUnit', component: OwnerAddUnitComponent, title:"Add Unit"}
+        { path: 'AddUnit', component: OwnerAddUnitComponent, title:"Add Unit"},
+  {  path: 'notifications',    component: NotificationComponent,    title: 'Notifications'}
 
 
     ]},
      {path:'community',loadComponent:() => import('../Pages/Community/community.component').then(m => m.CommunityComponent), title:"Community"},
      {path:'review',component:ReviewComponent},
      {path:'ads',component:AdvertisementsComponent},
-     {path:'RenterHome',component:RenterHomeComponent}
+     {path:'RenterHome',component:RenterHomeComponent},
      {path:'renterTabs',component:RenterTabsComponent}
 ];
 
-  
