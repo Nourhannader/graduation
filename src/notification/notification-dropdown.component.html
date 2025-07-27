@@ -1,0 +1,32 @@
+<div class="notification-wrapper">
+  <div class="notification-icon" (click)="toggleNotifications()">
+    <i class="fas fa-bell"></i>
+    @if(unreadCount > 0) {
+      <span class="notification-badge">{{ unreadCount }}</span>
+    }
+  </div>
+
+  @if(showNotifications) {
+  <div class="notification-dropdown">
+    <div class="notification-header">
+      <h4>Notifications</h4>
+      <a routerLink="/notifications" class="view-all">View All</a>
+    </div>
+    <div class="notification-list">
+      @for (notification of notifications; track notification.id) {
+      <div class="notification-item"
+           [class.read]="notification.isRead"
+           (click)="markAsRead(notification.id)">
+        <div class="notification-content">{{ notification.message }}</div>
+        <div class="notification-time">
+          {{ notification.createdAt | date:'shortTime' }}
+        </div>
+      </div>
+      }
+      @empty {
+      <div class="empty-notifications">No new notifications</div>
+      }
+    </div>
+  </div>
+  }
+</div>

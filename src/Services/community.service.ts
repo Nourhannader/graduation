@@ -8,7 +8,7 @@ import { TopUser } from '../interfaces/top-user';
   export interface Comm {
       Name:string
   }
-  
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,9 +17,7 @@ export class CommunityService {
 
   _httpClient=inject(HttpClient)
 
-
-
-  updateCommunity(communityName: Comm): Observable<any> {
+updateCommunity(communityName: Comm): Observable<any> {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
       return this._httpClient.put<any>(`http://localhost:5267/api/Community/`, communityName, { headers });
     }
