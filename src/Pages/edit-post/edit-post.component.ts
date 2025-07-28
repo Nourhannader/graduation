@@ -1,8 +1,9 @@
-import { Modal } from 'bootstrap';
+
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Output, ViewChild, EventEmitter, inject, input, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PostService } from '../../Services/post.service';
+import Modal from 'bootstrap/js/dist/modal';
 
 
 @Component({

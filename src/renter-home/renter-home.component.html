@@ -6,7 +6,7 @@
             <p>{{renter?.email}}</p>
         </div>
         <div class="renter-home-left-rent">
-            <button><a>Rent</a></button>
+            <button><a routerLink="/renterTabs">Rent</a></button>
         </div>
     </div>
     <div class="renter-home-right">
@@ -43,6 +43,7 @@
                 <Form [formGroup]="AddReviewForm" (ngSubmit)="submitReview()">
                     <input formControlName="content" type="text" placeholder="Write your review here..." >
                     <input formControlName="rate" type="text" placeholder="Rate (1-5)" >
+
                     <div class="review-buttons">
                         <button type="submit">Submit</button>
                         <button (click)="cancelReview()">Cancel</button>

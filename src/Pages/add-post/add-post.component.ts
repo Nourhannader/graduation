@@ -2,7 +2,8 @@ import { Component, Output, EventEmitter, AfterViewInit, ChangeDetectorRef, View
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Post, PostService } from '../../Services/post.service';
-import { Modal } from 'bootstrap';
+import Modal from 'bootstrap/js/dist/modal';
+// import { Modal } from 'bootstrap';
 
 
 @Component({

@@ -1,13 +1,18 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RentService {
-  constructor(private http: HttpClient) {}
 
-  getMonthRents(month: number, year: number) {
-    return this.http.get<any[]>(`https://5267/api/MonthRents?month=${month}&year=${year}`);
+_HttpClient=inject(HttpClient)
+
+getMonthRents(month: number, year: number):Observable<any> {
+
+const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
+  return this._HttpClient.get<any>(`http://localhost:5267/api/Rent/MonthRents?month=${month}&year=${year}`, { headers });
   }
+
 }

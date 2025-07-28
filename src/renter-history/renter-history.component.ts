@@ -17,44 +17,40 @@ export class RenterHistoryComponent implements OnInit {
 
   ngOnInit(): void {
 
+// const useMockData = true;          //    false    شيلو الداتا  دي    او اعملوهااا
 
+//   if (useMockData) {
+//     this.historyRents = [
+//       {
+//         rentId: 1,
+//         rentStatus: 'unpaid',
+//         rentValue: 2000,
+//         dueDate: '2025-06-01',
+//         paymentDate: '2025-06-05'
+//       },
+//       {
+//         rentId: 2,
+//         rentStatus: 'Paid',
+//         rentValue: 2500,
+//         dueDate: '2025-07-01',
+//         paymentDate: '2025-07-02'
+//       }
+//     ];
+//   } else
 
-
-const useMockData = true;          //    false    شيلو الداتا  دي    او اعملوهااا
-
-  if (useMockData) {
-    this.historyRents = [
-      {
-        rentId: 1,
-        rentStatus: 'unpaid',
-        rentValue: 2000,
-        dueDate: '2025-06-01',
-        paymentDate: '2025-06-05'
-      },
-      {
-        rentId: 2,
-        rentStatus: 'Paid',
-        rentValue: 2500,
-        dueDate: '2025-07-01',
-        paymentDate: '2025-07-02'
-      }
-    ];
-  } else
-
-
-
-
-
-
-
-
-
-
-
-
-
-    this.rentService.getHistoryRents().subscribe(data => {
-      this.historyRents = data;
-    });
+   this.getHistory();
   }
+
+
+getHistory(){
+  this.rentService.getHistoryRents().subscribe({
+    next: (data) => {
+      this.historyRents = data;
+      console.log('Fetched history rents:', data);       
+    },
+    error: (error) => {
+      console.error('Error fetching history rents:', error);
+    }
+  });
+}
 }

@@ -18,8 +18,5 @@ export class RenterTabsComponent {
     this.activeTab = tab;
   }
 
-
-
-
 }
 

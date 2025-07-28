@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <button type="submit">Confirm Payment</button>
+      <button [disabled]="!fullName || !cardNumber || !expiryDate || !cvv" type="submit">Confirm Payment</button>
     </form>
   </div>
 </div>

@@ -30,7 +30,7 @@
     <table class="rent-table">
       <thead>
         <tr>
-          <th>Month</th>
+          <th>Due Date</th>
           <th>Tenant</th>
           <th>Status</th>
           <th>Paid On</th>
@@ -39,7 +39,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let rent of filteredRents">
-          <td>{{ rent.rentMonth }}</td>
+          <td>{{ rent.dueDate }}</td>
           <td>{{ rent.renterName }}</td>
           <td>
             <span class="status-badge" [ngClass]="rent.rentStatus">

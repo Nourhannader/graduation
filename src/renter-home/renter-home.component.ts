@@ -4,11 +4,12 @@ import { AuthService } from '../Services/auth.service';
 import { ReviewService } from '../Services/review.service';
 import { GetStartedService, RenterSSN } from '../Services/get-started.service';
 import { Renter } from '../interfaces/renter';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-renter-home',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterLink],
   templateUrl: './renter-home.component.html',
   styleUrl: './renter-home.component.css'
 })
@@ -22,6 +23,9 @@ export class RenterHomeComponent implements OnInit {
   addReview: boolean = false;
   start: boolean = false;
   SSN:RenterSSN = { SSN: '' };
+  stars: number[] = [1, 2, 3, 4, 5];
+selectedRating: number = 0;
+
 
   GetStartedForm: FormGroup = new FormGroup({
     SSN: new FormControl(null, [Validators.required]),  
@@ -122,5 +126,12 @@ submitGetStarted() {
   }
 
 }
+
+/////
+setRating(rating: number) {
+  this.selectedRating = rating;
+  this.AddReviewForm.get('rate')?.setValue(rating);
+}
+
 
 }

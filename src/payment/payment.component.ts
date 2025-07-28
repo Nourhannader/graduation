@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentService } from '../Services/payment.service';
 import { FormsModule } from '@angular/forms';
+import e from 'express';
 
 @Component({
   selector: 'app-payment',
@@ -11,46 +12,67 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-  @Input() rentId: number | null = null;
-
-  renterId!: number;  //    @ 
-
+  rentId: number | null = null;
   fullName = '';
   cardNumber = '';
   expiryDate = '';
   cvv = '';
-
-  constructor(
-    private route: ActivatedRoute,
-    private paymentService: PaymentService
-  ) {}
+  _router=inject(Router);
+  _ActivatedRoute=inject(ActivatedRoute);  
+  _PaymentService=inject(PaymentService)   
+ 
 
   ngOnInit(): void {
-    if (this.rentId !== null) {
-      this.renterId = this.rentId;
-    } else {
-      this.route.queryParams.subscribe(params => {
-        const renterId = +params['renterId']; //
-        this.renterId = renterId;
-        console.log('Renter ID from query params:', renterId);
-      });
-    }
+    // if (this.rentId !== null) {
+    //   this.renterId = this.rentId;
+    // } else {
+    //   this.route.queryParams.subscribe(params => {
+    //     const renterId = +params['renterId']; //
+    //     this.renterId = renterId;
+    //     console.log('Renter ID from query params:', renterId);
+    //   });
+    // }
+    // this.route.queryParams.subscribe(params => {
+    //   this.rentId = +params['rentId'] || null;
+    //   console.log('Rent ID from query params:', this.rentId);
+
+    // });
+    this.rentId=Number(this._ActivatedRoute.snapshot.paramMap.get('id'));
+    console.log('Rent ID from route:', this.rentId);
   }
 
+
+
   confirmPayment(): void {
-    if (!this.renterId) {
-      alert("Missing renter ID");
+    if (!this.rentId) {
+      alert("Missing rent ID");
+      return;
+
+    } 
+    
+    else if (!this.fullName || !this.cardNumber || !this.expiryDate || !this.cvv) {
+      alert("Please fill in all payment details");
       return;
     }
 
-    this.paymentService.getStripeOnboardingUrl(this.renterId).subscribe({
-      next: (url: string) => {
-        window.location.href = url;
-      },
-      error: err => {
-        console.error('Error getting Stripe URL:', err);
-        alert("Something went wrong. Try again later.");
-      }
-    });
+
+    else if(this.cardNumber.length !== 16 || this.cvv.length!==3 || this.expiryDate.match(/^\d{2}\/\d{2}$/)){
+      alert("Please enter valid card details");
+      return;
+    }
+
+      else{
+        this._PaymentService.pay(this.rentId).subscribe({
+          next: (response) => {
+            console.log('Payment successful:', response);
+            alert("Payment successful");
+          },
+          error: (err) => {
+            console.error('Payment error:', err);
+            alert("Payment failed");
+          }
+        });
+    }
+
   }
 }
