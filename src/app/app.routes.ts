@@ -14,6 +14,12 @@ import { AdvertisementsComponent } from '../Pages/advertisements/advertisements.
 import { RenterHomeComponent } from '../renter-home/renter-home.component';
 import { RenterTabsComponent } from '../renter-tabs/renter-tabs.component';
 import { OwnerRentComponent } from '../owner-rent/owner-rent.component';
+import { ScheduleComponent } from '../Pages/schedule/schedule.component';
+import { BookingComponent } from '../Pages/booking/booking.component';
+
+import { NotificationComponent } from '../notification/notification.component';
+
+
 
 
 export const routes: Routes = [
@@ -29,7 +35,15 @@ export const routes: Routes = [
         {path:'owner',loadComponent: () => import('../Pages/owner-info/owner-info.component').then(m => m.OwnerInfoComponent)},
         { path: 'EditCommunity', component: OwnerEditCommunityComponent, title:"Edit Community"},
         { path: 'AddUnit', component: OwnerAddUnitComponent, title:"Add Unit"},
-         {path:'ownerRent', component:OwnerRentComponent, title:"Owner Rent"}
+         {path:'ownerRent', component:OwnerRentComponent, title:"Owner Rent"},
+
+
+        {path:'schedule',component:ScheduleComponent},
+        {path:'booking',component:BookingComponent},
+
+  {  path: 'notifications',    component: NotificationComponent,    title: 'Notifications'}
+
+
     ]},
 
     { path: 'renterTabs', component: RenterTabsComponent, title:"Renter Tabs",children:[
@@ -41,13 +55,15 @@ export const routes: Routes = [
      {path:'review',component:ReviewComponent},
      {path:'ads',component:AdvertisementsComponent},
      {path:'RenterHome',component:RenterHomeComponent},
-     {path:'renterTabs',component:RenterTabsComponent},
+    {path:'renterTabs',component:RenterTabsComponent},
      {path:'payment/:id',loadComponent:() => import('../payment/payment.component').then(m => m.PaymentComponent), title:"Payment"},
      {path:'renterHistory',loadComponent:() => import('../renter-history/renter-history.component').then(m => m.RenterHistoryComponent), title:"Renter History"},
     // {path:'ownerRent', component:OwnerRentComponent, title:"Owner Rent"},
      //  {path:'renterTabs',component:  RenterTabsComponent, title:"Renter Tabs"},
     //  {path:'unpaidRent',loadComponent:() => import('../unpaid-rent/unpaid-rent.component').then(m => m.UnpaidRentComponent), title:"Unpaid Rent"},
 
+    {path:'renterTabs',component:RenterTabsComponent},
+
+
 ];
 
-  

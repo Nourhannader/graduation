@@ -1,0 +1,69 @@
+<div class="container-custom">
+  <h1 class="h3 fw-bold text-dark mb-2">Bookings</h1>
+  <p class="text-secondary mb-4">See your scheduled Appointment</p>
+
+  <ul class="nav nav-pills mb-5 overflow-auto flex-nowrap pb-2">
+    <li class="nav-item">
+      <a class="nav-link" (click)="getAllReservation('Pending')">Pending</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="getAllReservation('Confirmed')">Confirmed</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="getAllReservation('Cancelled')">Cancelled</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="getAllReservation('Completed')">Completed</a>
+    </li>
+  </ul>
+
+  <div>
+    @for(group of groupedByMonth;track $index){
+    <h2 class="h5 fw-semibold text-dark mb-3">{{ group.month }}</h2>
+    <div class="d-grid gap-3">
+      @for(res of group.reservations;track $index){
+      <div class="booking-card">
+        <div class="booking-date">
+          <span class="day-of-week">{{ res.dayName }}</span>
+          <span class="day-of-month">{{ res.daynumber }}</span>
+        </div>
+        <div class="booking-details d-flex">
+          <div class="me-3">
+            <div class="info-row">
+              <span class="icon"><i class="bi bi-clock-history"></i></span>
+              <!-- Clock icon -->
+              <span>{{ res.hour }}</span>
+            </div>
+            <div class="info-row">
+              <span class="icon"><i class="bi bi-geo-alt"></i></span>
+              <!-- Map pin icon -->
+              <span>{{ res.Location }}</span>
+            </div>
+          </div>
+          <div>
+            <div class="title">{{ res.name }}</div>
+            <div class="phone">
+              {{ res.phoneNumber }}
+            </div>
+          </div>
+        </div>
+        @if(res.Status== 'Pending'){
+        <div class="booking-actions">
+          <div class="dropdown">
+            <select
+              class="custom-select-dropdown"
+              (change)="onActionChange($event,res.AppointmentId)">
+              <option selected disabled>Edit</option>
+              <option value="Confirmed">Confirm</option>
+              <option value="Completed">Complete</option>
+              <option value="Cancelled">Cancel</option>
+            </select>
+          </div>
+        </div>
+      }
+      </div>
+      }
+    </div>
+    }
+  </div>
+</div>

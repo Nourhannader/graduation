@@ -1,31 +1,43 @@
 <div class="col">
-  <div class="card">
-    <img
-      src="/images/unit1-1.webp"
-      class="card-img-top"
-      height="200"
-      alt="Property Image"
-    />
-    <div class="card-img-overlay-badges">
-      <span class="badge bg-danger">Remove</span>
-      <span class="badge bg-dark">16H ago</span>
-    </div>
-    <div class="card-body">
-      <div class="property-details">
-        <div><i class="bi bi-house"></i> 3 Beds</div>
-        <div><i class="bi bi-droplet"></i> 2 Baths</div>
-        <div><i class="bi bi-rulers"></i> 1520 Ft</div>
-        <div><i class="bi bi-calendar4-week"></i>Book</div>
+  <div class="card col-10" >    
+      <img
+        [src]="'http://localhost:5267/Images/' + imageUrl"
+        class="card-img-top"
+        height="200"
+        alt="Property Image"
+      />
+      <div class="card-img-overlay-badges">
+        @if(role === 'Owner' && item.userName === userName ){
+          <span (click)="Remove()" class="badge bg-danger">Remove</span>
+        }
+        <span class="badge bg-dark">{{getTimeDifference(item.publishDate)}} ago</span>
       </div>
-      <div class=" d-flex justify-content-between">
-        <h5 class="card-title fw-bold">EGP142,900</h5>
-        <div>
-          <p class="card-text mb-0">130 Milsom Ave</p>
-          <p class="card-text text-secondary" style="font-size: 0.85rem">
-            Cheektowaga, NY 14227
-          </p>
+      <div class="slide-link">
+         <button (click)="updateImage(0)"></button>
+         <button (click)="updateImage(1)"></button>
+         <button (click)="updateImage(2)"></button>
+      </div>
+      <div class="card-body p-0">
+        <div class="property-details">
+          <div><i class="bi bi-house"></i> {{Info.bedrooms}} Beds</div>
+          <div><i class="bi bi-droplet"></i> {{Info.bathrooms }} Baths</div>
+          <div><i class="bi bi-rulers"></i> {{Info.area}} m² </div>
+          @if(item.hasAppointment && role != 'Owner'){
+          <div (click)="getAllAppointmment(item.adID)"><i class="bi bi-calendar4-week"></i>Book</div>
+          }
+        </div>
+        <div class="d-flex justify-content-between price">
+          <div>
+            <h5 class="card-title fw-bold">EGP{{item.price}}</h5>
+           <p class="card-text mb-0">{{Info.type}}</p>
+          </div>
+          <div>
+            <p class="card-text mb-0">{{item.city}}</p>
+            <p class="card-text text-secondary" style="font-size: 0.85rem">
+              {{item.area}}, {{item.street}}
+            </p>
+          </div>
         </div>
       </div>
-    </div>
   </div>
 </div>
