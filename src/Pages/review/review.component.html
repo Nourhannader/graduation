@@ -21,7 +21,7 @@
     </div>
 
     <img
-      src="images/user1.jpg"
+      [src]="'http://localhost:5267/Images/' + review.userImage" 
       [alt]="review.fullName"
       class="user-image"
       id="userImage"
