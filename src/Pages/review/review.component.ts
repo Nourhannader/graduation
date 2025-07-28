@@ -3,6 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ReviewService } from '../../Services/review.service';
 import { Review } from '../../interfaces/review';
 import { RatingstarComponent } from '../ratingstar/ratingstar.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -23,17 +24,28 @@ export class ReviewComponent implements OnInit {
   _ReviewService=inject(ReviewService)
 
 
-  constructor(){}
+  constructor(private toastr: ToastrService){}
   ngOnInit(): void {
     this.userName=localStorage.getItem('userName');
     this.getAllReview();
-    this.review=this.reviews[this.currentSlideIndex]
+
   }
 
 
-
   getAllReview(){
-    this.reviews= this._ReviewService.reviews;
+    this._ReviewService.getAllReviews().subscribe({
+      next:(data) => {
+        this.reviews=data
+        this.review=this.reviews[this.currentSlideIndex]
+        setTimeout(() => {
+          this.toastr.success('reviews Loaded Successfully');
+        }, 500);
+      },error:(err)=>{
+        setTimeout(() => {
+          this.toastr.error(`${err.message}`);
+        }, 500);
+      }
+    })
   
   }
   
@@ -69,7 +81,17 @@ export class ReviewComponent implements OnInit {
   }
 
   delete(id:number){
-    alert("Clicked ID: " + id);
+      this._ReviewService.delete(id).subscribe({
+        next:(res)=>{
+          setTimeout(() => {
+          this.toastr.success(`${res.message}`);
+        }, 500);
+        },error:(err)=>{
+          setTimeout(() => {
+          this.toastr.error(`${err.message}`);
+        }, 500);
+        }
+      })
   }
 
 }

@@ -8,6 +8,7 @@ import { AuthService } from '../../Services/auth.service';
 import { CommunityService } from '../../Services/community.service';
 import { UserCommunity } from '../../interfaces/user-community';
 import { TopUser } from '../../interfaces/top-user';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -39,7 +40,7 @@ export class CommunityComponent implements OnInit , OnDestroy {
   _AuthService=inject(AuthService)
   _communityService=inject(CommunityService)
 
-  constructor(private postService: PostService) {}
+  constructor(private postService: PostService,private toastr: ToastrService) {}
 
   ngOnInit() {
     this.intervalId = setInterval(() => {
@@ -54,12 +55,17 @@ export class CommunityComponent implements OnInit , OnDestroy {
     this.loading = true;
     this.postService.getAllPosts().subscribe({
       next: (res: Post[]) => {
-        console.log('Posts loaded:', res);
+       setTimeout(() => {
+          this.toastr.success('Posts Loaded Successfully');
+        }, 500);
         this.posts = res;
         this.loading = false;
       },
       error: () => {
         this.error = 'error loading data';
+        setTimeout(() => {
+          this.toastr.error('Posts load failed');
+        }, 500);
         this.loading = false;
       },
     });
