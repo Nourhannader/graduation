@@ -11,7 +11,7 @@
         </div>
         <!--  -->
         <!-- <div class="chat-messages"> -->
-           <div [formGroup]="chatForm" class="chat-messages">
+           <!-- <div [formGroup]="chatForm" class="chat-messages">
                 <div formArrayName="messages">
                     <div *ngFor="let msg of messages.controls; let i = index" [formGroupName]="i" class="chat-message">
                         <p>{{ msg.value.message }}</p>
@@ -21,7 +21,7 @@
                     <input type="text" [formControl]="newMessage" placeholder="Type your message..." (keyup.enter)="sendMessage()" />
                     <button (click)="sendMessage()">Send</button>
                 </div>
-            </div>
+            </div> -->
             <!--  -->
         <!-- </div> -->
     </div>

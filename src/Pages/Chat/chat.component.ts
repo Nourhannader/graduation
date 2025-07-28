@@ -12,54 +12,54 @@ import { ChatService } from '../../Services/chat.service';
 export class ChatComponent{
     ask:boolean=false
     _chatService=inject(ChatService);              
-    chatForm: FormGroup;
-    newMessage: FormControl = new FormControl('');
+//     chatForm: FormGroup;
+//     newMessage: FormControl = new FormControl('');
 
-  constructor(private fb: FormBuilder) {
-    this.chatForm = this.fb.group({
-      messages: this.fb.array([])
-    });
-  }
+//   constructor(private fb: FormBuilder) {
+//     this.chatForm = this.fb.group({
+//       messages: this.fb.array([])
+//     });
+//   }
 
-  get messages(): FormArray {
-    return this.chatForm.get('messages') as FormArray;
-  }
+//   get messages(): FormArray {
+//     return this.chatForm.get('messages') as FormArray;
+//   }
 
-  sendMessage() {
-    const message = this.newMessage.value?.trim();
-    if (!message) return;
+//   sendMessage() {
+//     const message = this.newMessage.value?.trim();
+//     if (!message) return;
 
-    // Add user message
-    this.messages.push(this.fb.group({
-      sender: 'user',
-      message
-    }));
+//     // Add user message
+//     this.messages.push(this.fb.group({
+//       sender: 'user',
+//       message
+//     }));
 
-    this.newMessage.reset();
+//     this.newMessage.reset();
 
-    // Simulate AI response
-    this.getAIResponse(message);
-  }
+//     // Simulate AI response
+//     this.getAIResponse(message);
+//   }
 
-  getAIResponse(userMessage: string) {
-    this._chatService.getAnswer(userMessage).subscribe({
-      next: (response) => {
-        const aiReply = response.answer; 
-        this.messages.push(this.fb.group({
-          sender: 'assistant',
-          message: aiReply
-        }));
-      },
-      error: (error) => {
-        console.error('Error fetching AI response:', error);
-        this.messages.push(this.fb.group({
-          sender: 'assistant',
-          message: 'Sorry, I could not process your request.'
-        }));
-      }
-    });
+//   getAIResponse(userMessage: string) {
+//     this._chatService.getAnswer(userMessage).subscribe({
+//       next: (response) => {
+//         const aiReply = response.answer; 
+//         this.messages.push(this.fb.group({
+//           sender: 'assistant',
+//           message: aiReply
+//         }));
+//       },
+//       error: (error) => {
+//         console.error('Error fetching AI response:', error);
+//         this.messages.push(this.fb.group({
+//           sender: 'assistant',
+//           message: 'Sorry, I could not process your request.'
+//         }));
+//       }
+//     });
 
-  }
+//   }
 
     openChat(): void {
         this.ask=true
