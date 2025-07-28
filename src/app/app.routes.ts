@@ -41,10 +41,11 @@ export const routes: Routes = [
         {path:'schedule',component:ScheduleComponent},
         {path:'booking',component:BookingComponent},
 
-  {  path: 'notifications',    component: NotificationComponent,    title: 'Notifications'}
+ 
 
 
     ]},
+     {  path: 'notifications',    component: NotificationComponent,    title: 'Notifications'},
 
     { path: 'renterTabs', component: RenterTabsComponent, title:"Renter Tabs",children:[
     //  {path:'payment?rentId=:id',loadComponent:() => import('../payment/payment.component').then(m => m.PaymentComponent), title:"Payment"},

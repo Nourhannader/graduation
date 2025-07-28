@@ -18,8 +18,6 @@
     @if(isLoggedIn==false)
     {
     <div>
-            <app-notification-dropdown></app-notification-dropdown>
-
         <a routerLink="login">Login</a>
         <a routerLink="register">Register</a>
     </div>
@@ -27,6 +25,7 @@
     @if(isLoggedIn==true)
     {
     <div>
+        <app-notification-dropdown></app-notification-dropdown>
         <a routerLink="community">Community</a>
         <a (click)="logout()">logout</a>
     </div>

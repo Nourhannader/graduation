@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 interface Notification {
@@ -16,10 +16,12 @@ export class NotificationService {
   constructor(private http: HttpClient) {}
 
   getNotifications(): Observable<Notification[]> {
-    return this.http.get<Notification[]>(this.apiUrl);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
+    return this.http.get<Notification[]>(this.apiUrl, { headers });
   }
 
   markAsRead(id: number): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${id}`, {});
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
+    return this.http.put<void>(`${this.apiUrl}/${id}`,  { headers });
   }
 }
