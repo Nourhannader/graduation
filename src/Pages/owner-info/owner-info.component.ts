@@ -15,7 +15,8 @@ export class OwnerInfoComponent implements OnInit {
     firstName: '',
     lastName: '',
     userName: '',
-    email: ''
+    email: '',
+    compLocation:[]
   }
   _authService=inject(AuthService);
   _fb=inject(FormBuilder)

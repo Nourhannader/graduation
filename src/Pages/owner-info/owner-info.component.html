@@ -1,46 +1,78 @@
-<div class="col-md-12 owner-info">
-  <h4>  My Account / <i class="bi bi-person-circle"></i> Profile</h4>
-   <hr>
-  <div class="mb-4 user-personal">
-    <img
-      [src]="'http://localhost:5267/Images/' + user?.image"
-      [alt]="user?.userName"
-      class="profile-img me-3"
-    />
-    <div>
-      <h5 class="mb-0">{{ user?.firstName }} {{user?.lastName}}</h5>
-      <p class="text-muted mb-0">{{ user?.email }}</p>
-    </div>
-  </div>
 
-  <div class="card w-75 personal">
-    <div class="card-body">
-      <h6 class="mb-3">Personal details</h6>
-      <hr>
-      <div class="row mb-2">
-        <div class="col-md-4"><strong>First name:</strong></div>
-        <div class="col-md-8">{{ user?.firstName }}</div>
+<div class="main-container">
+  <div class="profile-content">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="h4 mb-0">My Profile</h2>
+    </div>
+
+    <div class="profile-header">
+      <img
+        [src]="'http://localhost:5267/Images/' + user?.image"
+        [alt]="user?.userName"
+        class="profile-img me-3"
+      />
+      <div class="profile-info">
+        <h3>{{ user?.firstName }} {{ user?.lastName }}</h3>
+        <p>{{ user?.userName }}</p>
       </div>
-      <hr>
-      <div class="row mb-2">
-        <div class="col-md-4"><strong>Last name:</strong></div>
-        <div class="col-md-8">{{ user?.lastName }}</div>
+      <!-- <button class="edit-btn">
+        <i class="fas fa-edit"></i>
+      </button> -->
+    </div>
+
+    <!-- Personal Information -->
+    <div class="section">
+      <div class="section-header">
+        <h3 class="section-title">Personal Information</h3>
       </div>
-      <hr>
-      <div class="row mb-2">
-        <div class="col-md-4"><strong>User name:</strong></div>
-        <div class="col-md-8">{{ user?.userName }}</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <div class="form-value">{{ user?.firstName }}</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <div class="form-value">{{ user?.lastName }}</div>
+        </div>
       </div>
-      <hr>
-      <div class="row mb-2">
-        <div class="col-md-4"><strong>Phone Number:</strong></div>
-        <div class="col-md-8">{{ user?.phoneNumber }}</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <div class="form-value">{{ user?.email }}</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">UserName</label>
+          <div class="form-value">{{ user?.userName }}</div>
+        </div>
       </div>
-      <hr>
-      <div class="row mb-2">
-        <div class="col-md-4"><strong>Email:</strong></div>
-        <div class="col-md-8">{{ user?.email }}</div>
+      @if(user?.phoneNumber != null){
+      <div class="form-group">
+        <label class="form-label">Phone</label>
+        <div class="form-value">{{ user?.phoneNumber }}</div>
       </div>
+      }
+    </div>
+
+    <!-- Address -->
+    <div class="section">
+      <div class="section-header">
+        <h3 class="section-title">Compound Address</h3>
+      </div>
+      @if(user && user.compLocation && user.compLocation.length > 0){
+      @for(location of user?.compLocation;track $index){
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">City</label>
+          <div class="form-value">{{ location.city }}</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Area</label>
+          <div class="form-value">{{ location.area }}</div>
+        </div>
+      </div>
+      } }
     </div>
   </div>
 </div>
