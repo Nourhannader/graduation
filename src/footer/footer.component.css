@@ -1,72 +1,78 @@
-footer{
-    background-color: #3a74b3;
+footer {
+    background-color: #00395e;
     color: white;
     text-align: center;
     box-sizing: border-box;
-    padding: 10px 0;
-    /* position: fixed;
-    bottom: 0; */
+    padding: 20px 0;
     width: 100%;
-    margin:0;
-    /* margin-top: 50px;  */
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 22px;
+    font-weight: 200;
+
 }
+footer {
+
+    width: 100%;
+    background-color: #00385B;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
 
 .footer-content {
     display: flex;
-    /* flex-direction: column; */
-    align-items: center;
     justify-content: space-around;
-    padding: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 30px;
 }
 
 .footer-logo {
-    width: 80px;
-    height: 80px;
+    width:270px;
+
     border-radius: 50%;
+    overflow: hidden;
 }
 .footer-logo img {
-    width: 100%;
+    width: 120%;
     height: 100%;
     border-radius: 50%;
 }
+
 .footer-text {
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 25px;
 }
-.footer-text a {
-    color: #fff;
+
+.footer-links a,
+.footer-contact a,
+.footer-terms a {
+    color: white;
     text-decoration: none;
-}
-
-.footer-links {
-    display: flex;
+    font-size: 25px;
+    padding: 0px 10px;
+    transition: 0.3s;
+      display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 14px;
+    align-items: flex-start;
+    margin-top: 15px;
+    text-align: left;
+    font-weight: 300;
 }
 
-.footer-contact{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
 
+.footer-links a:hover,
+.footer-contact a:hover,
+.footer-terms a:hover {
+    text-decoration: underline;
 }
 
-.footer-terms{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
 
-a{
+
+a {
     color: #fff;
     text-decoration: none;
 }
