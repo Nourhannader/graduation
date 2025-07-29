@@ -13,7 +13,7 @@
                 <h5 class="text-success">Register Successfully!</h5>
           </div>
         }
-
+           
     </div>
     <div class="row">
         <div class="col-md-9 register-left">
@@ -99,7 +99,7 @@
                            }
 
                           <div class="form-group col-md-8 pass">
-                              <input class="form-input" [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password" />
+                              <input class="form-input" [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password" /> 
                               <i (click)="togglePassword()" [class]="'bi ' + (showPassword ? 'bi-eye-fill' : 'bi-eye-slash-fill')"></i>
                           </div>
                           @if(password?.errors && password?.touched){
@@ -111,7 +111,7 @@
                            }
 
                           <div class="form-group col-md-8 ">
-                              <input class="form-input" [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword" placeholder="confirmPassword" />
+                              <input class="form-input" [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword" placeholder="confirmPassword" /> 
                               <i (click)="toggleConfirmPassword()" [class]="'bi ' + (showConfirmPassword ? 'bi-eye-fill' : 'bi-eye-slash-fill')"></i>
                           </div>
                           @if(confirmPassword?.errors && confirmPassword?.touched){
@@ -140,12 +140,12 @@
                       }
                 </div>
             </form>
-        </div>
+        </div> 
         <div class="col-md-3 register-right">
                 <img src="./images/register.jpg" alt=""/>
                 <div class="d-flex justify-content-end ">
                     <input type="submit"  value="Login" id="login-button" class="btn btn-login" (click)="Login()"/>
                 </div>
         </div>
-    </div>
+    </div> 
 </div>

@@ -1,9 +1,9 @@
 <div class="navbar">
     <div class="logo">
-        <img src="images/footerLogo2.png" alt="Logo" />
+        <img src="images/finalLogo2.png" alt="Logo" />
+        <!-- <h2>LIVANA</h2> -->
     </div>
-
-    <div class="nav-links">
+    <div>
         @if(role == 'Renter'){
             <a routerLink="RenterHome">Home</a>
         }
@@ -12,22 +12,22 @@
             <a routerLink="ownerHome">Home</a>
         }
 
-        <a routerLink="ads">Ads</a>
+        <a routerLink="ads"> Ads</a>
         <a routerLink="review">Reviews</a>
-
     </div>
-
-    <div class="nav-right">
-        @if(isLoggedIn==false)
-        {
-            <a routerLink="login" class="btn-login">Login</a>
-            <a routerLink="register" class="btn-register">Register</a>
-        }
-        @if(isLoggedIn==true)
-        {
-            <app-notification-dropdown></app-notification-dropdown>
-            <a routerLink="community">Community</a>
-            <a (click)="logout()">Logout</a>
-        }
+    @if(isLoggedIn==false)
+    {
+    <div>
+        <a routerLink="login">Login</a>
+        <a routerLink="register">Register</a>
     </div>
+    }
+    @if(isLoggedIn==true)
+    {
+    <div>
+        <app-notification-dropdown></app-notification-dropdown>
+        <a routerLink="community">Community</a>
+        <a (click)="logout()">logout</a>
+    </div>
+    }
 </div>
