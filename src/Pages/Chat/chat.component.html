@@ -24,6 +24,17 @@
             </div> -->
             <!--  -->
         <!-- </div> -->
+         <!-- <div class="message bot">How can I help you?</div> -->
+        <div class="chat-messages">
+            <div *ngFor="let msg of messages" class="messagesContainer">
+                <div class="message {{ msg.sender }}">{{ msg.text }}</div>
+            </div>
+
+            <form [formGroup]="chatForm" (ngSubmit)="sendMessage()">
+                <input formControlName="userInput" placeholder="Type your message" />
+                <button type="submit">Send</button>
+            </form>
+        </div>
     </div>
 </div>
 }

@@ -17,8 +17,7 @@ export class RenterHistoryComponent implements OnInit {
 
   ngOnInit(): void {
 
-// const useMockData = true;          //    false    شيلو الداتا  دي    او اعملوهااا
-
+// const useMockData = true;        
 //   if (useMockData) {
 //     this.historyRents = [
 //       {

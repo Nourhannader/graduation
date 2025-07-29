@@ -20,8 +20,8 @@ export class NotificationService {
     return this.http.get<Notification[]>(this.apiUrl, { headers });
   }
 
-  markAsRead(id: number): Observable<void> {
+  markAsRead(id: number): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.put<void>(`${this.apiUrl}/${id}`,  { headers });
+    return this.http.put<any>(`${this.apiUrl}/${id}`,  { headers });
   }
 }
