@@ -34,6 +34,7 @@ export const routes: Routes = [
         {path:'editUnit/:id',component:OwnerEditUnitComponent},
         {path:'owner',loadComponent: () => import('../Pages/owner-info/owner-info.component').then(m => m.OwnerInfoComponent)},
         { path: 'EditCommunity', component: OwnerEditCommunityComponent, title:"Edit Community"},
+<<<<<<< HEAD
         { path: 'AddUnit', component: OwnerAddUnitComponent, title:"Add Unit"},
          {path:'ownerRent', component:OwnerRentComponent, title:"Owner Rent"},
 
@@ -42,6 +43,10 @@ export const routes: Routes = [
         {path:'booking',component:BookingComponent},
 
  
+=======
+    { path: 'AddUnit', component: OwnerAddUnitComponent, title:"Add Unit"},
+  {  path: 'notifications',    component: NotificationComponent,    title: 'Notifications'}
+>>>>>>> ca8c04f (home)
 
 
     ]},
