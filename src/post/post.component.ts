@@ -67,8 +67,13 @@ export class PostComponent  {
 
     this.postService.reactToPost(Number(this.post.postId)).subscribe({
       next: (res) => {
-        console.log('Post liked/unliked:', res.message);
-        this.post.reactCount = res.message === 'added' ? this.post.reactCount + 1 : this.post.reactCount - 1;
+        if (res.message === 'added') {
+        this.post.reactCount++;
+         } else if (res.message === 'removed' && this.post.reactCount >=  0) {
+        this.post.reactCount--;
+         }
+
+
         this.fireUser.emit(this.post.postId);
         this.isLiking = false;
       },

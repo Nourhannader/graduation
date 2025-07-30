@@ -27,6 +27,6 @@ export class AppComponent {
   }
 
   shouldHideLayout(): boolean {
-    return this.currentUrl.startsWith('/login') || this.currentUrl.startsWith('/register');
+    return this.currentUrl.startsWith('/login') || this.currentUrl.startsWith('/register') || this.currentUrl.startsWith('/404') ;
   }
 }
