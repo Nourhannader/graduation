@@ -1,8 +1,18 @@
-<app-navbar></app-navbar>
+<!-- <app-navbar></app-navbar>
 
 <main>
   <router-outlet></router-outlet>
   <app-chat></app-chat>
 </main>
 
+<app-footer></app-footer> -->
+@if(!shouldHideLayout()){
+<app-navbar></app-navbar>
+}
+<main>
+  <router-outlet></router-outlet>
+  <app-chat></app-chat>
+</main>
+@if(!shouldHideLayout()){
 <app-footer></app-footer>
+}

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { UserLogin } from '../../interfaces/user-login';
+import { Owner } from '../../interfaces/owner';
 
 
 
@@ -16,6 +17,7 @@ export class LoginComponent {
   loginForm!: FormGroup
   apiError:string=''
   showPassword:boolean=false;
+  
 
   _fb = inject(FormBuilder);
   _router = inject(Router);
@@ -41,7 +43,7 @@ export class LoginComponent {
  ForgotPassword(){
 
  }
- Login(){
+ async Login(){
    if (this.loginForm.valid) {
     console.log(this.loginForm.value);
     const uerLogin: UserLogin = {
@@ -54,17 +56,15 @@ export class LoginComponent {
     }
     
     this._AuthService.Login(uerLogin).subscribe({
-      next:(response)=>{
+      next:async (response)=>{
         console.log(response);
           localStorage.setItem('role',response.role)
           localStorage.setItem('token',response.token);
           localStorage.setItem('userName',response.userName)
+          localStorage.setItem('image',response.image)
           this._AuthService.saveUser()
-          if(response.role == 'Renter'){
-            this._router.navigate(['/RenterHome'])
-          } else{
-           this._router.navigate(['/ownerHome']);
-          }
+            this._router.navigate(['/home'])
+          
           
       },error:(err)=>{
         console.log(err);
@@ -75,6 +75,8 @@ export class LoginComponent {
     this.loginForm.markAllAsTouched();
    }
  }
+
+  
 
  Register(){
   this._router.navigate(['/register']);

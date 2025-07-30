@@ -122,6 +122,8 @@ renderAppointments() {
 
 
  toggelShowAdd(){
+  console.log('hi');
+  
   this.showAdd=!this.showAdd;
  }
  close(){

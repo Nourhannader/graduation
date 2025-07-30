@@ -11,7 +11,10 @@ import { NotificationDropdownComponent } from '../notification/notification-drop
 })
 export class NavbarComponent implements OnInit {
 isLoggedIn:boolean=false
+isShow:boolean=false
 role!:string
+image!:string
+userName!:string
 _authService=inject(AuthService)
 _router=inject(Router)
 
@@ -29,6 +32,8 @@ constructor(){
 
 ngOnInit():void{
   this.role = localStorage.getItem('role')!
+  this.image=localStorage.getItem('image')!
+  this.userName=localStorage.getItem('userName')!
 }
 
 
@@ -36,5 +41,15 @@ logout() {
   this._authService.Logout();
   //window.location.reload();
   this._router.navigate(['/login']);
+}
+navigateToHome(){
+  if(this.role === 'Owner'){
+    this._router.navigate(['/ownerHome'])
+  }else{
+    this._router.navigate(['/RenterHome'])
+  }
+}
+ShowDrop(){
+  this.isShow=!this.isShow
 }
 }

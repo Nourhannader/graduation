@@ -4,7 +4,7 @@ export interface Owner {
   userName: string;
   phoneNumber?: string;             
   email: string;
-  image?: string;  
+  image: string;  
   compLocation:CompLocation[];     
 }
 

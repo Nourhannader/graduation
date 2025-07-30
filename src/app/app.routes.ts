@@ -18,18 +18,19 @@ import { ScheduleComponent } from '../Pages/schedule/schedule.component';
 import { BookingComponent } from '../Pages/booking/booking.component';
 
 import { NotificationComponent } from '../notification/notification.component';
+import { HomeComponent } from '../home/home.component';
 
 
 
 
 export const routes: Routes = [
-    {path:'',redirectTo:'ownerHome',pathMatch:"full"},
+    {path:'',redirectTo:'home',pathMatch:"full"},
     {path:'register',component:RegisterComponent},
     {path:'login',component:LoginComponent},
     // /////////////////////////////
     { path: 'ownerHome', component: OwnerComponent, title:"Owner Home",children:[
         {path:'',redirectTo:'owner',pathMatch:"full"},
-        {path:'units',loadComponent:() => import('../Pages/units/units.component').then(m => m.UnitsComponent)},
+        {path:'units',component:UnitsComponent},
         {path:'details/:id',component:DetailsComponent},
         {path:'editUnit/:id',component:OwnerEditUnitComponent},
         {path:'owner',loadComponent: () => import('../Pages/owner-info/owner-info.component').then(m => m.OwnerInfoComponent)},
@@ -61,6 +62,7 @@ export const routes: Routes = [
     //  {path:'unpaidRent',loadComponent:() => import('../unpaid-rent/unpaid-rent.component').then(m => m.UnpaidRentComponent), title:"Unpaid Rent"},
 
     {path:'renterTabs',component:RenterTabsComponent},
+    {path:'home',component:HomeComponent}
 
 
 ];
