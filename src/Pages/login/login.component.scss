@@ -1,16 +1,20 @@
 .register{
-    border-radius: 20px;
-    background: linear-gradient(to right, #3a74b3 0%, #3a74b3 10%, #7fa8d1 30%, #ffffff 100%);
-    margin-top: 3%;
+    background: linear-gradient(to right, #3a74b3 0%, #3a74b3 10%, #7fa8d1 100%);
     padding: 3%;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
     position: relative;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
-  
-  .login-left {
+    height: 100%;
+
+     .content{
+      
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+     }
+
+      .login-left{
       background-color: #ffffff;
       border-top-right-radius: 12% 50%;
       border-bottom-right-radius: 12% 50%;
@@ -23,7 +27,7 @@
         .login-heading{
           font-size: 28px;
           font-family:sans-serif;
-        
+           color: #2a5a8b;
         }
         .login-form{
           display: flex;
@@ -34,9 +38,12 @@
           .form-input {
             outline: none;
             border: 0.1px solid #d3d0d0;
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
+            border-radius: 5px;
             padding: 10px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
            }
            .form-input.pass{
             border-right: none;
@@ -95,6 +102,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: white;
     
 
     img{

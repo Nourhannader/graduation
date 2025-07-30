@@ -1,43 +1,96 @@
-.owner-info {
-  border: .1px solid #ccc;
-  width: 100%;
-  height: 100%;
-  padding: 10px 0;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-
-  h4{
-    padding: 0 10px;
-    font-size: 18px;
-    font-weight: 500;
-    color: #c2bfbf;
-  }
-  .user-personal{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 10px 30px;
-
-    .profile-img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 5px solid  #ccc;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      -ms-border-radius: 50%;
-      -o-border-radius: 50%;
-   }
-  }
-
-  .personal{
-    margin: 5px 30px;
-
-  }
-  
+.main-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
 }
 
+.profile-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #3a74b3;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.main-content {
+  display: flex;
+  min-height: calc(100vh - 100px);
+}
+
+.profile-content {
+  flex: 1;
+  padding: 32px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 32px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.profile-info h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color:#1e293b;
+  margin: 0;
+}
+
+.profile-info p {
+  color: #64748b;
+  margin: 4px 0 0 0;
+}
+.section {
+  margin-bottom: 32px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color:#1e293b;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-value {
+  color: #64748b;
+  font-size: 14px;
+}

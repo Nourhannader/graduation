@@ -10,9 +10,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to right, #3a74b3 0%, #3a74b3 10%, #7fa8d1 30%, #ffffff 100%);
+ /* background: linear-gradient(to right, #3a74b3 0%, #3a74b3 10%, #7fa8d1 30%, #ffffff 100%); */
+ background-color: #f0f0f0;
   border-radius: 50%;
-  color: white;
+  color: #3a74b3;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 2px 8px rgba(58, 116, 179, 0.2);
@@ -74,7 +75,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background: linear-gradient(to right, #3a74b3 0%, #3a74b3 10%, #7fa8d1 30%, #ffffff 100%);
+  background: linear-gradient(to right, #3a74b3 0%, #3a74b3 10%, #7fa8d1 100%);
   color: white;
 }
 

@@ -10,7 +10,6 @@ footer{
     margin:0;
     /* margin-top: 50px;  */
 }
-
 .footer-content {
     display: flex;
     /* flex-direction: column; */
@@ -20,8 +19,8 @@ footer{
 }
 
 .footer-logo {
-    width: 80px;
-    height: 80px;
+    width: 150px;
+    
     border-radius: 50%;
 }
 .footer-logo img {
@@ -42,7 +41,7 @@ footer{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: self-start;
     gap: 10px;
     margin-top: 10px;
 }
@@ -51,7 +50,7 @@ footer{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: self-start;
     gap: 10px;
     margin-top: 10px;
 
@@ -61,7 +60,7 @@ footer{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items:self-start;
     gap: 10px;
     margin-top: 10px;
 }

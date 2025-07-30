@@ -14,7 +14,9 @@ export class OwnerTopBarComponent implements OnInit {
        firstName: '',
        lastName: '',
        userName: '',
-       email: ''
+       email: '',
+       image:'',
+       compLocation:[]
      }
   _authService=inject(AuthService);
 
