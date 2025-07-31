@@ -1,4 +1,3 @@
-import { Message } from './../../../node_modules/primeng/api/message.d';
 import { Post } from './../../Services/post.service';
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
