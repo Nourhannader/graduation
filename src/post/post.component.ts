@@ -13,7 +13,7 @@ import { EditPostComponent } from '../Pages/edit-post/edit-post.component';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent  {
+export class PostComponent {
   @Input() post!: Post;
   @Output() toggleLiked = new EventEmitter<number>();
   @Output() postDeleted = new EventEmitter<string>();
@@ -27,6 +27,7 @@ export class PostComponent  {
   isAddingComment = false;
   loadingComments = false;
 
+
   // Form data
   editDescription = '';
   editImage = '';
@@ -39,8 +40,8 @@ export class PostComponent  {
   // Errors
   error: string | null = null;
 
+
   constructor(private postService: PostService, private cdr: ChangeDetectorRef) {}
-  
   onUpdate(postId:number){
     this.postUpdated.emit(postId);
   }
@@ -67,13 +68,9 @@ export class PostComponent  {
 
     this.postService.reactToPost(Number(this.post.postId)).subscribe({
       next: (res) => {
-        if (res.message === 'added') {
-        this.post.reactCount++;
-         } else if (res.message === 'removed' && this.post.reactCount >=  0) {
-        this.post.reactCount--;
-         }
-
-
+        console.log(res.message);
+        
+        this.post.reactCount = res.message === 'react added' ? this.post.reactCount + 1 : this.post.reactCount - 1;
         this.fireUser.emit(this.post.postId);
         this.isLiking = false;
       },

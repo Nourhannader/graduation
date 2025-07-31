@@ -30,7 +30,7 @@ export const routes: Routes = [
     {path:'',redirectTo:'home',pathMatch:"full"},
     {path:'register',component:RegisterComponent,canActivate:[guardRedirectGuard]},
     {path:'login',component:LoginComponent,canActivate:[guardRedirectGuard]},
-    { path: 'ownerHome', component: OwnerComponent, title:"Owner Home",canActivate:[authGuard],data: { roles: ['owner'],children:[
+    { path: 'ownerHome', component: OwnerComponent, title:"Owner Home",canActivate:[authGuard],data: { roles: ['Owner']},children:[
         {path:'',redirectTo:'owner',pathMatch:"full"},
         {path:'units',component:UnitsComponent},
         {path:'details/:id',component:DetailsComponent},
@@ -42,13 +42,13 @@ export const routes: Routes = [
         {path:'schedule',component:ScheduleComponent},
         {path:'booking',component:BookingComponent}
         // { path: 'notifications',    component: NotificationComponent,    title: 'Notifications'}
-    ]}},
+    ]},
      {  path: 'notifications',    component: NotificationComponent,    title: 'Notifications'},
 
-    { path: 'renterTabs', component: RenterTabsComponent, title:"Renter Tabs",canActivate:[authGuard],data: { roles: ['Renter'],children:[
+    { path: 'renterTabs', component: RenterTabsComponent, title:"Renter Tabs",canActivate:[authGuard],data: { roles: ['Renter']},children:[
     //  {path:'payment?rentId=:id',loadComponent:() => import('../payment/payment.component').then(m => m.PaymentComponent), title:"Payment"},
      {path:'renterHistory',loadComponent:() => import('../renter-history/renter-history.component').then(m => m.RenterHistoryComponent), title:"Renter History"},
-    ]}},
+    ]},
 
      {path:'community',loadComponent:() => import('../Pages/Community/community.component').then(m => m.CommunityComponent), title:"Community"},
      {path:'review',component:ReviewComponent},

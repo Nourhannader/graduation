@@ -1,7 +1,11 @@
 .unit-content {
   position: relative;
 }
-
+.spinner-border.custom-spin {
+    color: #3a74b3 !important;
+    width: 4rem;
+  height: 4rem;
+  }
 .btn-filter {
   background-color: #f4f4f4;
   border: none;
@@ -52,10 +56,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     animation: dropBounce 0.5s ease-in-out forwards;
-    pointer-events: none;
     -webkit-animation: dropBounce 0.5s ease-in-out forwards;
-    ul
-      {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+     ul{
       margin-left: 20px;
     }
 
