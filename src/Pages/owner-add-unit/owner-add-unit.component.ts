@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UnitsService } from '../../Services/units.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-owner-add-unit',
@@ -11,7 +12,7 @@ import { UnitsService } from '../../Services/units.service';
   styleUrl: './owner-add-unit.component.css'
 })
 export class OwnerAddUnitComponent {
-
+      constructor(private toastr: ToastrService){}
     _unitsService=inject(UnitsService)
 
 
@@ -24,9 +25,9 @@ export class OwnerAddUnitComponent {
     street:new FormControl(null,[Validators.required]),
     flatNumber:new FormControl(null),
     buildingNumber:new FormControl(null,[Validators.required]),
-    electricityNum:new FormControl(null,[Validators.required]),
-    waterNum:new FormControl(null,[Validators.required]),
-    gasNum:new FormControl(null,[Validators.required]),
+    // electricityNum:new FormControl(null,[Validators.required]),
+    // waterNum:new FormControl(null,[Validators.required]),
+    // gasNum:new FormControl(null,[Validators.required]),
     price:new FormControl(null,[Validators.required]),
     renterSSN:new FormControl(null), //required if it is not empyt
     image1:new FormControl(null),
@@ -65,9 +66,9 @@ onFileSelected(event: any, imageKey: string) {
       formData.append('area', this.AddUnitForm.get('area')?.value);
       formData.append('street', this.AddUnitForm.get('street')?.value);
       formData.append('buildingNumber', this.AddUnitForm.get('buildingNumber')?.value);
-      formData.append('electricityNum', this.AddUnitForm.get('electricityNum')?.value);
-      formData.append('waterNum', this.AddUnitForm.get('waterNum')?.value);
-      formData.append('gasNum', this.AddUnitForm.get('gasNum')?.value);
+      // formData.append('electricityNum', this.AddUnitForm.get('electricityNum')?.value);
+      // formData.append('waterNum', this.AddUnitForm.get('waterNum')?.value);
+      // formData.append('gasNum', this.AddUnitForm.get('gasNum')?.value);
       formData.append('price', this.AddUnitForm.get('price')?.value);
       if(this.AddUnitForm.get('flatNumber')?.value!=null)
       {
@@ -99,11 +100,14 @@ onFileSelected(event: any, imageKey: string) {
       this._unitsService.AddUnit(formData).subscribe({
         next:(res)=>{
           console.log(res);
+          this.toastr.success("Your new unit is added successfully")
           this._router.navigate(['/ownerHome/units'])
+
         },
         error:(err)=>{
           console.log(err)
           this.apiError=err.error.message
+          this.toastr.error("Can't add your unit")
         }
       })
     }

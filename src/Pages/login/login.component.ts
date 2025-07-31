@@ -50,9 +50,11 @@ export class LoginComponent {
       password: this.loginForm.value.password
     }
     if(this.loginForm.value.identifier.includes('@')){
-      uerLogin.email=this.loginForm.value.identifier; 
+      uerLogin.email=this.loginForm.value.identifier;
+      uerLogin.userName='' 
     }else{  
-      uerLogin.userName=this.loginForm.value.identifier; 
+      uerLogin.userName=this.loginForm.value.identifier;
+      uerLogin.email='' 
     }
     
     this._AuthService.Login(uerLogin).subscribe({

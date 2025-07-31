@@ -17,11 +17,11 @@
   <div class="d-flex ">
     <app-notification-dropdown></app-notification-dropdown>
     <div class="me-2 content-image">
-      <img [src]="'http://localhost:5267/Images/' + image"  (click)="ShowDrop()" />
+      <img [src]="'http://localhost:5267/Images/'+image"  (click)="ShowDrop()" />
       @if(isShow){
       <ul class="list-group">
           <li class="list-group-item" (click)="navigateToHome()"><i class="bi bi-person-fill"></i> {{userName}}</li>
-          <li class="list-group-item" routerLink="community"><i class="fa-solid fa-users"></i> Community</li>
+          <li class="list-group-item" routerLink="community" ><i class="fa-solid fa-users"></i> Community</li>
           <li class="list-group-item" (click)="logout()"><i class="bi bi-box-arrow-left"></i> logout</li>
       </ul>}
     </div>

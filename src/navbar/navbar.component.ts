@@ -45,8 +45,10 @@ logout() {
 navigateToHome(){
   if(this.role === 'Owner'){
     this._router.navigate(['/ownerHome'])
+    this.isShow=false
   }else{
     this._router.navigate(['/RenterHome'])
+    this.isShow=false
   }
 }
 ShowDrop(){
