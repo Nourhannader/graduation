@@ -96,7 +96,14 @@ body {
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+  transition: all 0.2s ease;
+ box-shadow: 0 2px 8px rgba(58, 116, 179, 0.2);
 }
+ .content-image img:hover{
+   transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(58, 116, 179, 0.3);
+ }
+
 .content-image ul {
   position: absolute;
   z-index: 55;

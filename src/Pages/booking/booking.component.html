@@ -16,7 +16,19 @@
       <a class="nav-link" (click)="getAllReservation('Completed')">Completed</a>
     </li>
   </ul>
-
+  @if(loading){
+  <div class="text-center my-5">
+    <div class="spinner-border custom-spin" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  } @if(!loading && groupedByMonth?.length === 0){
+  <div class="text-center text-muted">
+    <i class="bi bi-calendar-x fs-1"></i>
+    <p class="mt-2">No bookings found.</p>
+  </div>
+  }
+  @if(!loading && (groupedByMonth?.length ?? 0) > 0) {
   <div>
     @for(group of groupedByMonth;track $index){
     <h2 class="h5 fw-semibold text-dark mb-3">{{ group.month }}</h2>
@@ -52,7 +64,8 @@
           <div class="dropdown">
             <select
               class="custom-select-dropdown"
-              (change)="onActionChange($event,res.AppointmentId)">
+              (change)="onActionChange($event, res.AppointmentId)"
+            >
               <option selected disabled>Edit</option>
               <option value="Confirmed">Confirm</option>
               <option value="Completed">Complete</option>
@@ -60,10 +73,11 @@
             </select>
           </div>
         </div>
-      }
+        }
       </div>
       }
     </div>
     }
   </div>
+}
 </div>

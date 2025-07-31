@@ -20,11 +20,14 @@ export class UnitsComponent implements OnInit {
   selectedStatus: string = '';
   selectedType: string = '';
   filterAll:string = '';
-
+  loading:boolean=false
   _unitsService=inject(UnitsService)
 
   ngOnInit(): void {
-    this.getAll()
+    this.loading=true
+    setTimeout(() => {
+      this.getAll()
+    },1000)
   }
 
   toggleFilters() {
@@ -81,8 +84,11 @@ export class UnitsComponent implements OnInit {
       next:(data)=>{
         this.units=data;
         console.log(this.units);
+        this.loading=false
       },error:(err)=>{
-        console.error('Error fetching units:', err);  }
+        console.error('Error fetching units:', err);
+        this.loading=false
+      }
     });
   }
 
