@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PostService, Post, Comment } from '../Services/post.service';
 import { EditPostComponent } from '../Pages/edit-post/edit-post.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-post',
@@ -41,7 +42,7 @@ export class PostComponent {
   error: string | null = null;
 
 
-  constructor(private postService: PostService, private cdr: ChangeDetectorRef) {}
+  constructor(private postService: PostService, private cdr: ChangeDetectorRef,private toastr: ToastrService) {}
   onUpdate(postId:number){
     this.postUpdated.emit(postId);
   }
@@ -54,11 +55,17 @@ export class PostComponent {
       next: () => {
         this.postDeleted.emit(String(this.post.postId));
         this.fireUser.emit(this.post.postId);
+        setTimeout(()=>{
+          this.toastr.success('Post Deleted successfully');
+        },500)
+        
       },
       error: (err) => {
         this.error = 'Error deleting post:';
         this.isDeleting = false;
-        console.error('Error deleting post:', err);
+        setTimeout(()=>{
+          this.toastr.error('Post Deleted failed');
+        },500)
       }
     });
   }

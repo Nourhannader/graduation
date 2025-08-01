@@ -5,6 +5,7 @@ import { Advertisement } from '../../interfaces/advertisement';
 import { AdvertisementService } from '../../Services/advertisement.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AppointmentAv } from '../../interfaces/appointmentAv';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -18,6 +19,9 @@ export class AdvertisementsComponent implements OnInit {
   showPrice = false;
   showBeds = false;
   showTypes = false;
+  loading:boolean=false
+  loadingAppoint:boolean=false
+  loadingHour:boolean=false
   searchTerm = '';
   selectDate:string=''
   selectTime:string=''
@@ -32,15 +36,19 @@ export class AdvertisementsComponent implements OnInit {
   appointmentForm!:FormGroup
   _AdvertisementService=inject(AdvertisementService)
 
-   constructor(private fb: FormBuilder) {}
+   constructor(private fb: FormBuilder,private toastr:ToastrService) {}
   ngOnInit(): void {
-    this.getAllAdvertisements()
+    this.loading=true
+    setTimeout(()=>{
+      this.getAllAdvertisements()
+    },1000)
+    
     this.appointmentForm=this.fb.group({
       email:['',[Validators.required,Validators.email]],
       name:['',[Validators.required]],
       phoneNumber:['',Validators.required],
       date:['',[Validators.required]],
-      hour:['',[Validators.required]]
+      time:['',[Validators.required]]
     })
   }
 
@@ -56,8 +64,10 @@ export class AdvertisementsComponent implements OnInit {
         console.log(data);
         this.advertisements=data;
         this.filteredAds = [...this.advertisements]; 
+        this.loading=false
       },error:(err) => {
         console.log(err);
+        this.loading=false
       }
     })
   }
@@ -65,9 +75,13 @@ export class AdvertisementsComponent implements OnInit {
   delete(id:number){
     this._AdvertisementService.DeleteAds(id).subscribe({
       next:(res) =>{
-        console.log(res.message);
+        setTimeout(() => {
+          this.toastr.success(res.message);
+        })
       },error:(err) => {
-        console.log(err.message);
+        setTimeout(() => {
+          this.toastr.success(err.message);
+        })
       }
     })
   }
@@ -126,21 +140,23 @@ filterBeds(){
 
   getAllAppointmment(id:number){
     this.ShowReservation=true
-   this._AdvertisementService.getAppointmentAvailble(id).subscribe({
+    this.loadingAppoint=true
+    setTimeout(() => {
+      this._AdvertisementService.getAppointmentAvailble(id).subscribe({
     next:(data)=>{
       this.appointment=data
-      console.log(this.appointment);
       const grouped=this.groupAppointmentsByDay(this.appointment);
       this.groupedAppointments=grouped
       this.dates=Object.keys(grouped)
-      console.log(this.dates);
-      
+      this.loadingAppoint=false
       
     },error:(err)=>{
       console.log(err);
-      
+      this.loadingAppoint=false
     }
-   })  
+   })
+  }, 1000);
+     
  }
   
  groupAppointmentsByDay(data: AppointmentAv[]): { [key: string]: string[] } {
@@ -162,7 +178,9 @@ filterBeds(){
 }
   updateDate(date:string){
     this.selectDate=date;
-    this.times = this.groupedAppointments[date] || [];
+    this.times = this.groupedAppointments[date];
+    console.log(this.times);
+    
   this.selectTime = ''; 
   }
   updateTime(time:string){
@@ -176,7 +194,11 @@ filterBeds(){
   }
 
   const temp=this.appointmentForm.value;
-  const fullDateTime = `${temp.date}T${temp.hour}:00`;
+  const fullDateTime = `${temp.date}T${temp.time}:00`;
+  console.log(this.appointment);
+  
+  console.log(fullDateTime);
+  
   const found= this.appointment.find(app => app.appointmentDate==fullDateTime)
   if(found){
     const reservation1={
@@ -187,9 +209,15 @@ filterBeds(){
     }
    this._AdvertisementService.AddReservarion(reservation1).subscribe({
     next:(res)=>{
-      console.log(res.message);
+     this.ShowReservation = false
+      setTimeout(() => {
+        this.toastr.success(res.message)
+      }, 1000);
     },error:(err)=>{
-      console.log(err.message);
+      this.ShowReservation = false
+      setTimeout(() => {
+        this.toastr.error(err.message)
+      }, 1000);
     }
    });
     

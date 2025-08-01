@@ -1,11 +1,11 @@
 export interface AllReservation {
     id:number,
-    Status:string,
+    status:string,
     reservationDate:Date
-    Location:string
+    location:string
     name:string
     phoneNumber:string
-    Email:string
-    AppointmentId:number
+    email:string
+    appointmentId:number
 }
 

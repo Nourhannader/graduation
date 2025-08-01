@@ -1,15 +1,15 @@
 export interface TransformedReservation {
   id: number;
-  Status: string;
+  status: string;
   dayName: string;
   daynumber: number;
   hour: string;
   month: string;
-  Location: string;
+  location: string;
   name: string;
   phoneNumber: string;
-  Email: string;
-  AppointmentId: number;
+  email: string;
+  appointmentId: number;
 }
 
 export interface MonthGroup {

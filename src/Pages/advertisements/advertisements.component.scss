@@ -36,7 +36,7 @@
   left: 0;
   z-index: 1000;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: rgba($color: #000000, $alpha: 0.2);
 }
 .btn-reser{
@@ -66,3 +66,8 @@
    color: white;
   }
 }
+.spinner-border.custom-spin {
+    color: #3a74b3 !important;
+    width: 4rem;
+  height: 4rem;
+  }

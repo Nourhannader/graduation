@@ -3,6 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AllReservation } from '../../interfaces/all-reservation';
 import { MonthGroup, TransformedReservation } from '../../interfaces/transformed-reservation';
 import { CommonModule } from '@angular/common';
+import { log } from 'console';
 
 
 @Component({
@@ -20,28 +21,35 @@ export class BookingComponent implements OnInit {
   _ReservationService=inject(ReservationService);
 
   ngOnInit() {
-     this.getAllReservation('Pending');
+    this.loading=true
+    setTimeout(() => {
+      this.getAllReservation('Pending');
+    }, 1000);
+     
   
    };
 
-  getAllReservation(status: string ) {
-  this.loading = true;
-    
-    setTimeout(()=>{
+  getAllReservation(Status: string ) {
       this._ReservationService.AllReservation().subscribe({
 
       next:(data) =>{
         this.reservations=data
-        this.reservations = this.reservations.filter(r => r.Status === status);
+        this.reservations = data.filter(r =>
+         r.status?.trim().toLowerCase() === Status.trim().toLowerCase()
+        );
+        console.log(this.reservations);
+        
         this.Transform();
         this.GroupedMonth();
+      console.log(this.groupedByMonth);
+      
         this.loading=false
       },error:(err)=>{
         console.log(err);
         this.loading=false
       }
     })
-    },2000)
+    
     
   }
 
@@ -51,21 +59,22 @@ export class BookingComponent implements OnInit {
 
     return {
       id: r.id,
-      Status: r.Status,
+      status: r.status,
       dayName: date.toLocaleDateString('en-US', { weekday: 'short' }),
       daynumber: date.getDate(),
       hour: date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }),
       month: date.toLocaleDateString('en-US', { month: 'long' }),
-      Location: r.Location,
+      location: r.location,
       name: r.name,
       phoneNumber: r.phoneNumber,
-      Email: r.Email,
-      AppointmentId: r.AppointmentId
+      email: r.email,
+      appointmentId: r.appointmentId
     };
   });
    }
 
    GroupedMonth(){
+    this.groupedByMonth=[]
     this.transformedReservations.forEach(res => {
     let group = this.groupedByMonth.find(g => g.month === res.month);
     if (!group) {
@@ -74,6 +83,7 @@ export class BookingComponent implements OnInit {
     }
     group.reservations.push(res);
   });
+  
    }
    onActionChange(event: Event,id:number) {
   const value = (event.target as HTMLSelectElement).value;

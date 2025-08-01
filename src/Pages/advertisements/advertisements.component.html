@@ -66,7 +66,7 @@
       <!-- Type Dropdown -->
       <div class="dropdown position-relative">
         <button
-          class="btn btn-outline-secondary filter-btn dropdown-toggle bg-white rounded-pill "
+          class="btn btn-outline-secondary filter-btn dropdown-toggle bg-white rounded-pill"
           type="button"
           (click)="toggle('types')"
         >
@@ -86,7 +86,19 @@
       </div>
     </div>
   </div>
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 ">
+  @if(loading){
+  <div class="text-center my-5">
+    <div class="spinner-border custom-spin" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  } @if(!loading && filteredAds?.length === 0){
+  <div class="text-center text-muted">
+    <i class="bi bi-file-earmark-x fs-1"></i>
+    <p class="mt-2">No Addvertisements found.</p>
+  </div>
+  } @if(!loading && (filteredAds?.length ?? 0) > 0){
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
     @for(ads of filteredAds;track $index){
     <app-ads-single
       (AllAppointment)="getAllAppointmment($event)"
@@ -95,139 +107,154 @@
     ></app-ads-single>
     }
   </div>
+  }
 </div>
 
 @if(ShowReservation){
 <div class="booking d-flex justify-content-center align-items-center">
   <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
-  <div class="d-flex flex-column flex-md-row gap-4 mb-4">
-    <div class="card" style="width: 380px">
-      <div class="card-body select-input p-4">
-        <h2 class="h5 fw-bold mb-4">Select Date</h2>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          @for(date of dates;track $index){
-          <div>
-            <input
-              type="radio"
-              [id]="date"
-              [value]="date"
-              name="date"
-              formControlName="date"
-              (change)="updateDate(date)"
-            />
-            <label [for]="date">{{ date }}</label>
+    <div class="d-flex flex-column flex-md-row gap-4 mb-4">
+      <div class="card" style="width: 380px">
+        @if(loadingAppoint){
+        <div class="text-center my-5">
+          <div class="spinner-border custom-spin" role="status">
+            <span class="visually-hidden">Loading...</span>
           </div>
-          }
         </div>
-        @if(appointmentForm.get('date')?.errors && appointmentForm.get('date')?.touched){
+        } @if(!loadingAppoint && dates?.length === 0){
+        <div class="text-center text-muted">
+          <i class="bi bi-file-earmark-x fs-1"></i>
+          <p class="mt-2">No Appointments found.</p>
+          <div class="d-flex justify-content-center align-items-center">
+            <button
+              class="btn btn-reser"
+              type="reset"
+              (click)="ShowReservation = false"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+        }
+        @if(!loadingAppoint && (dates?.length ?? 0) > 0){
+        <div class="card-body select-input p-4">
+          <h2 class="h5 fw-bold mb-4">Select Date</h2>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            @for(date of dates;track $index){
+            <div>
+              <input
+                type="radio"
+                [id]="date"
+                [value]="date"
+                name="date"
+                formControlName="date"
+                (change)="updateDate(date)"
+              />
+              <label [for]="date">{{ date }}</label>
+            </div>
+            }
+          </div>
+          @if(appointmentForm.get('date')?.errors &&
+          appointmentForm.get('date')?.touched){
           @if(appointmentForm.get('date')?.hasError('required')){
-            <div class="text-danger mt-1 mb-1">
-              date is required
+          <div class="text-danger mb-1">date is required</div>
+          } }
+          <h2 class="h5 fw-bold mb-4">Select Time</h2>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            @for(time of times;track time){
+            <div>
+              <input
+                type="radio"
+                [id]="time"
+                [value]="time"
+                name="time"
+                formControlName="time"
+                (change)="updateTime(time)"
+              />
+              <label [for]="time">{{ time }}</label>
             </div>
-          }
-        }
-        <h2 class="h5 fw-bold mb-4">Select Time</h2>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          @for(time of times;track $index){
-          <div>
-            <input
-              type="radio"
-              [id]="time"
-              [value]="time"
-              name="time"
-              class="m-0"
-              formControlName="hour"
-              (change)="updateTime(time)"
-            />
-            <label [for]="time">{{ time }}</label>
+            }
+          
           </div>
-          }
-        </div>
-        @if(appointmentForm.get('hour')?.errors && appointmentForm.get('hour')?.touched){
+          @if(appointmentForm.get('hour')?.errors &&
+          appointmentForm.get('hour')?.touched){
           @if(appointmentForm.get('hour')?.hasError('required')){
-            <div class="text-danger mt-1 mb-1">
-              Time is required
-            </div>
-          }
+          <div class="text-danger mt-1 mb-1">Time is required</div>
+          } }
+          <div class="d-flex justify-content-center align-items-center">
+            <button
+              class="btn btn-reser"
+              type="reset"
+              (click)="ShowReservation = false"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
         }
-        <div class="d-flex justify-content-center align-items-center">
-          <button class="btn btn-reser" type="reset" (click)="ShowReservation = false">
-            Cancel
-          </button>
+      </div>
+      <div class="card" style="width: 380px">
+        <div class="card-body p-4">
+          <h2 class="h5 fw-bold mb-4 text-center">Personal Data</h2>
+          <div>
+            <div class="form-group mb-3">
+              <label for="name">Enter Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="name"
+                placeholder="ex:Ahmed"
+              />
+            </div>
+            @if(appointmentForm.get('name')?.errors &&
+            appointmentForm.get('name')?.touched){
+            @if(appointmentForm.get('name')?.hasError('required')){
+            <div class="text-danger mb-1">Name is required</div>
+            } }
+          </div>
+          <div>
+            <div class="form-group mb-3">
+              <label for="email">Enter Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                placeholder="example@gmail.com"
+              />
+            </div>
+            @if(appointmentForm.get('email')?.errors &&
+            appointmentForm.get('email')?.touched){
+            @if(appointmentForm.get('email')?.hasError('required')){
+            <div class="text-danger mt-1 mb-1">Email is required</div>
+            } @if(appointmentForm.get('email')?.hasError('email')){
+            <div class="text-danger mt-1">Email is invalid</div>
+            } }
+          </div>
+          <div>
+            <div class="form-group mb-3">
+              <label for="phoneNumber">Enter phoneNumber</label>
+              <input
+                type="text"
+                class="form-control"
+                id="phoneNumber"
+                formControlName="phoneNumber"
+                placeholder="ex:01093088047"
+              />
+            </div>
+            @if(appointmentForm.get('phoneNumber')?.errors &&
+            appointmentForm.get('phoneNumber')?.touched){
+            @if(appointmentForm.get('phoneNumber')?.hasError('required')){
+            <div class="text-danger mt-1">phoneNumber is required</div>
+            } }
+          </div>
+          <div class="d-flex justify-content-center align-items-center mt-2">
+            <button type="submit" class="btn btn-reser">Reservation</button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="card" style="width: 380px">
-      <div class="card-body p-4">
-        <h2 class="h5 fw-bold mb-4 text-center">Personal Data</h2>
-        <div>
-          <div class="form-group mb-3">
-            <label for="name">Enter Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              formControlName="name"
-              placeholder="ex:Ahmed"
-            />
-          </div>
-          @if(appointmentForm.get('name')?.errors && appointmentForm.get('name')?.touched){
-          @if(appointmentForm.get('name')?.hasError('required')){
-            <div class="text-danger mt-1 mb-1">
-              Name is required
-            </div>
-          }
-        }
-        </div>
-        <div>
-          <div class="form-group mb-3">
-            <label for="email">Enter Email</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              formControlName="email"
-              placeholder="example@enail.com"
-            />
-          </div>
-          @if(appointmentForm.get('email')?.errors && appointmentForm.get('email')?.touched){
-          @if(appointmentForm.get('email')?.hasError('required')){
-            <div class="text-danger mt-1 mb-1">
-              Email is required
-            </div>
-          }
-          @if(appointmentForm.get('email')?.hasError('email')){
-            <div class="text-danger mt-2">
-              Email is invalid
-            </div>
-          }
-        }
-        </div>
-        <div>
-          <div class="form-group mb-3">
-            <label for="phoneNumber">Enter phoneNumber</label>
-            <input
-              type="text"
-              class="form-control"
-              id="phoneNumber"
-              formControlName="phoneNumber"
-              placeholder="ex:01093088047"
-            />
-          </div>
-          @if(appointmentForm.get('phoneNumber')?.errors && appointmentForm.get('phoneNumber')?.touched){
-          @if(appointmentForm.get('phoneNumber')?.hasError('required')){
-            <div class="text-danger mt-1">
-              phoneNumber is required
-            </div>
-          }
-        }
-        </div>
-        <div class="d-flex justify-content-center align-items-center mt-2">
-          <button type="submit" class="btn btn-reser">Reservation</button>
-        </div>
-      </div>
-    </div>
-  </div>
   </form>
 </div>
 }

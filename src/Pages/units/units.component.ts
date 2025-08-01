@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { UnitComponent } from '../unit/unit.component';
 import { Unit } from '../../interfaces/unit';
 import { UnitsService } from '../../Services/units.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -22,7 +23,8 @@ export class UnitsComponent implements OnInit {
   filterAll:string = '';
   loading:boolean=false
   _unitsService=inject(UnitsService)
-
+   
+  constructor(private toastr:ToastrService){}
   ngOnInit(): void {
     this.loading=true
     setTimeout(() => {
@@ -119,11 +121,15 @@ export class UnitsComponent implements OnInit {
     console.log('Delete unit with ID:', id);
     this._unitsService.deleteUnit(id).subscribe({
       next: (res) => {
-        console.log('Unit deleted successfully:', res);
+        setTimeout(() => {
+          this.toastr.success('unit deleted successfully');
+        }, 1000);
         this.getAll(); 
       },
       error: (err) => {
-        console.error('Error deleting unit:', err);
+        setTimeout(() => {
+          this.toastr.error('Error deleting unit');
+        }, 1000);
       }
     });
   }
