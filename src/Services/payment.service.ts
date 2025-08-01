@@ -19,10 +19,10 @@ export class PaymentService {
   // }
 
 
-pay(RentId:number):Observable<any>
+pay(RentId:number):Observable<{ clientSecret: string }>
 {
   const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.post<any>(`http://localhost:5267/api/Payment/Payment/`, {RentId}, {headers});
+    return this._HttpClient.post<{ clientSecret: string }>(`http://localhost:5267/api/Payment/Payment/`, {RentId}, {headers});
 }
   
 }
