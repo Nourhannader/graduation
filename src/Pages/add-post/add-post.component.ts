@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Post, PostService } from '../../Services/post.service';
 import Modal from 'bootstrap/js/dist/modal';
+import { ToastrService } from 'ngx-toastr';
 // import { Modal } from 'bootstrap';
 
 
@@ -30,7 +31,7 @@ export class AddPostComponent implements OnInit  {
   userName:string=''
   image:string=''
 
-  constructor(private postService: PostService , private cd:ChangeDetectorRef) {}
+  constructor(private postService: PostService , private cd:ChangeDetectorRef,private toastr:ToastrService) {}
 
   ngOnInit(): void {
     this.userName = localStorage.getItem('username') || ''
@@ -71,12 +72,17 @@ export class AddPostComponent implements OnInit  {
         this.resetForm();
         this.isSubmitting = false;
         this.closeModal();
+        setTimeout(() => {
+          this.toastr.success('post added successfully')
+        },500);
         
       },
       error: (err) => {
         this.error = 'faild  create post ';
         this.isSubmitting = false;
-        console.error('Error creating post:', err);
+        setTimeout(() => {
+          this.toastr.error('post added successfully')
+        },500);
       }
     });
   }

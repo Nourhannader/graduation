@@ -20,6 +20,7 @@ export class ReviewComponent implements OnInit {
    userName: string | null | undefined;
    currentSlideIndex: number = 0;
    length:number=4;
+   loading:boolean=false
 
   _ReviewService=inject(ReviewService)
 
@@ -27,7 +28,11 @@ export class ReviewComponent implements OnInit {
   constructor(private toastr: ToastrService){}
   ngOnInit(): void {
     this.userName=localStorage.getItem('userName');
-    this.getAllReview();
+    this.loading=true
+    setTimeout(() => {
+       this.getAllReview();
+    }, 1000);
+   
 
   }
 
@@ -37,13 +42,10 @@ export class ReviewComponent implements OnInit {
       next:(data) => {
         this.reviews=data
         this.review=this.reviews[this.currentSlideIndex]
-        setTimeout(() => {
-          this.toastr.success('reviews Loaded Successfully');
-        }, 500);
+       this.loading=false
+       
       },error:(err)=>{
-        setTimeout(() => {
-          this.toastr.error(`${err.message}`);
-        }, 500);
+        this.loading=false
       }
     })
   

@@ -44,6 +44,10 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 
 .image1 img, .image2 img {
@@ -59,16 +63,25 @@
 .left{
   position: sticky;
   top: 20px;
-  
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+.right{
+  position: sticky;
+  top: 20px;
 }
 
-.left button{
+.left a{
   border: none;
   outline: none;
   background-color: #3a74b3;
   color: white;
   padding: 5px 10px;
   border-radius: 20px;
+  text-decoration: none;
   cursor: pointer;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;

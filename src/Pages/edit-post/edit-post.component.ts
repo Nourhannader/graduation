@@ -4,6 +4,7 @@ import { Component, ElementRef, Output, ViewChild, EventEmitter, inject, input, 
 import { FormsModule } from '@angular/forms';
 import { PostService } from '../../Services/post.service';
 import Modal from 'bootstrap/js/dist/modal';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class EditPostComponent implements OnInit {
   @ViewChild('createPostModal',{static:false}) createPostModal!: ElementRef;
   @Output() postedited = new EventEmitter<number>();
 
-
+   constructor(private toastr:ToastrService){}
   ngOnInit(): void {
     this.userName = localStorage.getItem('username') || ''
     this.image=localStorage.getItem('image') ||''
@@ -69,10 +70,15 @@ export class EditPostComponent implements OnInit {
       next: (res) => {
         this.postedited.emit(res.postId);
         this.closeModal();
+        setTimeout(() => {
+        this.toastr.success('post edited Successfully')
+        }, 500);
       },
       error: (err) => {
         this.error = 'Failed to edit post';
-        console.error(err);
+       setTimeout(() => {
+        this.toastr.error('post edited Failed')
+        }, 500);
       },
       complete: () => {
         this.isSubmitting = false;

@@ -3,13 +3,13 @@
     <div class="col-md-3">
       <aside class="bg-white p-4 left rounded-xl shadow-sm">
         <div class="mb-4 image1" [class.visible]="showFirstImage">
-           <img src="/images/unit1-1.webp" alt="">
+           <img [src]="'http://localhost:5267/Images/' + image1"  alt="">
         </div>
         <div class="mb-4 image2" [class.visible]="!showFirstImage">
-           <img src="/images/unit1-2.webp" alt="">
+            <img [src]="'http://localhost:5267/Images/' + image2"  alt="">
         </div>
         <div class="d-flex justify-content-center align-items-center">
-          <button>ShowMore</button>
+          <a routerLink="/ads">ShowMore</a>
         </div>
       </aside>
     </div>
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="col-md-3">
-      <aside class="h-100">
+      <aside class="h-100 right">
         <!-- Profile Summary Card -->
         <div class="card mb-4 profile-card text-center">
           <div class="profile-bg">

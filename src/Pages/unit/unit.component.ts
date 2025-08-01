@@ -4,6 +4,7 @@ import { Component, inject, Input, OnInit, OnDestroy, ElementRef, EventEmitter, 
 import { Router, RouterLink } from '@angular/router';
 import { Unit } from '../../interfaces/unit';
 import { UnitsService } from '../../Services/units.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-unit',
@@ -27,7 +28,7 @@ export class UnitComponent implements OnInit,OnDestroy {
   _AdvertisementService = inject(AdvertisementService)
   _router = inject(Router);
 
-  constructor(private elRef: ElementRef) {}
+  constructor(private elRef: ElementRef,private toastr:ToastrService) {}
   
   ngOnInit(): void {
     const unit = this.item;
@@ -95,9 +96,14 @@ export class UnitComponent implements OnInit,OnDestroy {
 
     this._AdvertisementService.AddAds(unit.id).subscribe({
       next:(res) =>{
-        console.log(res);
+        
+        setTimeout(() => {
+          this.toastr.success(res.message)
+        }, 1000);
       },error:(err) => {
-        console.log(err);
+        setTimeout(() => {
+          this.toastr.success(err.message)
+        }, 1000);
       }
     })
   }

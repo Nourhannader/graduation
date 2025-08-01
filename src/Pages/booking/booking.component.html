@@ -49,7 +49,7 @@
             <div class="info-row">
               <span class="icon"><i class="bi bi-geo-alt"></i></span>
               <!-- Map pin icon -->
-              <span>{{ res.Location }}</span>
+              <span>{{ res.location}}</span>
             </div>
           </div>
           <div>
@@ -59,12 +59,12 @@
             </div>
           </div>
         </div>
-        @if(res.Status== 'Pending'){
+        @if(res.status === 'Pending'){
         <div class="booking-actions">
           <div class="dropdown">
             <select
               class="custom-select-dropdown"
-              (change)="onActionChange($event, res.AppointmentId)"
+              (change)="onActionChange($event, res.appointmentId)"
             >
               <option selected disabled>Edit</option>
               <option value="Confirmed">Confirm</option>

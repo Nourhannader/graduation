@@ -11,12 +11,13 @@ import { TopUser } from '../../interfaces/top-user';
 import { ToastrService } from 'ngx-toastr';
 import { Advertisement } from '../../interfaces/advertisement';
 import { AdvertisementService } from '../../Services/advertisement.service';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-community',
   standalone: true,
-  imports: [CommonModule,PostComponent, AddPostComponent],
+  imports: [CommonModule,PostComponent, AddPostComponent,RouterLink],
   templateUrl: './community.component.html',
   styleUrls: ['./community.component.css'],
 })
@@ -36,6 +37,8 @@ export class CommunityComponent implements OnInit , OnDestroy {
   loading: boolean = false;
   error: string | null = null;
   showFirstImage: boolean = true;
+  image1!:string
+  image2!:string
   private intervalId: any;
 
 
@@ -60,17 +63,11 @@ export class CommunityComponent implements OnInit , OnDestroy {
     this.loading = true;
     this.postService.getAllPosts().subscribe({
       next: (res: Post[]) => {
-       setTimeout(() => {
-          this.toastr.success('Posts Loaded Successfully');
-        }, 500);
         this.posts = res;
         this.loading = false;
       },
       error: () => {
         this.error = 'error loading data';
-        setTimeout(() => {
-          this.toastr.error('Posts load failed');
-        }, 500);
         this.loading = false;
       },
     });
@@ -127,9 +124,9 @@ export class CommunityComponent implements OnInit , OnDestroy {
     this._AdvertisementService.getTwoAds().subscribe({
       next:(res) => {
         this.twoAds=res
-        console.log(this.twoAds);
+        this.image1=this.twoAds[0].image1!
+        this.image2=this.twoAds[1].image1!
         
-
       },error:(err)=>{
         console.log(err.message);
         
