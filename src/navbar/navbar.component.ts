@@ -54,4 +54,9 @@ navigateToHome(){
 ShowDrop(){
   this.isShow=!this.isShow
 }
+
+closeMenue()
+{
+  this.isShow=false
+}
 }

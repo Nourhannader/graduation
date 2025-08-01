@@ -48,4 +48,9 @@ export class NotificationDropdownComponent {
     });
 
   }
+
+  cancelShow()
+  {
+    this.showNotifications=false
+  }
 }

@@ -1,6 +1,6 @@
 <div class="navbar">
   <div class="logo">
-    <img src="images/finalLogo2.png" alt="Logo" />
+    <img src="images/navLogo.png" alt="Logo" />
     <!-- <h2>LIVANA</h2> -->
   </div>
   <div>
@@ -21,7 +21,7 @@
       @if(isShow){
       <ul class="list-group">
           <li class="list-group-item" (click)="navigateToHome()"><i class="bi bi-person-fill"></i> {{userName}}</li>
-          <li class="list-group-item" routerLink="community" ><i class="fa-solid fa-users"></i> Community</li>
+          <li class="list-group-item" routerLink="community" (click)="closeMenue()"><i class="fa-solid fa-users"></i> Community</li>
           <li class="list-group-item" (click)="logout()"><i class="bi bi-box-arrow-left"></i> logout</li>
       </ul>}
     </div>

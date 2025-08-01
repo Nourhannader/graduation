@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './owner-add-unit.component.css'
 })
 export class OwnerAddUnitComponent {
-      constructor(private toastr: ToastrService){}
+    constructor(private toastr: ToastrService){}
     _unitsService=inject(UnitsService)
 
 

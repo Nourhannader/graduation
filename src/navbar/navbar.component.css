@@ -18,6 +18,8 @@ body {
     top:0; */
 }
 
+
+
 /* .navbar a {
   color: #3a74b3;
   text-decoration: none;
@@ -86,6 +88,7 @@ body {
 }
 .content-image {
   position: relative;
+  cursor: pointer;
 }
 .content-image img{
   width: 40px;

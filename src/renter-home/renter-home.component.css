@@ -1,329 +1,212 @@
-.renter-home{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 10%;
-    box-sizing: border-box;
-    padding: 20px;
-}
 
-.renter-home-left{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 10%;
-    justify-content: center;
-    width: 45%;
-}
-
-.renter-home-right{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 10%;
-    justify-content: space-between;
-    width: 45%;
-}
-
-.renter-home-left-info{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    width: 50%;
-    height: 250px;
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
-    background-color: #ffffff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    -webkit-transition: transform 0.2s;
-    -moz-transition: transform 0.2s;
-    -ms-transition: transform 0.2s;
-    -o-transition: transform 0.2s;
-    -webkit-transition: transform 0.2s;
-}
-
-.renter-home-left-info:hover{
-    transform: scale(1.01);
-    -webkit-transform: scale(1.01);
-    -moz-transform: scale(1.01);
-    -ms-transform: scale(1.01);
-    -o-transform: scale(1.01);
-    box-shadow: 0 6px 12px lightblue;
-}
-
-.renter-home-left-info img{
-    width:60px;
-    height:60px;
-    border-radius:50%;
-}
-
-.renter-home-left-rent{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    height: 250px;
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
-    background-color: #f0f0f0;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    -webkit-transition: transform 0.2s;
-    -moz-transition: transform 0.2s;
-    -ms-transition: transform 0.2s;
-    -o-transition: transform 0.2s;
-    -webkit-transition: transform 0.2s;
-    margin-top: 50px;
-}
-
-.renter-home-left-rent:hover{
-    transform: scale(1.01);
-    -webkit-transform: scale(1.01);
-    -moz-transform: scale(1.01);
-    -ms-transform: scale(1.01);
-    -o-transform: scale(1.01);
-    box-shadow: 0 6px 12px lightblue;
-}
-
-.renter-home-left-rent button{
-    background-color: #3a74b3;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-
-
-.renter-home-right-getStarted{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    height: 250px;
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
-    background-color: #ffffff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    -webkit-transition: transform 0.2s;
-    -moz-transition: transform 0.2s;
-    -ms-transition: transform 0.2s;
-    -o-transition: transform 0.2s;
-    -webkit-transition: transform 0.2s;
-}
-.renter-home-right-getStarted:hover{
-    transform: scale(1.01);
-    -webkit-transform: scale(1.01);
-    -moz-transform: scale(1.01);
-    -ms-transform: scale(1.01);
-    -o-transform: scale(1.01);
-    box-shadow: 0 6px 12px lightblue;
-}
-
-.renter-home-right-welcome{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    height: 250px;
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
-    background-color: #ffffff;
-    padding: 20px;
-    /* color:#3a74b3; */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    -webkit-transition: transform 0.2s;
-    -moz-transition: transform 0.2s;
-    -ms-transition: transform 0.2s;
-    -o-transition: transform 0.2s;
-    -webkit-transition: transform 0.2s;
-}
-.renter-home-right-welcome:hover{
-    transform: scale(1.01);
-    -webkit-transform: scale(1.01);
-    -moz-transform: scale(1.01);
-    -ms-transform: scale(1.01);
-    -o-transform: scale(1.01);
-    box-shadow: 0 6px 12px lightblue;
-}
-
-.renter-home-right-addReview{
-     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    height: 250px;
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
-    background-color: #ffffff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    -webkit-transition: transform 0.2s;
-    -moz-transition: transform 0.2s;
-    -ms-transition: transform 0.2s;
-    -o-transition: transform 0.2s;
-    -webkit-transition: transform 0.2s;
-    margin-top: 50px;
-}
-
-.renter-home-right-addReview:hover{
-    transform: scale(1.01);
-    -webkit-transform: scale(1.01);
-    -moz-transform: scale(1.01);
-    -ms-transform: scale(1.01);
-    -o-transform: scale(1.01);
-    box-shadow: 0 6px 12px lightblue;
-}
-
-.renter-home-right-addReview button{
-    background-color: #3a74b3;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.renter-home-right-addReview Form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    row-gap: 10px;
-    margin: 10px 0;
-}
-
-.renter-home-right-addReview Form input{
-    width: 80%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-.review-buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.renter-home-right-getStarted Form input{
-    width: 80%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.renter-home-right-getStarted Form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    row-gap: 10px;
-    margin: 10px 0;
-}
-
-.renter-home-right-getStarted Form input{
-    width: 80%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}   
-
-.renter-home-right-getStarted button{
-    background-color: #3a74b3;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.renter-home-right-welcome p{
-    font-size: 18px;
-    color: #333;
-    text-align: center;
-}           
-
-a{
-    text-decoration: none;
-    color: white;
-}
-
-.star-rating {
-  display: flex;
-  font-size: 2rem;
-  color: #ccc;
-  cursor: pointer;
-  gap: 5px;
-}
-
-.star-rating .filled {
-  color: gold;
-}
-
-
-/* ---------------- */
+/* -------new version--------- */
 
 .mainDiv{
-    width: 70%;
+    width: 60%;
+    margin: 100px auto;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     row-gap: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
 }
 
 .infoDiv{
-    width: 100%;
+    width: 40%;
     height: 300px;
     background-color: #f0f0f0;
+    border-radius:20px ;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    row-gap: 20px;
-    
+    row-gap: 20px 0 0 20px;
+    -webkit-border-radius:20px ;
+    -moz-border-radius:20px ;
+    -ms-border-radius:20px ;
+    -o-border-radius:20px ;
 }
 
 .infoDiv img{
     width: 100px;
     height: 100px;
     border-radius: 50%;
+}
+
+.getStarted{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 50px;
+    width: 60%;
+}
+
+.getStarted p{
+    font-size: 16px;
+}
+
+.startBtn{
+    border: none;
+    padding: 10px 20px;
+    background-color: rgb(76, 138, 192);
+    color: #ffffff;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: transform 0.2s;
+    -webkit-transition: transform 0.2s;
+    -moz-transition: transform 0.2s;
+    -ms-transition: transform 0.2s;
+    -o-transition: transform 0.2s;
+    -webkit-transition: transform 0.2s;
+}
+
+.startBtn:hover{
+    transform: scale(1.01);
+    -webkit-transform: scale(1.01);
+    -moz-transform: scale(1.01);
+    -ms-transform: scale(1.01);
+    -o-transform: scale(1.01);
+    box-shadow: 0 6px 12px lightblue
+}
+
+.startWithBtn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.startWithBtn form{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.error{
+    color:rgb(252, 89, 89);
+    font-size: 12px;
+}
+
+.submit{
+    border: none;
+    color: #ffffff;
+    background-color: #628cb9;
+    padding:5px 10px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.cancel{
+    border: none;
+    color: #ffffff;
+    background-color: #da6464;
+    padding:5px 10px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.renterOptions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 20px;
+    width: 60%;
+    row-gap: 40px;
+}
+
+.option{
+    width: 50%;
+}
+
+.option button{
+    width: 100%;
+    color: #ffffff;
+    padding: 20px 0;
+    border: none;
+    background-color: #628cb9;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 3px;
+    transition: transform 0.2s;
+    -webkit-transition: transform 0.2s;
+    -moz-transition: transform 0.2s;
+    -ms-transition: transform 0.2s;
+    -o-transition: transform 0.2s;
+    -webkit-transition: transform 0.2s;
+}
+
+.option button:hover{
+    transform: scale(1.01);
+    -webkit-transform: scale(1.01);
+    -moz-transform: scale(1.01);
+    -ms-transform: scale(1.01);
+    -o-transform: scale(1.01);
+    box-shadow: 0 6px 12px lightblue
+}
+
+a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.renterOptions form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 10px;
+    position: fixed;
+    bottom: 250px;
+    left: 350px;
+    border: solid 1px #ffffff;
+    width: 300px;
+    height: 280px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.background{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.review-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }

@@ -1,4 +1,4 @@
-<div class="renter-home">
+<!-- <div class="renter-home">
     <div class="renter-home-left">
         <div class="renter-home-left-info">
             <img [src]="'http://localhost:5267/Images/' + renter?.image"alt="">
@@ -55,15 +55,84 @@
             }
         </div>
     </div>
-</div>
+</div> -->
 
-<!-- <div class="mainDiv">
+<!-- new version -->
+<div class="mainDiv">
     <div class="infoDiv">
         <img [src]="'http://localhost:5267/Images/' + renter?.image"alt="">
         <h2>{{renter?.firstName}} {{renter?.lastName}}</h2>
         <p>{{renter?.email}}</p>
     </div>
-</div> -->
-
-    
-
+    @if(isNew==true)
+    {
+        <div class="getStarted">
+            <p>Start your experience with us by entering your national ID</p>
+            <div class="startWithBtn">
+                <button class="startBtn" (click)="showGetStarted()">Get Started</button>
+            @if(start==true)
+            {
+                <Form [formGroup]="GetStartedForm" (ngSubmit)="submitGetStarted()">
+                    <input formControlName="SSN" type="text" placeholder="Enter your national ID" class="form-control">
+                    @if(GetStartedForm.get('SSN')?.errors && GetStartedForm.get('SSN')?.touched)
+                    {
+                        @if(GetStartedForm.get('SSN')?.hasError('required'))
+                        {
+                            <p class="error">This field is required</p>
+                        }
+                        @if(GetStartedForm.get('SSN')?.hasError('pattern'))
+                        {
+                            <p class="error">Invalid ID</p>
+                        }
+                    }
+                    <div class="review-buttons">
+                        <button class="submit" type="submit" [disabled]="!GetStartedForm.valid">Submit</button>
+                        <button class="cancel" (click)="cancelGetStarted()">Cancel</button>
+                    </div>
+                </Form>
+            }
+            </div>
+        </div>
+    }
+    @if(isNew==false)
+    {
+        <div class="renterOptions">
+            <div class="option">
+                <button><i class="bi bi-currency-dollar"></i><a routerLink="/renterTabs">Check my rent</a></button>
+            </div>
+            <div class="option">
+                <button (click)="showAddReview()"><i class="bi bi-star-half"></i><a>Add Review</a></button>
+            </div>
+            @if(addReview==true)
+            {<div class="background">
+                <Form [formGroup]="AddReviewForm" (ngSubmit)="submitReview()">
+                    <input formControlName="content" type="text" placeholder="Write your review here..." class="form-control">
+                    @if(AddReviewForm.get('content')?.errors && AddReviewForm.get('content')?.touched)
+                    {
+                        @if(AddReviewForm.get('content')?.hasError('required'))
+                        {
+                            <p class="error">This field is required</p>
+                        }
+                    }
+                    <input formControlName="rate" type="text" placeholder="Rate (1-5)" class="form-control">
+                    @if(AddReviewForm.get('rate')?.errors && AddReviewForm.get('rate')?.touched)
+                    {
+                        @if(AddReviewForm.get('rate')?.hasError('required'))
+                        {
+                            <p class="error">This field is required</p>
+                        }
+                        @if(AddReviewForm.get('rate')?.hasError('pattern'))
+                        {
+                            <p class="error">Invalid Rating</p>
+                        }
+                    }
+                    <div class="review-buttons">
+                        <button class="submit" type="submit" [disabled]="!AddReviewForm.valid">Submit</button>
+                        <button class="cancel" (click)="cancelReview()">Cancel</button>
+                    </div>
+                </Form>
+            </div>
+            }
+        </div>
+    }
+</div>
