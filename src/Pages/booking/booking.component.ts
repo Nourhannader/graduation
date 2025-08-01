@@ -1,9 +1,9 @@
 import { ReservationService } from './../../Services/reservation.service';
 import { Component, inject, OnInit } from '@angular/core';
-import { Reservation } from '../../interfaces/reservation';
 import { AllReservation } from '../../interfaces/all-reservation';
-import { identity } from 'rxjs';
 import { MonthGroup, TransformedReservation } from '../../interfaces/transformed-reservation';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-booking',
@@ -13,6 +13,7 @@ import { MonthGroup, TransformedReservation } from '../../interfaces/transformed
 })
 export class BookingComponent implements OnInit {
   reservations:AllReservation[]=[]
+  loading:boolean=false
   transformedReservations: TransformedReservation[] = [];
   groupedByMonth:MonthGroup[] = [];
 
@@ -24,17 +25,23 @@ export class BookingComponent implements OnInit {
    };
 
   getAllReservation(status: string ) {
-    this._ReservationService.AllReservation().subscribe({
+  this.loading = true;
+    
+    setTimeout(()=>{
+      this._ReservationService.AllReservation().subscribe({
+
       next:(data) =>{
         this.reservations=data
         this.reservations = this.reservations.filter(r => r.Status === status);
         this.Transform();
         this.GroupedMonth();
+        this.loading=false
       },error:(err)=>{
         console.log(err);
-        
+        this.loading=false
       }
     })
+    },2000)
     
   }
 

@@ -14,8 +14,7 @@ import { TopUser } from '../interfaces/top-user';
 })
 export class CommunityService {
 
-
-  _httpClient=inject(HttpClient)
+ _httpClient=inject(HttpClient)
 
 updateCommunity(communityName: Comm): Observable<any> {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);

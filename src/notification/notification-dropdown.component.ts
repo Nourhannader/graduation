@@ -35,11 +35,22 @@ export class NotificationDropdownComponent {
 
   markAsRead(id: number): void {
     this.notificationService.markAsRead(id).subscribe({
-      next: () => {
+      next: (res) => {
+        console.log(res)
         const notification = this.notifications.find(n => n.id === id);
         if (notification) notification.isRead = true;
         this.unreadCount = Math.max(0, this.unreadCount - 1);
+      },
+
+      error: (err) => {
+        console.error('Error marking notification as read:', err);
       }
     });
+
+  }
+
+  cancelShow()
+  {
+    this.showNotifications=false
   }
 }

@@ -4,5 +4,11 @@ export interface Owner {
   userName: string;
   phoneNumber?: string;             
   email: string;
-  image?: string;       
+  image: string;  
+  compLocation:CompLocation[];     
+}
+
+export interface CompLocation{
+  city:string
+  area:string
 }

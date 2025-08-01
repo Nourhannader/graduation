@@ -9,6 +9,8 @@ import { CommunityService } from '../../Services/community.service';
 import { UserCommunity } from '../../interfaces/user-community';
 import { TopUser } from '../../interfaces/top-user';
 import { ToastrService } from 'ngx-toastr';
+import { Advertisement } from '../../interfaces/advertisement';
+import { AdvertisementService } from '../../Services/advertisement.service';
 
 
 @Component({
@@ -21,6 +23,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CommunityComponent implements OnInit , OnDestroy {
   posts: Post[] = [];
   topUsers: TopUser[] = [];
+  twoAds:Advertisement[]=[];
   user :UserCommunity={
     name: '',
     email: '',
@@ -39,6 +42,7 @@ export class CommunityComponent implements OnInit , OnDestroy {
 
   _AuthService=inject(AuthService)
   _communityService=inject(CommunityService)
+  _AdvertisementService=inject(AdvertisementService)
 
   constructor(private postService: PostService,private toastr: ToastrService) {}
 
@@ -49,6 +53,7 @@ export class CommunityComponent implements OnInit , OnDestroy {
     this.loadPosts();
     this.GetUserCommunity();
     this.GetTopUsers();
+    this.getTwoAds()
   }
 
   loadPosts() {
@@ -116,6 +121,20 @@ export class CommunityComponent implements OnInit , OnDestroy {
         console.error('Error fetching top users:', err);
       }
     });
+  }
+
+  getTwoAds(){
+    this._AdvertisementService.getTwoAds().subscribe({
+      next:(res) => {
+        this.twoAds=res
+        console.log(this.twoAds);
+        
+
+      },error:(err)=>{
+        console.log(err.message);
+        
+      }
+    })
   }
  
   ngOnDestroy() {

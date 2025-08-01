@@ -10,7 +10,7 @@
   <div class="notification-dropdown">
     <div class="notification-header">
       <h4>Notifications</h4>
-      <a routerLink="/notifications" class="view-all">View All</a>
+      <a routerLink="/notifications" (click)="cancelShow()" class="view-all">View All</a>
     </div>
     <div class="notification-list">
       @for (notification of notifications; track notification.id) {

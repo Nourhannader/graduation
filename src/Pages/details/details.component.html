@@ -11,31 +11,32 @@
             </div>
           </div>
           <div class="col-8">
-             <p><strong>Status:</strong> {{ unit.status }}</p>
-             <p><strong>Type:</strong> {{ unit.type }}</p>
-             <p><strong>Price:</strong>{{unit.price}}</p>
-             <p><strong>Description:</strong>{{unit.description}}</p>
+             <p><strong>Status: </strong> {{ unit.status }}</p>
+             <p><strong>Type: </strong> {{ unit.type }}</p>
+             <p><strong>Price: </strong>{{unit.price}}</p>
+             <p><strong>Description: </strong>{{unit.description}}</p>
              <div class="row">
                @if(unit.street){
-                <p class="col-6"><strong>Street:</strong>{{unit.street}}</p>
+                <p class="col-6"><strong>Street: </strong>{{unit.street}}</p>
                }
                @if(unit.area){
-                <p class="col-6"><strong>Area:</strong>{{unit.area}}</p>
+                <p class="col-6"><strong>Area: </strong>{{unit.area}}</p>
                }
              </div>
              <div class="row">
               @if(unit.flatNumber){
-                <p class="col-6"><strong>FlatNumber:</strong>{{unit.flatNumber}}</p>
+                <p class="col-6"><strong>FlatNumber: </strong>{{unit.flatNumber}}</p>
                }
                @if(unit.buildingNumber){
-                <p class="col-6"><strong>BuildingNumber:</strong>{{unit.buildingNumber}}</p>
+                <p class="col-6"><strong>BuildingNumber: </strong>{{unit.buildingNumber}}</p>
                }
              </div>
           </div>
+          <div class="edit-btn">
+         <button (click)="edit()"><i class="bi bi-pencil"></i></button>
        </div>
-       <div class="edit-btn">
-         <button (click)="edit()"><i class="bi bi-pencil"></i> Edit</button>
        </div>
+       
     </div>
 }@else{
   <p>Loading.........</p>

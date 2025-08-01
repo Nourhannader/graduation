@@ -56,6 +56,11 @@ export class AdvertisementService {
     return this._HttpClient.get<Advertisement[]>('http://localhost:5267/api/Advertisement');
   }
 
+   getTwoAds():Observable<Advertisement[]>{
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
+    return this._HttpClient.get<Advertisement[]>('http://localhost:5267/api/Advertisement/LastTwo',{headers});
+  }
+
   DeleteAds(id:number):Observable<AddAds>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
     return this._HttpClient.delete<AddAds>(`http://localhost:5267/api/Advertisement/${id}`,{headers});
@@ -93,3 +98,4 @@ export class AdvertisementService {
 
 
 //http://localhost:5267/api/Advertisement/
+//http://localhost:5267/api/Advertisement/LastTwo

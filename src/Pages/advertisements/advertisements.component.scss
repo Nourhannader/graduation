@@ -1,8 +1,10 @@
-.ds{
+.ads{
   position: relative;
+  background-color: #ffffff;
+  margin-top: 10px;
 }
 .filter-bar {
-  background-color:#f0f2f3;
+  background-color:#f4f4f4;
   border-radius: 100px;
   -webkit-border-radius: 100px;
   -moz-border-radius: 100px;
@@ -12,12 +14,16 @@
   padding-left: 40px;
   }
   .search-icon {
-    position: absolute;
+  position: absolute;
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
   color: #6c757d;
- }
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
  .filter-btn{
   &:hover{
     color: #6c757d;

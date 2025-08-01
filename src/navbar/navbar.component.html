@@ -1,33 +1,31 @@
 <div class="navbar">
-    <div class="logo">
-        <img src="images/footerLogo2.png" alt="Logo" />
+  <div class="logo">
+    <img src="images/navLogo.png" alt="Logo" />
+    <!-- <h2>LIVANA</h2> -->
+  </div>
+  <div>
+    <a routerLink="home">Home</a>
+    <a routerLink="ads"> Ads</a>
+    <a routerLink="review">Reviews</a>
+  </div>
+  @if(isLoggedIn==false) {
+  <div>
+    <a routerLink="login">Login</a>
+    <a routerLink="register">Register</a>
+  </div>
+  } @if(isLoggedIn==true) {
+  <div class="d-flex ">
+    <app-notification-dropdown></app-notification-dropdown>
+    <div class="me-2 content-image">
+      <img [src]="'http://localhost:5267/Images/'+image"  (click)="ShowDrop()" />
+      @if(isShow){
+      <ul class="list-group">
+          <li class="list-group-item" (click)="navigateToHome()"><i class="bi bi-person-fill"></i> {{userName}}</li>
+          <li class="list-group-item" routerLink="community" (click)="closeMenue()"><i class="fa-solid fa-users"></i> Community</li>
+          <li class="list-group-item" (click)="logout()"><i class="bi bi-box-arrow-left"></i> logout</li>
+      </ul>}
     </div>
-
-    <div class="nav-links">
-        @if(role == 'Renter'){
-            <a routerLink="RenterHome">Home</a>
-        }
-        @if(role == 'Owner')
-        {
-            <a routerLink="ownerHome">Home</a>
-        }
-
-        <a routerLink="ads">Ads</a>
-        <a routerLink="review">Reviews</a>
-
-    </div>
-
-    <div class="nav-right">
-        @if(isLoggedIn==false)
-        {
-            <a routerLink="login" class="btn-login">Login</a>
-            <a routerLink="register" class="btn-register">Register</a>
-        }
-        @if(isLoggedIn==true)
-        {
-            <app-notification-dropdown></app-notification-dropdown>
-            <a routerLink="community">Community</a>
-            <a (click)="logout()">Logout</a>
-        }
-    </div>
+    
+  </div>
+  }
 </div>

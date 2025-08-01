@@ -3,56 +3,68 @@
     <form [formGroup]="EditUnitForm" (ngSubmit)="UpdateUnit()" enctype="multipart/form-data">
         <div id="mainFormContent">
             <div class="halfFormSide">
-               <div id="radioInput" class=" mb-3">
-                <label for="status">Status</label>
-                <label for="" class="labelRadio">
-                <input formControlName="status" type="radio"  value="empty">
-                    Empty
-                </label>
-                <label for="" class="labelRadio">
-                <input formControlName="status" type="radio"  value="busy">
-                    Busy
-                </label>
-                </div>
 
+              
             <div class="singleInputDiv">
                 <label>Description</label>
                 <input formControlName="description" type="text" placeholder="description" class="form-control mb-3">
             </div>
 
-            <div class="singleInputDiv">
-                <label>Type</label>
-                <input formControlName="type" type="text" placeholder="type" class="form-control mb-3">
-            </div>
+            
 
             <div class="singleInputDiv">
                 <label>Price</label>
                 <input formControlName="price" type="text" placeholder="price" class="form-control mb-3">
             </div>
 
-            @if(EditUnitForm.get('status')?.value === 'busy'){
-            <div  class="singleInputDiv">
-                <input formControlName="renterSSN" type="text" placeholder="Renter SSN" class="form-control mb-3">
-            </div>
-            }
-            
+            <div id="radioInput2" class=" mb-3">
+                    <label for="type">Type</label>
+                    <label for="" class="labelRadio">
+                        <input formControlName="type" type="radio"  value="For Rent">
+                            Rent
+                        </label>
+                    <label for="" class="labelRadio">
+                        <input formControlName="type" type="radio"  value="For Sell">
+                            Sell
+                    </label>
             </div>
 
-            <div class="halfFormSide">
+            <div id="radioInput" class=" mb-3">
+                    <label for="status">Status</label>
+                    <label for="" class="labelRadio">
+                        <input formControlName="status" type="radio"  value="empty">
+                            Empty
+                        </label>
+                    <label for="" class="labelRadio">
+                        <input formControlName="status" type="radio"  value="busy">
+                            Busy
+                    </label>
+            </div>
+
+
+            @if(EditUnitForm.get('status')?.value === 'busy'){
+            <div  class="singleInputDiv">
+                <label>ID</label>
+                <input formControlName="renterSSN" type="text" placeholder="Renter National ID" class="form-control mb-3">
+            </div>
+            }
+
+
+            <div class="halfFormSide2">
                 @if(existingImages.image1)
             {
-            <div class="singleInputDiv" >
-                <label>Current Image 1</label>
+            <div class="singleInputDivImg" >
+                <!-- <label>Current Image 1</label> -->
                 <img [src]="existingImages.image1" width="100">
-                <input formControlName="image1" type="file" (change)="onFileSelected($event, 'image1')" class="form-control mb-3">
+                <input formControlName="image1" type="file" (change)="onFileSelected($event, 'image1')" class="form-control ">
             </div>
             }
 
 
             @if(existingImages.image2)
             {
-            <div class="singleInputDiv" >
-                <label>Current Image 2</label>
+            <div class="singleInputDivImg" >
+                <!-- <label>Current Image 2</label> -->
                 <img [src]="existingImages.image2" width="100">
                 <input formControlName="image2" type="file" (change)="onFileSelected($event, 'image2')" class="form-control mb-3">
             </div>
@@ -60,8 +72,8 @@
 
             @if(existingImages.image3)
             {
-            <div class="singleInputDiv" >
-                <label>Current Image 3</label>
+            <div class="singleInputDivImg" >
+                <!-- <label>Current Image 3</label> -->
                 <img [src]="existingImages.image3" width="100">
                 <input formControlName="image3" type="file" (change)="onFileSelected($event, 'image3')" class="form-control mb-3">
             </div>
@@ -72,8 +84,14 @@
         </div>  
 
 
+            
+            </div>
 
-        <button [disabled]="!EditUnitForm.valid">Save Changes</button>
+            
+<div class="submitDiv" >
+    <button [disabled]="!EditUnitForm.valid">Save Changes</button>
+
+</div>
 
     </form>
 

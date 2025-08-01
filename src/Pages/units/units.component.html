@@ -1,38 +1,94 @@
 <div class="container mt-2">
-    <div class="d-flex justify-content-between mb-3">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search units..." (input)="updateSearch($event)">
-                <span class="input-group-text" (click)="searchUnits()"><i class="bi bi-search"></i></span>
-            </div>
-            <div class="filter">
-                <button class="btn-filter" (click)="toggleFilters()" >Filter</button>
-                @if(showFilters){
-                    <div class="filter-options">
-                     <p> <input type="radio" name="all" value="all" (change)="selectAll()"> ALL</p>
-                    <div>
-                        Status:
-                        <ul class="list-unstyled">
-                            <li><input type="radio" name="status" value="empty" (change)="updateStatus($event)"> Empty</li>
-                            <li><input type="radio" name="status" value="busy" (change)="updateStatus($event)"> Busy</li>
-                        </ul>
-                    </div>
-                    <div>
-                        Type:
-                        <ul class="list-unstyled">
-                            <li><input type="radio" name="type" value="For Rent" (change)="updateType($event)" > For Rent</li>
-                            <li><input type="radio" name="type" value="For Sell" (change)="updateType($event)" > For Sell</li>
-                        </ul>
-                    </div>
-                    <button class="btn-apply" (click)="filterUnits()" >Apply</button>
-                </div>
-                }
-            </div>
+  <div class="d-flex justify-content-between mb-3">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search units..."
+        (input)="updateSearch($event)"
+      />
+      <span class="input-group-text" (click)="searchUnits()"
+        ><i class="bi bi-search"></i
+      ></span>
     </div>
-     <div class="row row-cols-1 row-cols-md-4 g-4 unit-content  ">
-       @for (unit of units;track $index) {
-        <div class="col ">
-            <app-unit (delete)="DeleteUnit($event)"  [item]="unit"></app-unit>
+    <div class="filter">
+      <button class="btn-filter" (click)="toggleFilters()">Filter</button>
+      @if(showFilters){
+      <div class="filter-options">
+        <p>
+          <input type="radio" name="all" value="all" (change)="selectAll()" />
+          ALL
+        </p>
+        <div>
+          Status:
+          <ul class="list-unstyled">
+            <li>
+              <input
+                type="radio"
+                name="status"
+                value="empty"
+                (change)="updateStatus($event)"
+              />
+              Empty
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="status"
+                value="busy"
+                (change)="updateStatus($event)"
+              />
+              Busy
+            </li>
+          </ul>
         </div>
-    }
+        <div>
+          Type:
+          <ul class="list-unstyled">
+            <li>
+              <input
+                type="radio"
+                name="type"
+                value="For Rent"
+                (change)="updateType($event)"
+              />
+              For Rent
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="type"
+                value="For Sell"
+                (change)="updateType($event)"
+              />
+              For Sell
+            </li>
+          </ul>
+        </div>
+        <button class="btn-apply" (click)="filterUnits()">Apply</button>
+      </div>
+      }
     </div>
+  </div>
+
+  @if(loading){
+  <div class="text-center my-5">
+    <div class="spinner-border custom-spin" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  } @if(!loading && units?.length === 0){
+  <div class="text-center text-muted">
+    <i class="bi bi-file-earmark-x fs-1"></i>
+    <p class="mt-2">No Units found.</p>
+  </div>
+  } @if(!loading && (units?.length ?? 0) > 0) {
+  <div class="row row-cols-1 row-cols-md-4 g-4 unit-content">
+    @for (unit of units;track $index) {
+    <div class="col">
+      <app-unit (delete)="DeleteUnit($event)" [item]="unit"></app-unit>
+    </div>
+    }
+  </div>
+  }
 </div>

@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { UserLogin } from '../interfaces/user-login';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { Owner } from '../interfaces/owner';
 
 
 @Injectable({
@@ -34,9 +35,9 @@ if(isPlatformBrowser(this._pLATFORM_ID))
     return this._HttpClient.post('http://localhost:5267/api/Account/Login',info);
   }
 
-  GetUserInfo():Observable<any>{
+  GetUserInfo():Observable<Owner>{
     const headers=new HttpHeaders().set('Authorization',`Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get('http://localhost:5267/api/Account/GetUserInfo', {headers});
+    return this._HttpClient.get<Owner>('http://localhost:5267/api/Account/GetUserInfo', {headers});
   }
 
   saveUser()

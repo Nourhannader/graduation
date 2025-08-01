@@ -66,14 +66,14 @@
       <!-- Type Dropdown -->
       <div class="dropdown position-relative">
         <button
-          class="btn btn-outline-secondary filter-btn dropdown-toggle bg-white rounded-pill w-75"
+          class="btn btn-outline-secondary filter-btn dropdown-toggle bg-white rounded-pill "
           type="button"
           (click)="toggle('types')"
         >
           All Types
         </button>
         <ul
-          class="dropdown-menu show mt-2"
+          class="dropdown-menu show mt-2 w-50"
           *ngIf="showTypes"
           style="display: block; position: absolute"
         >
@@ -86,7 +86,7 @@
       </div>
     </div>
   </div>
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4 ">
     @for(ads of filteredAds;track $index){
     <app-ads-single
       (AllAppointment)="getAllAppointmment($event)"

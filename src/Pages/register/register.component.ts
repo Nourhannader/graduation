@@ -143,14 +143,8 @@ export class RegisterComponent {
         next:(res)=>{
           console.log(res);
           this.registrationSuccess=!this.registrationSuccess;
-          this.overlay.nativeElement.style.display = 'flex';
-          this.cd.detectChanges();
-          
-          setTimeout(()=>{
-             this._router.navigate(['/login']);
-          },1000)
 
-         
+             this._router.navigate(['/login']);
         },error:(err) => {
           console.log(err);
            this.apiError=err.error.Error[0];

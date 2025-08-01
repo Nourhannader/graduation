@@ -9,21 +9,16 @@
             <h3>Chat with AI</h3>
             <button (click)="closeChat()">Close</button>
         </div>
-        <!--  -->
-        <!-- <div class="chat-messages"> -->
-           <!-- <div [formGroup]="chatForm" class="chat-messages">
-                <div formArrayName="messages">
-                    <div *ngFor="let msg of messages.controls; let i = index" [formGroupName]="i" class="chat-message">
-                        <p>{{ msg.value.message }}</p>
-                    </div>
-                </div>
-                <div class="input-area">
-                    <input type="text" [formControl]="newMessage" placeholder="Type your message..." (keyup.enter)="sendMessage()" />
-                    <button (click)="sendMessage()">Send</button>
-                </div>
-            </div> -->
-            <!--  -->
-        <!-- </div> -->
+        <div class="chat-messages">
+            <div *ngFor="let msg of messages" class="messagesContainer">
+                <div class="message {{ msg.sender }}">{{ msg.text }}</div>
+            </div>
+
+            <form [formGroup]="chatForm" (ngSubmit)="sendMessage()">
+                <input formControlName="userInput" placeholder="Type your message" />
+                <button type="submit">Send</button>
+            </form>
+        </div>
     </div>
 </div>
 }

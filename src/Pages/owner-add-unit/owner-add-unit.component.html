@@ -11,7 +11,193 @@
 
     <div class="halfFormSide">
 
+       
+
+    <div class="singleInputDiv">
+        <label>Description</label>
+        <input formControlName="description" type="text" class="form-control mb-3" id="descriptionInput" placeholder="description">
+            @if(AddUnitForm.get('description')?.errors && AddUnitForm.get('description')?.touched)
+            {
+            <div  class="error">
+                @if(AddUnitForm.get('description')?.hasError('required'))
+                {
+                    <p>Description field is required</p>
+                }
+            </div>
+            }
+    </div>
+
+    
+   
+
+    <div class="singleInputDiv">
+        <label>City</label>
+        <input formControlName="city" type="text" class="form-control mb-3" id="cityInput" placeholder="city">
+            @if(AddUnitForm.get('city')?.errors && AddUnitForm.get('city')?.touched)
+            {
+            <div class="error">
+                @if(AddUnitForm.get('city')?.hasError('required'))
+                {
+                    <p>City field is required</p>
+                }
+                </div>
+            }
+    </div>
+
+    <div class="singleInputDiv">
+        <label>Area</label>
+        <input formControlName="area" type="text" class="form-control mb-3" id="areaInput" placeholder="area">
+            @if(AddUnitForm.get('area')?.errors && AddUnitForm.get('area')?.touched)
+            {
+            <div  class="error">
+                @if(AddUnitForm.get('area')?.hasError('required'))
+                {
+                    <p>Area field is required</p>
+                }
+                </div>
+            }
+    </div>
+
+    <div class="singleInputDiv">
+        <label>Street</label>
+        <input formControlName="street" type="text" class="form-control mb-3" id="streetInput" placeholder="street">
+            @if(AddUnitForm.get('street')?.errors && AddUnitForm.get('street')?.touched)
+            {
+            <div  class="error">
+                @if(AddUnitForm.get('street')?.hasError('required'))
+                {
+                    <p>Street field is required</p>
+                }
+                </div>
+            }
+    </div>
+
+    <div class="singleInputDiv">
+        <label>Building No.</label>
+        <input formControlName="buildingNumber" type="text" class="form-control mb-3" id="buildingNumberInput" placeholder="building number">
+            @if(AddUnitForm.get('buildingNumber')?.errors && AddUnitForm.get('buildingNumber')?.touched)
+            {
+            <div  class="error">
+                @if(AddUnitForm.get('buildingNumber')?.hasError('required'))
+                {
+                    <p>Building Number field is required</p>
+                }
+                </div>
+            }
+    </div>
+
+    <div class="singleInputDiv">
+        <label>Unit No.</label>
+        <input formControlName="flatNumber" type="text" class="form-control mb-3" id="flatNumberInput" placeholder="unit number">
+    </div>
+
         <div class="singleInputDiv">
+            <label>Price</label>
+        <input formControlName="price" type="text" class="form-control mb-3" id="priceInput" placeholder="price">
+            @if(AddUnitForm.get('price')?.errors && AddUnitForm.get('price')?.touched)
+            {
+            <div  class="error">
+                @if(AddUnitForm.get('price')?.hasError('required'))
+                {
+                    <p>Price field is required</p>
+                }
+                </div>
+            }
+    </div>
+    
+    
+    </div>
+<!-- ---------------------- -->
+
+    <div class="halfFormSide2">
+  
+
+    <!-- <div class="singleInputDiv">
+        <input formControlName="electricityNum" type="text" class="form-control mb-3" id="electricityNumInput" placeholder="electricity number">
+            @if(AddUnitForm.get('electricityNum')?.errors && AddUnitForm.get('electricityNum')?.touched)
+            {
+            <div class="alert alert-danger p-1" role="alert">
+                @if(AddUnitForm.get('electricityNum')?.hasError('required'))
+                {
+                    <p>Electricity Numumber field is required</p>
+                }
+                </div>
+            }
+    </div>
+
+    <div class="singleInputDiv">
+        <input formControlName="waterNum" type="text" class="form-control mb-3" id="waterNumInput" placeholder="water number">
+            @if(AddUnitForm.get('waterNum')?.errors && AddUnitForm.get('waterNum')?.touched)
+            {
+            <div class="alert alert-danger p-1" role="alert">
+                @if(AddUnitForm.get('waterNum')?.hasError('required'))
+                {
+                    <p>Wate rNumber field is required</p>
+                }
+                </div>
+            }
+    </div>
+
+    <div class="singleInputDiv">
+        <input formControlName="gasNum" type="text" class="form-control mb-3" id="gasNumnput" placeholder="gas number">
+            @if(AddUnitForm.get('gasNum')?.errors && AddUnitForm.get('gasNum')?.touched)
+            {
+            <div class="alert alert-danger p-1" role="alert">
+                @if(AddUnitForm.get('gasNum')?.hasError('required'))
+                {
+                    <p>Gas Number field is required</p>
+                }
+                </div>
+            }
+    </div> -->
+
+    <div class="singleInputDiv">
+        <label>Image 1</label>
+        <input formControlName="image1" type="file" class="form-control mb-3" id="image1Input" placeholder="first image" (change)="onFileSelected($event, 'image1')">
+    </div>
+    <div class="singleInputDiv">
+        <label>Image 2</label>
+        <input formControlName="image2" type="file" class="form-control mb-3" id="image2Input" placeholder="second image" (change)="onFileSelected($event, 'image2')">
+    </div>
+    <div class="singleInputDiv">
+        <label>Image 3</label>
+        <input formControlName="image3" type="file" class="form-control mb-3" id="image3Input" placeholder="third image" (change)="onFileSelected($event, 'image3')">
+    </div>
+
+
+
+
+    </div>
+
+<div class="halfFormSide">
+    <div class="singleInputDiv">
+ <div id="radioInput2" class=" mb-3">
+                    <label for="type">Type</label>
+
+                    <label for="" class="labelRadio">
+                    <input formControlName="type" type="radio"  value="For Rent">
+                        Rent
+                    </label>
+                    <label for="" class="labelRadio">
+                    <input formControlName="type" type="radio"  value="For Sell">
+                        Sell
+                    </label>
+
+            @if(AddUnitForm.get('type')?.errors && AddUnitForm.get('type')?.touched)
+            {
+            <div  class="error">
+                @if(AddUnitForm.get('type')?.hasError('required'))
+                {
+                    <p>Type field is required</p>
+                }
+                </div>
+            }
+    </div>
+    </div>
+   
+
+
+     <div class="singleInputDiv">
             <div id="radioInput" class=" mb-3">
                 <label for="status">Status</label>
                 <label for="" class="labelRadio">
@@ -25,7 +211,7 @@
 
             @if(AddUnitForm.get('status')?.errors && AddUnitForm.get('status')?.touched)
             {
-            <div class="alert alert-danger p-1" role="alert">
+            <div  class="error">
                 @if(AddUnitForm.get('status')?.hasError('required'))
                 {
                     <p>Status field is required</p>
@@ -36,186 +222,23 @@
            
         </div>
 
-    <div class="singleInputDiv">
-        <input formControlName="description" type="text" class="form-control mb-3" id="descriptionInput" placeholder="description">
-            @if(AddUnitForm.get('description')?.errors && AddUnitForm.get('description')?.touched)
-            {
-            <div class="alert alert-danger p-1" role="alert">
-                @if(AddUnitForm.get('description')?.hasError('required'))
-                {
-                    <p>Description field is required</p>
-                }
-            </div>
-            }
-    </div>
-
-    <div class="singleInputDiv">
-    <div id="radioInput2" class=" mb-3">
-                    <label for="type">Type</label>
-                    <label for="" class="labelRadio">
-                    <input formControlName="type" type="radio"  value="For Rent">
-                        Rent
-                    </label>
-                    <label for="" class="labelRadio">
-                    <input formControlName="type" type="radio"  value="For Sell">
-                        Sell
-                    </label>
-
-        <!-- <input formControlName="type" type="text" class="form-control mb-3" id="typeInput" placeholder="type"> -->
-            @if(AddUnitForm.get('type')?.errors && AddUnitForm.get('type')?.touched)
-            {
-            <div class="alert alert-danger p-1" role="alert">
-                @if(AddUnitForm.get('type')?.hasError('required'))
-                {
-                    <p>Type field is required</p>
-                }
-                </div>
-            }
-    </div>
-
-    <div class="singleInputDiv">
-        <input formControlName="city" type="text" class="form-control mb-3" id="cityInput" placeholder="city">
-            @if(AddUnitForm.get('city')?.errors && AddUnitForm.get('city')?.touched)
-            {
-            <div class="alert alert-danger p-1" role="alert">
-                @if(AddUnitForm.get('city')?.hasError('required'))
-                {
-                    <p>City field is required</p>
-                }
-                </div>
-            }
-    </div>
-
-    <div class="singleInputDiv">
-        <input formControlName="area" type="text" class="form-control mb-3" id="areaInput" placeholder="area">
-            @if(AddUnitForm.get('area')?.errors && AddUnitForm.get('area')?.touched)
-            {
-            <div class="alert alert-danger p-1" role="alert">
-                @if(AddUnitForm.get('area')?.hasError('required'))
-                {
-                    <p>Area field is required</p>
-                }
-                </div>
-            }
-    </div>
-
-    <div class="singleInputDiv">
-        <input formControlName="street" type="text" class="form-control mb-3" id="streetInput" placeholder="street">
-            @if(AddUnitForm.get('street')?.errors && AddUnitForm.get('street')?.touched)
-            {
-            <div class="alert alert-danger p-1" role="alert">
-                @if(AddUnitForm.get('street')?.hasError('required'))
-                {
-                    <p>Street field is required</p>
-                }
-                </div>
-            }
-    </div>
-
-    <div class="singleInputDiv">
-        <input formControlName="buildingNumber" type="text" class="form-control mb-3" id="buildingNumberInput" placeholder="building number">
-            @if(AddUnitForm.get('buildingNumber')?.errors && AddUnitForm.get('buildingNumber')?.touched)
-            {
-            <div class="alert alert-danger p-1" role="alert">
-                @if(AddUnitForm.get('buildingNumber')?.hasError('required'))
-                {
-                    <p>Building Number field is required</p>
-                }
-                </div>
-            }
-    </div>
-
-    <div class="singleInputDiv">
-        <input formControlName="flatNumber" type="text" class="form-control mb-3" id="flatNumberInput" placeholder="unit number">
-    </div>
-
-
-
-
-
-    </div>
-
-    </div>
-<!-- ---------------------- -->
-
-    <div class="halfFormSide">
-        <div class="singleInputDiv">
-        <input formControlName="price" type="text" class="form-control mb-3" id="priceInput" placeholder="price">
-            @if(AddUnitForm.get('price')?.errors && AddUnitForm.get('price')?.touched)
-            {
-            <div class="alert alert-danger p-1" role="alert">
-                @if(AddUnitForm.get('price')?.hasError('required'))
-                {
-                    <p>Price field is required</p>
-                }
-                </div>
-            }
-    </div>
-    <div class="singleInputDiv">
-        <input formControlName="electricityNum" type="text" class="form-control mb-3" id="electricityNumInput" placeholder="electricity number">
-            @if(AddUnitForm.get('electricityNum')?.errors && AddUnitForm.get('electricityNum')?.touched)
-            {
-            <div class="alert alert-danger p-1" role="alert">
-                @if(AddUnitForm.get('electricityNum')?.hasError('required'))
-                {
-                    <p>Electricity Numumber field is required</p>
-                }
-                </div>
-            }
-    </div>
-    <div class="singleInputDiv">
-        <input formControlName="waterNum" type="text" class="form-control mb-3" id="waterNumInput" placeholder="water number">
-            @if(AddUnitForm.get('waterNum')?.errors && AddUnitForm.get('waterNum')?.touched)
-            {
-            <div class="alert alert-danger p-1" role="alert">
-                @if(AddUnitForm.get('waterNum')?.hasError('required'))
-                {
-                    <p>Wate rNumber field is required</p>
-                }
-                </div>
-            }
-    </div>
-    <div class="singleInputDiv">
-        <input formControlName="gasNum" type="text" class="form-control mb-3" id="gasNumnput" placeholder="gas number">
-            @if(AddUnitForm.get('gasNum')?.errors && AddUnitForm.get('gasNum')?.touched)
-            {
-            <div class="alert alert-danger p-1" role="alert">
-                @if(AddUnitForm.get('gasNum')?.hasError('required'))
-                {
-                    <p>Gas Number field is required</p>
-                }
-                </div>
-            }
-    </div>
-    <div class="singleInputDiv">
-        <input formControlName="image1" type="file" class="form-control mb-3" id="image1Input" placeholder="first image" (change)="onFileSelected($event, 'image1')">
-    </div>
-    <div class="singleInputDiv">
-        <input formControlName="image2" type="file" class="form-control mb-3" id="image2Input" placeholder="second image" (change)="onFileSelected($event, 'image2')">
-    </div>
-    <div class="singleInputDiv">
-        <input formControlName="image3" type="file" class="form-control mb-3" id="image3Input" placeholder="third image" (change)="onFileSelected($event, 'image3')">
-    </div>
-
     @if(AddUnitForm.get('status')?.value=='busy')
     {
     <div class="singleInputDiv">
-        <input formControlName="renterSSN" type="text" class="form-control mb-3" id="renterSSNInput" required placeholder="renter SSN">
+        <label>Renter ID</label>
+        <input formControlName="renterSSN" type="text" class="form-control mb-3" id="renterSSNInput" required placeholder="Renter National ID">
     </div>
     }
 
-
-
-    </div>
-
-
+</div>
 
 
 
 </div>
 
-
-<button [disabled]="!AddUnitForm.valid" >Add</button>
+<div class="submitDiv">
+    <button [disabled]="!AddUnitForm.valid" >Add Unit</button>
+</div>
 
 </form>
 
