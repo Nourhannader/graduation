@@ -19,7 +19,7 @@ export class ReservationService {
 
   EditReservation(status:string,id:number):Observable<AddAds>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.put<AddAds>(`http://localhost:5267/api/Reservation/${id}?status=${status}`,{headers})
+    return this._HttpClient.put<AddAds>(`http://localhost:5267/api/Reservation/${id}?status=${status}`,{},{headers})
   }
 
 }

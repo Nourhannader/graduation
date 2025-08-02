@@ -4,16 +4,16 @@
 
   <ul class="nav nav-pills mb-5 overflow-auto flex-nowrap pb-2">
     <li class="nav-item">
-      <a class="nav-link" (click)="getAllReservation('Pending')">Pending</a>
+      <a class="nav-link" [class.active]="activeStatus === 'Pending'" (click)="getAllReservation('Pending')">Pending</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" (click)="getAllReservation('Confirmed')">Confirmed</a>
+      <a class="nav-link"  [class.active]="activeStatus === 'Confirmed'"  (click)="getAllReservation('Confirmed')">Confirmed</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" (click)="getAllReservation('Cancelled')">Cancelled</a>
+      <a class="nav-link"  [class.active]="activeStatus === 'Cancelled'"  (click)="getAllReservation('Cancelled')">Cancelled</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" (click)="getAllReservation('Completed')">Completed</a>
+      <a class="nav-link"  [class.active]="activeStatus === 'Completed'"  (click)="getAllReservation('Completed')">Completed</a>
     </li>
   </ul>
   @if(loading){
@@ -59,16 +59,20 @@
             </div>
           </div>
         </div>
-        @if(res.status === 'Pending'){
+        @if(res.status === 'Pending' || res.status == 'Confirmed' ){
         <div class="booking-actions">
           <div class="dropdown">
             <select
               class="custom-select-dropdown"
-              (change)="onActionChange($event, res.appointmentId)"
+              (change)="onActionChange($event, res.id)"
             >
               <option selected disabled>Edit</option>
+              @if(res.status == 'Pending'){
               <option value="Confirmed">Confirm</option>
+              }
+              @if(res.status == 'Confirmed'){
               <option value="Completed">Complete</option>
+              }
               <option value="Cancelled">Cancel</option>
             </select>
           </div>

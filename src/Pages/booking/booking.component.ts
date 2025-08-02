@@ -17,6 +17,7 @@ export class BookingComponent implements OnInit {
   loading:boolean=false
   transformedReservations: TransformedReservation[] = [];
   groupedByMonth:MonthGroup[] = [];
+  activeStatus: string = 'Pending';
 
   _ReservationService=inject(ReservationService);
 
@@ -29,19 +30,17 @@ export class BookingComponent implements OnInit {
   
    };
 
-  getAllReservation(Status: string ) {
+  getAllReservation(status: string ) {
+    this.activeStatus = status;
       this._ReservationService.AllReservation().subscribe({
 
       next:(data) =>{
         this.reservations=data
         this.reservations = data.filter(r =>
-         r.status?.trim().toLowerCase() === Status.trim().toLowerCase()
+         r.status?.trim().toLowerCase() === status.trim().toLowerCase()
         );
-        console.log(this.reservations);
-        
         this.Transform();
         this.GroupedMonth();
-      console.log(this.groupedByMonth);
       
         this.loading=false
       },error:(err)=>{
@@ -87,12 +86,16 @@ export class BookingComponent implements OnInit {
    }
    onActionChange(event: Event,id:number) {
   const value = (event.target as HTMLSelectElement).value;
+  if (value === 'Edit') {
+    return; 
+  }
   this._ReservationService.EditReservation(value,id).subscribe({
     next:(res)=>{
-      console.log(res.message);
+      console.log(`result${res.message}`);
+      this.getAllReservation(value)
       
     },error:(err) => {
-      console.log(err.message);
+      console.log(`result${err.message}`);
       
     }
   })

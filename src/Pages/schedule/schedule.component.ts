@@ -45,7 +45,7 @@ export class ScheduleComponent implements OnInit {
     const today = new Date();
     return Array.from({ length: count }, (_, i) => {
       const date = new Date(today);
-      date.setDate(today.getDate() + i);
+     date.setDate(today.getDate() + i + 1);
       return date.toLocaleDateString('en-GB', {
       weekday: 'long',     
       day: '2-digit',     
@@ -133,9 +133,11 @@ renderAppointments() {
  save(){
   if (this.form.valid) {
     const selected = this.form.value;
-    const appointmentDate1: Date=this.convertToDate(selected.day,selected.hour)
+    const localDate: Date = this.convertToDate(selected.day, selected.hour);
+    const appointmentDate1: string = localDate.toLocaleString('sv-SE').replace('T', ' '); 
+   
     const appointment={
-      appointmentDate :appointmentDate1,
+      appointmentDate :localDate,
       advertisementId: this.selectedAdId
     }
     console.log(appointment);
@@ -182,7 +184,7 @@ renderAppointments() {
 
  }
 
- convertToDate(fullDay: string, hour: string): Date {
+convertToDate(fullDay: string, hour: string): Date {
   const [dayName, dayNumberStr, monthStr] = fullDay.split(' ');
   const dayNumber = parseInt(dayNumberStr);
   const currentYear = new Date().getFullYear();
@@ -195,31 +197,18 @@ renderAppointments() {
     throw new Error("Invalid day format");
   }
 
-  // Create base date: e.g., "2025-07-26"
   const date = new Date(currentYear, monthIndex, dayNumber);
 
-  // Detect if time is in 12-hour format (with am/pm)
   let hours = 0, minutes = 0;
   const hourLower = hour.toLowerCase().trim();
+  const [timePart, period] = hourLower.split(/\s+/); // ← safe split
+  [hours, minutes] = timePart.split(':').map(Number);
 
-  if (hourLower.includes('am') || hourLower.includes('pm')) {
-    // 12-hour format
-    const [timePart, period] = hourLower.split(' ');
-    [hours, minutes] = timePart.split(':').map(Number);
-
-    if (period === 'pm' && hours < 12) hours += 12;
-    if (period === 'am' && hours === 12) hours = 0;
-  } else {
-    // 24-hour format
-    [hours, minutes] = hourLower.split(':').map(Number);
-  }
+  if (period === 'pm' && hours < 12) hours += 12;
+  if (period === 'am' && hours === 12) hours = 0;
 
   date.setHours(hours, minutes, 0, 0);
 
   return date;
 }
-
-
-
- 
 }
