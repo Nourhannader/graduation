@@ -100,7 +100,7 @@ onFileSelected(event: any, imageKey: string) {
       this._unitsService.AddUnit(formData).subscribe({
         next:(res)=>{
           console.log(res);
-          this.toastr.success("Your new unit is added successfully")
+          this.toastr.success("Your new unit has been added successfully")
           this._router.navigate(['/ownerHome/units'])
 
         },
