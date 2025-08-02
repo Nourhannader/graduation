@@ -18,7 +18,7 @@ export class OwnerSideBarComponent implements OnInit{
   userName:string=''
 
   _authService = inject(AuthService);
-  
+
   ngOnInit(): void {
     this.GetUserdata();
   }
@@ -30,11 +30,11 @@ export class OwnerSideBarComponent implements OnInit{
         this.lastName=response.lastName
         this.email=response.email
         this.userName=response.userName
-        
+
       } ,
       error: (error) => {
         console.error('Error fetching user data:', error);
-      }       
+      }
   })
 
 }
