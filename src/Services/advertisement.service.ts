@@ -32,7 +32,7 @@ export interface AppointmentByOwner{
 }
 
 export interface Appointment{
-  appointmentDate:Date,
+  appointmentDate:string,
   advertisementId:number
 }
 

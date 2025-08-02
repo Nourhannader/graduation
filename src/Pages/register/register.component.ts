@@ -17,7 +17,7 @@ export class RegisterComponent {
   showPassword:boolean=false;
   registrationSuccess: boolean = false;
   selectedRole: string = 'Renter';
-  fileName: string = 'Your image';
+  fileName: string = 'Upload Profile Image';
 
   @ViewChild('doorLeft') doorLeft!: ElementRef;
   @ViewChild('doorRight') doorRight!: ElementRef;
