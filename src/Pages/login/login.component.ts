@@ -17,7 +17,7 @@ export class LoginComponent {
   loginForm!: FormGroup
   apiError:string=''
   showPassword:boolean=false;
-  
+  loading:boolean=false
 
   _fb = inject(FormBuilder);
   _router = inject(Router);
@@ -44,6 +44,8 @@ export class LoginComponent {
 
  }
  async Login(){
+   
+  
    if (this.loginForm.valid) {
     console.log(this.loginForm.value);
     const uerLogin: UserLogin = {
@@ -56,7 +58,8 @@ export class LoginComponent {
       uerLogin.userName=this.loginForm.value.identifier;
       uerLogin.email='' 
     }
-    
+    this.loading=true
+    await this.delay(1000);
     this._AuthService.Login(uerLogin).subscribe({
       next:async (response)=>{
         console.log(response);
@@ -65,12 +68,12 @@ export class LoginComponent {
           localStorage.setItem('userName',response.userName)
           localStorage.setItem('image',response.image)
           this._AuthService.saveUser()
-            this._router.navigate(['/home'])
-          
-          
+          this._router.navigate(['/home'])
+          this.loading=false
       },error:(err)=>{
         console.log(err);
         this.apiError=err.error.Error[0];
+        this.loading=false
       }
     })
    }else{
@@ -78,7 +81,9 @@ export class LoginComponent {
    }
  }
 
-  
+ delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}  
 
  Register(){
   this._router.navigate(['/register']);

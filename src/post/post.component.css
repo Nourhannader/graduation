@@ -95,11 +95,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-
-
-   z-index: 999;
-  position: relative;
   pointer-events: auto;
 }
 

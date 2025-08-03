@@ -101,11 +101,12 @@ export class AdvertisementsComponent implements OnInit {
   });
 }
 
-FilterPrice(price:string){
-  if(price === '< 10000'){
-    this.filteredAds=this.advertisements.filter(ads => ads.price < 10000)
-  }else{
-    this.filteredAds=this.advertisements.filter(ads => ads.price > 10000)
+FilterPrice(price: string) {
+  price = price.trim();
+  if (price == 'Less 10000') {
+    this.filteredAds = this.advertisements.filter(ads => ads.price < 10000);
+  } else {
+    this.filteredAds = this.advertisements.filter(ads => ads.price > 10000);
   }
 }
 

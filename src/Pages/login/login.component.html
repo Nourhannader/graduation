@@ -17,11 +17,10 @@
               />
             </div>
             @if(identifier?.errors && identifier?.touched) {
-              <div class="validation-error">
-                @if(identifier?.hasError('required')) {
-                  Username or Email is required
-                }
-              </div>
+            <div class="validation-error">
+              @if(identifier?.hasError('required')) { Username or Email is
+              required }
+            </div>
             }
           </div>
 
@@ -34,24 +33,42 @@
                 placeholder="Password"
                 class="form-control"
               />
-              <button type="button" class="password-toggle" (click)="togglePassword()">
-                <i [class]="showPassword ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill'"></i>
+              <button
+                type="button"
+                class="password-toggle"
+                (click)="togglePassword()"
+              >
+                <i
+                  [class]="
+                    showPassword ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill'
+                  "
+                ></i>
               </button>
             </div>
             @if(password?.errors && password?.touched) {
-              <div class="validation-error">
-                @if(password?.hasError('required')) {
-                  Password is required
-                }
-              </div>
+            <div class="validation-error">
+              @if(password?.hasError('required')) { Password is required }
+            </div>
             }
           </div>
 
           <!-- Submit Button -->
           <div class="form-actions">
+            @if(!loading){
             <button type="submit" class="btn btn-primary">
               <i class="bi bi-box-arrow-in-right"></i> Login
             </button>
+            }
+            @if(loading){
+            <button class="btn btn-primary" type="button" disabled>
+              <span
+                class="spinner-grow spinner-grow-sm me-2"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Loading...
+            </button>
+            }
           </div>
 
           <!-- Forgot Password Link -->
@@ -61,9 +78,9 @@
 
           <!-- Error Message -->
           @if(apiError != '') {
-            <div class="api-error">
-              {{ apiError }}
-            </div>
+          <div class="api-error">
+            {{ apiError }}
+          </div>
           }
         </form>
       </div>
@@ -71,7 +88,7 @@
       <!-- Welcome Section -->
       <div class="auth-welcome-section">
         <div class="welcome-content">
-          <img src="images/log1.png" alt="Welcome" class="welcome-image">
+          <img src="images/log1.png" alt="Welcome" class="welcome-image" />
           <h3>Welcome Back!</h3>
           <p>Start your real estate journey in just 30 seconds!</p>
           <button class="btn btn-secondary" (click)="Register()">

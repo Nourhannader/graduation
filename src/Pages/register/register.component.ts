@@ -18,6 +18,7 @@ export class RegisterComponent {
   registrationSuccess: boolean = false;
   selectedRole: string = 'Renter';
   fileName: string = 'Upload Profile Image';
+  loading:boolean=false
 
   @ViewChild('doorLeft') doorLeft!: ElementRef;
   @ViewChild('doorRight') doorRight!: ElementRef;
@@ -138,6 +139,9 @@ export class RegisterComponent {
       formData.append('ImageFile', file); 
     }
     console.log(formData);
+     setTimeout(()=>{
+      this.loading=true
+     })
     
       this._AuthService.register(formData).subscribe({
         next:(res)=>{
@@ -145,9 +149,12 @@ export class RegisterComponent {
           this.registrationSuccess=!this.registrationSuccess;
 
              this._router.navigate(['/login']);
+             this.loading=false
         },error:(err) => {
           console.log(err);
+          this.loading=false
            this.apiError=err.error.Error[0];
+
         }
       })
       

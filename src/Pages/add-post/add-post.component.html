@@ -4,6 +4,7 @@
 </button>
   
 <!-- Modal -->
+
 <div  class="modal fade" #createPostModal id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-centered" >
     <div class="modal-content create-post-modal">
@@ -78,7 +79,7 @@
             type="submit"
             class="btn btn-post"
             [disabled]="isSubmitting || !description.trim()">
-            <span *ngIf="!isSubmitting">Post</span>
+            <span *ngIf="!isSubmitting">Update</span>
             <span *ngIf="isSubmitting">
               <span class="spinner-border spinner-border-sm me-2" role="status"></span>
               Publishing...
