@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NotificationService } from '../Services/notification.service';
@@ -10,25 +10,34 @@ import { NotificationService } from '../Services/notification.service';
   templateUrl: './notification-dropdown.component.html',
   styleUrls: ['./notification-dropdown.component.css']
 })
-export class NotificationDropdownComponent {
+export class NotificationDropdownComponent implements OnInit{
   showNotifications = false;
   unreadCount = 0;
   notifications: any[] = [];
 
   constructor(private notificationService: NotificationService) {}
 
+  ngOnInit(): void {
+  this.notificationService.unreadCount$.subscribe(count => {
+    this.unreadCount = count;
+  });
+  this.loadNotifications();
+}
+
   toggleNotifications(): void {
     this.showNotifications = !this.showNotifications;
-    if (this.showNotifications) {
-      this.loadNotifications();
-    }
+    // if (this.showNotifications) {
+    //   this.loadNotifications();
+    // }
   }
 
   loadNotifications(): void {
     this.notificationService.getNotifications().subscribe({
       next: (data) => {
-        this.notifications = data.slice(0, 5); 
+        console.log(data)
+        this.notifications = data.slice(0, 3); 
         this.unreadCount = data.filter((n: any) => !n.isRead).length;
+        this.notificationService.setUnreadCount(this.unreadCount);
       }
     });
   }
@@ -40,6 +49,7 @@ export class NotificationDropdownComponent {
         const notification = this.notifications.find(n => n.id === id);
         if (notification) notification.isRead = true;
         this.unreadCount = Math.max(0, this.unreadCount - 1);
+        
       },
 
       error: (err) => {

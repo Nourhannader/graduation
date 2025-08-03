@@ -17,9 +17,10 @@
       <div class="notification-item"
            [class.read]="notification.isRead"
            (click)="markAsRead(notification.id)">
-        <div class="notification-content">{{ notification.message }}</div>
+        <div class="notification-content">{{ notification.massage }}</div>
         <div class="notification-time">
-          {{ notification.createdAt | date:'shortTime' }}
+          <!-- {{ notification.createdAt | date:'shortTime' }} -->
+        {{ notification.sender }}
         </div>
       </div>
       }
