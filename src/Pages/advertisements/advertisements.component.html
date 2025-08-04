@@ -32,11 +32,11 @@
           style="display: block; position: absolute"
         >
           <li class="dropdown-item" (click)="LoadAll()">Any Price</li>
-          <li class="dropdown-item" (click)="FilterPrice('< 10000 ')">
-            &lt; 10000
+          <li class="dropdown-item" (click)="FilterPrice('Less 10000 ')">
+            Less 10000
           </li>
-          <li class="dropdown-item" (click)="FilterPrice('> 10000')">
-            &gt; 10000
+          <li class="dropdown-item" (click)="FilterPrice('More 10000')">
+            More 10000
           </li>
         </ul>
       </div>
@@ -84,6 +84,10 @@
           </li>
         </ul>
       </div>
+      <button class="btn btn-outline-secondary rounded-pill bg-white filter-btn" type="button">
+        More <i class="bi bi-sliders"></i>
+        <!-- Placeholder for sliders icon -->
+      </button>
     </div>
   </div>
   @if(loading){
@@ -135,8 +139,7 @@
             </button>
           </div>
         </div>
-        }
-        @if(!loadingAppoint && (dates?.length ?? 0) > 0){
+        } @if(!loadingAppoint && (dates?.length ?? 0) > 0){
         <div class="card-body select-input p-4">
           <h2 class="h5 fw-bold mb-4">Select Date</h2>
           <div class="d-flex justify-content-between align-items-center mb-3">
@@ -174,7 +177,6 @@
               <label [for]="time">{{ time }}</label>
             </div>
             }
-          
           </div>
           @if(appointmentForm.get('hour')?.errors &&
           appointmentForm.get('hour')?.touched){

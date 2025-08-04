@@ -176,7 +176,7 @@
 
             <div class="form-group file-upload-group">
               <label class="file-upload-label">
-                <span>Upload Profile Image</span>
+                <span>{{ fileName }}</span>
                 <input
                   type="file"
                   id="file-input"
@@ -185,7 +185,7 @@
                 />
 
               </label>
-              <div class="file-name">{{ fileName || 'No file selected' }}</div>
+              <!-- <div class="file-name">{{ fileName || 'No file selected' }}</div> -->
 
             </div>
           </div>
@@ -197,9 +197,21 @@
               {{ apiError }}
             </div>
           }
+          @if(!loading){
           <button type="submit" class="submit-button">
             Register
           </button>
+        }
+        @if(loading){
+            <button class="submit-button" type="button" disabled>
+              <span
+                class="spinner-grow spinner-grow-sm me-2"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Loading...
+            </button>
+            }
         </div>
       </form>
     </div>

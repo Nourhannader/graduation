@@ -23,20 +23,6 @@ export class PaymentComponent implements OnInit {
  
 
   ngOnInit(): void {
-    // if (this.rentId !== null) {
-    //   this.renterId = this.rentId;
-    // } else {
-    //   this.route.queryParams.subscribe(params => {
-    //     const renterId = +params['renterId']; //
-    //     this.renterId = renterId;
-    //     console.log('Renter ID from query params:', renterId);
-    //   });
-    // }
-    // this.route.queryParams.subscribe(params => {
-    //   this.rentId = +params['rentId'] || null;
-    //   console.log('Rent ID from query params:', this.rentId);
-
-    // });
     this.rentId=Number(this._ActivatedRoute.snapshot.paramMap.get('id'));
     console.log('Rent ID from route:', this.rentId);
   }
@@ -76,3 +62,67 @@ export class PaymentComponent implements OnInit {
 
   }
 }
+
+//////////////////////////////////////////stripe///////////////////////////////////////////
+// import { Component, OnInit, AfterViewInit } from '@angular/core';
+// import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
+// import { PaymentService } from '../Services/payment.service';
+// import { ActivatedRoute } from '@angular/router';
+
+// @Component({
+//   selector: 'app-payment',
+//   standalone: true,
+//   imports: [],
+//   templateUrl: './payment.component.html',
+//   styleUrls: ['./payment.component.css']
+// })
+
+// export class PaymentComponent implements OnInit, AfterViewInit {
+//   stripe: Stripe | null = null;
+//   elements!: StripeElements;
+//   rentId: number | null = null;
+//   clientSecret = '';
+
+//   constructor(
+//     private route: ActivatedRoute,
+//     private paymentService: PaymentService
+//   ) {}
+
+//   ngOnInit() {
+//     this.rentId = Number(this.route.snapshot.paramMap.get('id'));
+//   }
+
+//   async ngAfterViewInit() {
+//     if (!this.rentId) return;
+
+//     this.paymentService.pay(this.rentId).subscribe(async (res) => {
+//       this.clientSecret = res.clientSecret;
+//       console.log('Client Secret:', this.clientSecret);
+//       this.stripe = await loadStripe('pk_test_51Rn0VvIgZmpOI8hZPRRXQoi4crYrFaqHhcQH5MmKnAYODSVREIAYj9FBGcxgTf1zqSOowZhEpEegFWKwC5ydkA3d00bZ6RXQKh');
+//       if (this.stripe) {
+//         this.elements = this.stripe.elements();
+//         const card = this.elements.create('card');
+//         card.mount('#card-element');
+
+//         const form = document.getElementById('payment-form')!;
+//         form.addEventListener('submit', async (event) => {
+//           event.preventDefault();
+
+//           const result = await this.stripe?.confirmCardPayment(this.clientSecret, {
+//             payment_method: { card }
+//           });
+
+//           if (result?.error) {
+//             console.error('Stripe error:', result.error.message);
+//             alert('Payment failed: ' + result.error.message);
+//           } else if (result?.paymentIntent && result.paymentIntent.status === 'succeeded') {
+//             alert('Payment successful!');
+//           } else {
+//             console.warn('Unexpected payment result:', result);
+//             alert('Unexpected status — payment may have failed.');
+//           }
+//         });
+//       }
+//     }); 
+//   }
+// }

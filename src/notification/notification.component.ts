@@ -40,7 +40,11 @@ export class NotificationComponent implements OnInit {
       next: (res) => {
         console.log(`Notification ${id} marked as read`, res);
         const notification = this.notifications.find(n => n.id === id);
-        if (notification) notification.isRead = true;
+        if (notification) {
+  notification.isRead = true;
+  const newCount = this.notifications.filter(n => !n.isRead).length;
+  this.notificationService.setUnreadCount(newCount);
+}
       }
       ,
       error: (err) => {
@@ -49,4 +53,11 @@ export class NotificationComponent implements OnInit {
       }
     });
   }
+
+  // markAll():void
+  // {
+  //   this.notifications.forEach(element => {
+  //     element.isRead=true
+  //   });
+  // }
 }
