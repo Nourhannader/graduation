@@ -1,23 +1,14 @@
-.rent-history-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  padding: 25px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: 1000px;
-  margin: 20px auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
-}
+
 
 .rent-history-title {
   color: #3a74b3;
-  font-size: 1.6rem;
-  margin-bottom: 25px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 24px;
   display: flex;
   align-items: center;
   padding-bottom: 12px;
-  position: relative;
+  border-bottom: 2px solid #f5f9fd;
 }
 
 .rent-history-title::after {
@@ -33,6 +24,7 @@
 .table-container {
   width: 100%;
   overflow: hidden;
+
 }
 
 .rent-history-table {
@@ -42,18 +34,19 @@
 }
 
 .table-header-row {
-  background: #3a74b3;
+  background: linear-gradient(135deg, #3a74b3 0%, #7fa8d1 100%);
   color: white;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
 }
 
 th {
-  padding: 14px 16px;
+ padding: 15px 20px;
   text-align: left;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.85rem;
+  font-weight: 500;
   position: relative;
-  width: auto;
 }
 
 .data-row {
@@ -65,15 +58,17 @@ th {
 }
 
 td {
-  padding: 16px;
-  color: #555;
-  word-wrap: break-word; 
+  padding: 20px 35px;
+   color: #4a5568;
+  font-size: 0.95rem;
+  vertical-align: middle;
 }
 
-.status-cell {
+.status-cells {
   font-weight: 600;
   text-transform: capitalize;
 }
+
 
 .paid-status {
   color: #2e8b57;

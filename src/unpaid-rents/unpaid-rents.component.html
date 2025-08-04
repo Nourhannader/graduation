@@ -1,6 +1,6 @@
 <div class="unpaid-rents-container">
   <h3 class="section-title">
-    <i class="fas fa-money-bill-wave title-icon"></i> Unpaid Rents
+    Unpaid Rents
   </h3>
 
   <div class="table-scroll-wrapper">
@@ -23,13 +23,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let r of unpaidRents" class="rent-row">
-          <td class="status-cell">
-            <i class="status-icon fas"
-               [class.fa-exclamation-circle]="r.rentStatus === 'OVERDUE'"
-               [class.fa-clock]="r.rentStatus === 'PENDING'"></i>
-            {{ r.rentStatus }}
-          </td>
-          <td class="value-cell">{{ r.rentValue }}</td>
+          <td class="status-cell"
+    [ngClass]="{
+      'unpaid-status': r.rentStatus.toLowerCase() === 'unpaid'
+    }">
+  {{ r.rentStatus }}
+</td>
+
+          <td class="valu-cell">{{ r.rentValue }}</td>
           <td class="date-cell">{{ r.dueDate }}</td>
           <td class="action-cell">
             <button class="pay-button" (click)="goToPayment(r.rentId)">
