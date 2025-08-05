@@ -1,7 +1,9 @@
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EditPostComponent } from './../edit-post/edit-post.component';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, inject, OnInit } from '@angular/core';
 import { Owner } from '../../interfaces/owner';
 import { AuthService } from '../../Services/auth.service';
+import { Comm, CommunityService } from '../../Services/community.service';
 ;
 
 @Component({
@@ -19,11 +21,20 @@ export class OwnerInfoComponent implements OnInit {
     image:'',
     compLocation:[]
   }
+
+  currentName!:string
+  EditNameForm!: FormGroup; 
+  newName!:Comm
+  openToEdit:boolean=false
+
+  
+  _communityService=inject(CommunityService)
   _authService=inject(AuthService);
   _fb=inject(FormBuilder)
 
   ngOnInit(): void {
     this.GetUserdata();
+    this.getCommunityName();
   }
 
   GetUserdata() {
@@ -39,4 +50,51 @@ export class OwnerInfoComponent implements OnInit {
   })
 
 }
+
+
+getCommunityName()
+{
+  this._communityService.GetCommunityName().subscribe({
+          next: res => {
+            this.currentName=res.name
+            
+          },
+          error: err => {
+            console.error(err);
+          }
+        });
+  
+}
+
+openToEditComm():void
+{
+  this.openToEdit=true
+    this.EditNameForm = new FormGroup({
+    Name: new FormControl(this.currentName, Validators.required),
+  });
+}
+
+closeEdit():void{
+  this.openToEdit=false;
+}
+
+UpdateName()
+{
+if(this.EditNameForm.valid)
+{
+        this.newName=this.EditNameForm.value
+        this._communityService.updateCommunity(this.newName).subscribe({
+        next: res => {
+          this.openToEdit=false
+          this.getCommunityName()
+        },
+        error: err => {
+          console.error(err);
+        }
+      });
+    } else {
+      this.EditNameForm.markAllAsTouched();
+    }
+}
+
 }

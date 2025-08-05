@@ -94,3 +94,91 @@
   color: #64748b;
   font-size: 14px;
 }
+
+// to edit community name
+.editCommunity{
+  background-color: white;
+  border: none;
+}
+
+.editCommunity i{
+  color: #3a74b3;
+}
+
+.background{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.background form{
+  background-color: white;
+  width: 300px;
+  height: 300px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 20px;
+  box-sizing: border-box;
+  padding: 20px;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+}
+
+.edit-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.editDiv{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 10px;
+}
+
+.submit {
+  border: none;
+  color: #ffffff;
+  background-color: #628cb9;
+  padding: 5px 10px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.cancel {
+  border: none;
+  color: #ffffff;
+  background-color: #da6464;
+  padding: 5px 10px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.error {
+  color: rgb(252, 89, 89);
+  font-size: 12px;
+}
