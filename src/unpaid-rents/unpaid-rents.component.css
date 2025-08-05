@@ -25,7 +25,7 @@
 }
 
 .table-header {
-  background: linear-gradient(135deg, #3a74b3 0%, #7fa8d1 100%);
+  background:  #7fa8d1 ;
   color: white;
   font-size: 0.9rem;
   text-transform: uppercase;
@@ -77,7 +77,7 @@
 }
 
 .pay-button {
-  background: linear-gradient(135deg, #3a74b3 0%, #7fa8d1 100%);
+  background: #7fa8d1;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -91,7 +91,6 @@
 }
 
 .pay-button:hover {
-  transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(58, 116, 179, 0.3);
 }
 

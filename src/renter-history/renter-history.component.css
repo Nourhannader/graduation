@@ -34,7 +34,7 @@
 }
 
 .table-header-row {
-  background: linear-gradient(135deg, #3a74b3 0%, #7fa8d1 100%);
+  background: #7fa8d1 ;
   color: white;
   font-size: 0.9rem;
   text-transform: uppercase;
