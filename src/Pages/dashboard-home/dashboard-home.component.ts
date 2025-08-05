@@ -16,7 +16,7 @@ type NumbersKey = keyof numbers;
   styleUrl: './dashboard-home.component.scss'
 })
 export class DashboardHomeComponent implements OnInit {
-  
+  loading:boolean=false
   generalNumbers!:numbers;
   adsReservation:AdsVsReservations[]=[]
   profitPerCommunity:ProfitCommunity[]=[]
@@ -59,6 +59,10 @@ cards: { label: string; key: NumbersKey; icon: string,color:string,colorIcon:str
   _AdminService=inject(AdminService)
 
   ngOnInit(): void {
+    this.loading=true
+    setTimeout(() => {
+      this.loading=false
+    },1000)
     this.getAllNumbers()
     this.getAdsReservation()
     this.getProfit()
@@ -149,16 +153,17 @@ public barChartType: 'bar' = 'bar';
 
 //profit
 getProfit(){
-  this.profitData = [
-      { month: '01/2025', profit: 1200 },
-      { month: '02/2025', profit: 1600 },
-      { month: '03/2025', profit: 1000 },
-      { month: '04/2025', profit: 2000 },
-      { month: '05/2025', profit: 1800 },
-    ];
+  this._AdminService.getProfitPermonth().subscribe({
+    next:(data) => {
+      this.profitData=data
+      this.lineChartData.labels = this.profitData.map(p => p.month);
+      this.lineChartData.datasets[0].data = this.profitData.map(p => p.profit);
+    },error:(err) =>{
+      console.log(err);
+    }
+  })
 
-    this.lineChartData.labels = this.profitData.map(p => p.month);
-    this.lineChartData.datasets[0].data = this.profitData.map(p => p.profit);
+    
 }
 public lineChartOptions: ChartConfiguration<'line'>['options'] = {
     responsive: true,
@@ -204,7 +209,11 @@ public lineChartData: ChartConfiguration<'line'>['data'] = {
         ];
 
       //   this.pieChartData.labels = res.map(d => d.communityName);
-      // this.pieChartData = res.map(d => d.profit);
+          // this.pieChartData.datasets = [
+          //  {
+          //     data: res.map(d => d.profit),
+          //  }
+          // ];
         
       },error:(err) =>{
         console.log(err);

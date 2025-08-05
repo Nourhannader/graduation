@@ -1,3 +1,11 @@
+ @if(loading){
+  <div class="text-center my-5">
+    <div class="spinner-border custom-spin" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  } 
+@if(!loading){
 <div class="container mt-4 w-100">
   <div class="cards">
     @for(card of cards;track $index){
@@ -81,39 +89,4 @@
     </div>
   </div>
 </div>
-
-<!-- <div class="shadow p-3">
-  <h4 class="text-center">رسم الأرباح الشهرية</h4>
-  <canvas baseChart
-          [data]="lineChartData"
-          [options]="lineChartOptions"
-          chartType="line">
-  </canvas>
-</div>
-
-<div class="card p-3">
-  <canvas baseChart
-          [data]="barChartData"
-          [options]="barChartOptions"
-          chartType="bar">
-  </canvas>
-</div> -->
-
-<!-- <div class="card p-3 shadow rounded">
-  <canvas baseChart
-          [data]="pieChartData"
-          [labels]="pieChartLabels"
-          [type]="pieChartType"
-          [options]="pieChartOptions">
-  </canvas>
-</div> -->
-<!-- 
-<div>
-   <canvas
-  baseChart
-  type="line"
-  [data]="lineChartUser"
-  [options]="lineChartOption"
-></canvas>
-
-</div> -->
+}

@@ -35,10 +35,17 @@ export class BookingComponent implements OnInit {
       this._ReservationService.AllReservation().subscribe({
 
       next:(data) =>{
+        const today = new Date();
         this.reservations=data
-        this.reservations = data.filter(r =>
-         r.status?.trim().toLowerCase() === status.trim().toLowerCase()
-        );
+        this.reservations = data.filter(r =>{
+          const statusMatch = r.status?.trim().toLowerCase() === status.trim().toLowerCase();
+          if (status.toLowerCase() === 'pending' || status.toLowerCase() === 'confirmed') {
+             const publishDate = new Date(r.reservationDate);
+             return statusMatch && publishDate >= today;
+          }
+
+        return statusMatch;
+      });
         this.Transform();
         this.GroupedMonth();
       

@@ -2,6 +2,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { AllReser } from '../interfaces/all-reser';
 
 
 export interface numbers{
@@ -52,9 +53,18 @@ export class AdminService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
     return this._HttpClient.get<AdsVsReservations[]>('http://localhost:5267/api/Admin/adsVsReservations',{headers})
   }
+  getProfitPermonth():Observable<Profit[]>{
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
+    return this._HttpClient.get<Profit[]>('http://localhost:5267/api/Admin/profitsPerMonth',{headers})
+  }
 
   getProfitCommunity():Observable<ProfitCommunity[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
     return this._HttpClient.get<ProfitCommunity[]>('http://localhost:5267/api/Admin/profitperCommunity',{headers})
+  }
+
+  getALLREservation():Observable<AllReser[]>{
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
+    return this._HttpClient.get<AllReser[]>('http://localhost:5267/api/Admin/AllReservation',{headers})
   }
 }

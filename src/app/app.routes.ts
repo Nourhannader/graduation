@@ -24,6 +24,7 @@ import { guardRedirectGuard } from '../Services/guard-redirect.guard';
 import { authGuard } from '../Services/auth.guard';
 import { AdminHomeComponent } from '../Pages/admin-home/admin-home.component';
 import { DashboardHomeComponent } from '../Pages/dashboard-home/dashboard-home.component';
+import { AdminBookingComponent } from '../Pages/admin-booking/admin-booking.component';
 
 
 
@@ -65,9 +66,10 @@ export const routes: Routes = [
     //  {path:'renterTabs',component:RenterTabsComponent},
     {path:'home',component:HomeComponent},
     //{path:'adminHome',component:DashboardHomeComponent},
-    {path:'adminHome',component:AdminHomeComponent,children:[
+    {path:'adminHome',component:AdminHomeComponent,data: { roles: ['Admin']},children:[
         {path:'',redirectTo:'DashBoard',pathMatch:"full"},
-        {path:'DashBoard',component:DashboardHomeComponent}
+        {path:'DashBoard',component:DashboardHomeComponent},
+        {path:'adminbooking',component:AdminBookingComponent}
     ]},
     {path:'404',component:NotFoundComponent},
     {path:'**',redirectTo:'404'}

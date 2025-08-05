@@ -1,0 +1,66 @@
+<div class="container-custom">
+  <h1 class="h3 fw-bold text-dark mb-2">Bookings</h1>
+  <p class="text-secondary mb-4">See ALL Reservation</p>
+
+  <ul class="nav nav-pills mb-5 overflow-auto flex-nowrap pb-2">
+    <li class="nav-item">
+      <a class="nav-link"  [class.active]="activeStatus === 'Cancelled'"  (click)="getAllReservation('Cancelled')">Cancelled</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  [class.active]="activeStatus === 'Completed'"  (click)="getAllReservation('Completed')">Completed</a>
+    </li>
+  </ul>
+  @if(loading){
+  <div class="text-center my-5">
+    <div class="spinner-border custom-spin" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  } @if(!loading && groupedByMonth?.length === 0){
+  <div class="text-center text-muted">
+    <i class="bi bi-calendar-x fs-1"></i>
+    <p class="mt-2">No bookings found.</p>
+  </div>
+  }
+  @if(!loading && (groupedByMonth?.length ?? 0) > 0) {
+  <div>
+    @for(group of groupedByMonth;track $index){
+    <h2 class="h5 fw-semibold text-dark mb-3">{{ group.month }}</h2>
+    <div class="d-grid gap-3">
+      @for(res of group.reservations;track $index){
+      <div class="booking-card">
+        <div class="booking-date">
+          <span class="day-of-week">{{ res.dayName }}</span>
+          <span class="day-of-month">{{ res.daynumber }}</span>
+        </div>
+        <div class="booking-details d-flex">
+          <div class="me-3">
+            <div class="info-row">
+              <span class="icon"><i class="bi bi-clock-history"></i></span>
+              <!-- Clock icon -->
+              <span>{{ res.hour }}</span>
+            </div>
+            <div class="info-row">
+              <span class="icon"><i class="bi bi-geo-alt"></i></span>
+              <!-- Map pin icon -->
+              <span>{{ res.location}}</span>
+            </div>
+          </div>
+          <div>
+            <div class="title">{{ res.name }}</div>
+            <div class="phone">
+              {{ res.phoneNumber }}
+            </div>
+          </div>
+        </div>
+        <div class="ownerName">
+          {{res.owner}}  
+        </div>
+        
+      </div>
+      }
+    </div>
+    }
+  </div>
+}
+</div>
