@@ -1,0 +1,15 @@
+
+<div class="sidebar">
+  <div class="info">
+     <img src="images/navLogo.png" alt="Logo" />
+  </div>
+  <nav>
+      <a routerLink="DashBoard" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"><i class="bi bi-graph-up"></i> DashBoard</a>
+      <a routerLink="Owners" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"><i class="bi bi-person-check"></i> Owners</a>
+      <a routerLink="Renters" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"><i class="bi bi-people"></i> Renters</a>
+      <a routerLink="booking" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"><i class="bi bi-calendar-check"></i> Booking</a>
+      <a (click)="LogOut()" class="logout" routerLinkActive="active">
+        <i class="bi bi-box-arrow-left"></i> LogOut
+      </a>
+  </nav>
+</div>
