@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="h4 mb-0">My Profile</h2>
     </div>
-
+    
     <div class="profile-header">
       <img
         [src]="'http://localhost:5267/Images/' + user?.image"
@@ -73,6 +73,34 @@
         </div>
       </div>
       } }
-    </div>
+
+      <div class="form-group">
+          <label class="form-label">Compound Name <button (click)="openToEditComm()"  class="editCommunity"><i  class="bi bi-pencil"></i></button></label>          
+          <div class="form-value">{{ currentName }}</div>
+        </div>
+      </div>
+    
   </div>
 </div>
+
+@if(openToEdit==true)
+{
+  <div class="background">
+    <form [formGroup]="EditNameForm" (ngSubmit)="UpdateName()">
+    <div class="editDiv">
+            <h4>Your Community Name</h4>
+            <input formControlName="Name" [value]="currentName" type="text" placeholder="community name" class="form-control">
+             @if(EditNameForm.get('Name')?.errors && EditNameForm.get('Name')?.touched)
+             {
+            @if(EditNameForm.get('Name')?.hasError('required')) {
+            <p class="error">This field is required</p>
+            }
+            }
+    </div>
+    <div class="edit-buttons">
+    <button class="submit" [disabled]="!EditNameForm.valid">Edit</button>
+    <button class="cancel" (click)="closeEdit()">Cancel</button>
+    </div>
+</form>
+  </div>
+}

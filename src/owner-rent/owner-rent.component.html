@@ -28,18 +28,18 @@
 
   <div class="table-wrapper">
     <table class="rent-table">
-      <thead>
-        <tr>
-          <th>Due Date</th>
-          <th>Tenant</th>
-          <th>Status</th>
-          <th>Paid On</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
+    <thead>
+  <tr>
+    <th><i class="fas fa-calendar-alt"></i> Month</th>
+    <th><i class="fas fa-user-tie"></i> Tenant</th>
+    <th><i class="fas fa-info-circle"></i> Status</th>
+    <th><i class="fas fa-calendar-check"></i> Paid On</th>
+    <th><i class="fas fa-coins header-icon"></i> Amount</th>
+  </tr>
+</thead>
       <tbody>
         <tr *ngFor="let rent of filteredRents">
-          <td>{{ rent.dueDate }}</td>
+          <td>{{ rent.rentMonth }}</td>
           <td>{{ rent.renterName }}</td>
           <td>
             <span class="status-badge" [ngClass]="rent.rentStatus">

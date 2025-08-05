@@ -17,11 +17,10 @@ export class OwnerEditCommunityComponent {
   newName!:Comm
   _communityService=inject(CommunityService)
   _router=inject(Router)
-    ngOnInit(): void {
+
+  ngOnInit(): void {
     this._communityService.GetCommunityName().subscribe({
         next: res => {
-          console.log(res)
-          console.log(res.name)
           this.currentName=res.name
           
         },
