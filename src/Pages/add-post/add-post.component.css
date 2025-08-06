@@ -20,8 +20,8 @@
 }
 
 .actions-btn:hover {
-  background-color: #f5f7fa;
-  color: #3a74b3;
+  background-color:  #2a5a93;
+  /* color: #3a74b3; */
 }
 
 .actions-btn:disabled {
@@ -135,7 +135,7 @@
 }
 
 .btn-post {
-  background: #1877f2;
+  background: #3a74b3;
   color: white;
   border: none;
   border-radius: 6px;
@@ -153,5 +153,5 @@
 }
 
 .btn-post:hover:not(:disabled) {
-  background: #166fe5;
+  background:  #2a5a93;
 }

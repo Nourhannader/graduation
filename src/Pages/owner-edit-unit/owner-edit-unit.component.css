@@ -33,7 +33,7 @@ form{
     justify-content: flex-start;
     column-gap: 30px;
     width: 100%;
-   
+
 }
 
 .halfFormSide{
@@ -84,7 +84,7 @@ input{
 
 
 button{
-    background-color: rgb(76, 138, 192);
+    background-color:#3a74b3 ;
     border: none;
     padding: 10px 40px;
     border-radius: 10px;

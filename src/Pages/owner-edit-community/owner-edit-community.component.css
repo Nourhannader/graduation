@@ -17,8 +17,8 @@ button{
     -ms-border-radius: 15px;
     -o-border-radius: 15px;
     padding: 10px 30px;
-    background-color: rgb(74, 74, 205);
-    color: rgb(242, 239, 239);
+    background-color: #3a74b3;
+    color: white;
 }
 
 form{

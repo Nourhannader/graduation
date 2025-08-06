@@ -82,12 +82,12 @@
       -ms-transition: background-color 0.3s ease;
       -o-transition: background-color 0.3s ease;
         &:hover {
-        background-color: #2d649e;
+        background-color: #2a5a93;
       }
     }
   }
 
- 
+
 }
 @keyframes dropBounce {
   0%   { transform: translateY(-20px); opacity: 0; -webkit-transform: translateY(-20px); -moz-transform: translateY(-20px); -ms-transform: translateY(-20px); -o-transform: translateY(-20px); }

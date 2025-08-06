@@ -55,7 +55,7 @@
 }
 
 .form-group input[formControlName="month"] {
-  width: 200px; 
+  width: 200px;
 }
 
 .form-group input[formControlName="year"] {
@@ -82,7 +82,7 @@
 }
 
 .filter-button:hover {
-  background:#7fa8d1;
+  background: #2a5a93;
 }
 
 .filter-button i {
@@ -103,7 +103,7 @@
 }
 
 .rent-table th {
-  background:  #7fa8d1 ;
+  background:  #3a74b3;
   color: white;
   padding: 1rem 1.5rem;
   text-align: left;
