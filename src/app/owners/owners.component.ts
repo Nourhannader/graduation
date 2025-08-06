@@ -1,6 +1,8 @@
+import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { AdminService, Owners } from '../../Services/admin.service';
+import { AdminService, Owners, Transfer } from '../../Services/admin.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-owners',
@@ -11,9 +13,18 @@ import { AdminService, Owners } from '../../Services/admin.service';
 })
 export class OwnersComponent implements OnInit{
 allOwners!:Owners[]
-oldOwnerId!:string
 transfer:boolean=false
+transferDTO:Transfer={
+  oldOwnerId:'',
+  newOwnerId:''
+}
+
+  TransferForm: FormGroup = new FormGroup({
+    newOwnerId: new FormControl(null, [Validators.required]),  
+  });
+
 _adminService=inject(AdminService)
+toastr=inject(ToastrService)
 
 ngOnInit(): void {
     this.GetOwners()
@@ -33,9 +44,43 @@ this._adminService.getAllOwners().subscribe({
 
 openTransfer(oldOwner:string)
 {
-this.oldOwnerId=oldOwner
+this.transferDTO.oldOwnerId=oldOwner
 this.transfer=true
-console.log(oldOwner)
+console.log(this.transferDTO.oldOwnerId)
 }
 
+TransferFn(newId:string){
+
+this.transferDTO.newOwnerId=newId
+console.log(this.transferDTO.newOwnerId)
 }
+
+cancelTransfer():void{
+  this.transfer=false
+}
+
+confirmTransfer():void
+{
+  if(this.transferDTO.oldOwnerId==null || this.transferDTO.newOwnerId=='' || this.transferDTO.newOwnerId==undefined|| this.transferDTO.newOwnerId=="0")
+  {
+    this.toastr.error("You didn't choose any owner.")
+  }
+
+  else{
+  this._adminService.TransferTo(this.transferDTO).subscribe({
+ next:(res) => {
+      console.log(res)
+      this.transfer=false
+      this.toastr.success("Transfered Successfully.")
+      this.GetOwners()
+    },error:(err) =>{
+      console.log(err);
+          this.toastr.error("Faild to Transfer.")
+    }
+  })
+
+  }
+}
+}
+
+

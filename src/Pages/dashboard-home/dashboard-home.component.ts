@@ -200,20 +200,20 @@ public lineChartData: ChartConfiguration<'line'>['data'] = {
     this._AdminService.getProfitCommunity().subscribe({
       next:(res) => {
         this.profitPerCommunity=res
-        this.pieChartData.labels = ['Green Valley', 'Palm Hills', 'Madinaty'];
-        this.pieChartData.datasets = [
-          {
-            data:[12000,15000,20000],
-            backgroundColor:['#8b5cf6', '#06b6d4','#608cbb']
-          }
-        ];
+        // this.pieChartData.labels = ['Green Valley', 'Palm Hills', 'Madinaty'];
+        // this.pieChartData.datasets = [
+        //   {
+        //     data:[12000,15000,20000],
+        //     backgroundColor:['#8b5cf6', '#06b6d4','#608cbb']
+        //   }
+        // ];
 
-      //   this.pieChartData.labels = res.map(d => d.communityName);
-          // this.pieChartData.datasets = [
-          //  {
-          //     data: res.map(d => d.profit),
-          //  }
-          // ];
+        this.pieChartData.labels = res.map(d => d.communityName);
+          this.pieChartData.datasets = [
+           {
+              data: res.map(d => d.profit),
+           }
+          ];
         
       },error:(err) =>{
         console.log(err);

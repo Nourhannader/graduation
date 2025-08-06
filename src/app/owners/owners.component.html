@@ -28,11 +28,13 @@
             {{ owner?.isActive ? 'Active' : 'Inactive' }}
           </span>
         </td>
+        @if(owner?.isActive!=false){
         <td>
             <button (click)="openTransfer(owner.id)" class="transfer"> 
             Transfer
           </button>
         </td>
+      }
       </tr>
     </tbody>
   </table>
@@ -40,7 +42,51 @@
 
 @if(transfer==true)
 {
-    <div class="background">
+  <div class="background">
+    <div class="tableContainer">
+          <h2>Choose New Owner</h2>
+  <table class="transferTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th></th>
+        <th>Email</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let owner of allOwners ; let i = index"
+      [ngStyle]="{'animation-delay': (i * 100)+ 'ms'}">
+        @if(owner?.id!= transferDTO.oldOwnerId && owner?.isActive==true)
+        {
+          <td>{{ owner?.firstName }} {{ owner?.lastName }}</td>
+          <td></td>
+          <td>{{owner?.email}}</td>
+          <td>
+            <span class="status" [ngClass]="owner.isActive ? 'active' : 'inactive'">
+              {{ owner?.isActive ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+          <td>
+              <button (click)="TransferFn(owner.id)" class="transfer"> 
+              Choose
+            </button>
+          </td>
+        }  
+      </tr>
+    </tbody>
+  </table>
+  <div class="confirmationDiv">
+  <h4>Are you sure?</h4>
+  <div class="buttons">
+    <button class="submit" (click)="confirmTransfer()">Transfer</button>
+    <button class="cancel" (click)="cancelTransfer()">Cancel</button>
+  </div>
+</div>
+</div>
 
-    </div>
+
+
+  </div>
 }

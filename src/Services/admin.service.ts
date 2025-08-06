@@ -33,7 +33,7 @@ export interface Profit {
 }
 
 export interface ProfitCommunity{
-  comunityName:string,
+  communityName:string,
   profit:number
 }
 
@@ -63,8 +63,8 @@ export interface Owners{
 }
 
 export interface Transfer{
-  comunityName:string,
-  profit:number
+  oldOwnerId:string,
+  newOwnerId:string
 }
 
 @Injectable({
