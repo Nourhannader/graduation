@@ -176,7 +176,7 @@ export class PostComponent {
 
   
   formatDate(date: Date | string): string {
-    return new Date(date).toLocaleDateString('ar-EG', {
+    return new Date(date).toLocaleDateString('EG', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',

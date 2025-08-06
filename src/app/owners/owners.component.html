@@ -14,7 +14,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let owner of allOwners">
+      <tr *ngFor="let owner of allOwners ; let i = index"
+      [ngStyle]="{'animation-delay': (i * 100)+ 'ms'}">
         <td>{{ owner?.firstName }}</td>
         <td>{{ owner?.lastName }}</td>
         <td>{{ owner?.userName }}</td>
