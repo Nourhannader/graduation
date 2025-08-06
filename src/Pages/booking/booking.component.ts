@@ -41,7 +41,7 @@ export class BookingComponent implements OnInit {
           const statusMatch = r.status?.trim().toLowerCase() === status.trim().toLowerCase();
           if (status.toLowerCase() === 'pending' || status.toLowerCase() === 'confirmed') {
              const publishDate = new Date(r.reservationDate);
-             return statusMatch && publishDate >= today;
+            //  return statusMatch && publishDate >= today;
           }
 
         return statusMatch;
