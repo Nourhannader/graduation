@@ -177,3 +177,42 @@ a:hover {
   border-right: 15px solid transparent;
   border-bottom: 15px solid white;
 }
+.icon-admin{
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.icon-admin div{
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  color: #3a74b3;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(58, 116, 179, 0.2);
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.icon-admin i{
+  font-size: 1.2rem;
+}
+.icon-admin div:hover{
+  transform: scale(1.05);
+  background:  #2a5a93;
+  color: white;
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}

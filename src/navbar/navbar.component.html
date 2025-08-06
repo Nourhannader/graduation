@@ -13,7 +13,7 @@
     <a routerLink="login">Login</a>
     <a routerLink="register">Register</a>
   </div>
-  } @if(isLoggedIn==true) {
+  } @if(isLoggedIn==true && (role == 'Owner' || role == 'Renter')) {
   <div class="d-flex ">
     <app-notification-dropdown></app-notification-dropdown>
     <div class="me-2 content-image">
@@ -27,5 +27,10 @@
     </div>
     
   </div>
+  } @if(isLoggedIn==true && role == 'Admin'){
+     <div class="d-flex icon-admin">
+        <div (click)="navigateToHome()" ><i class="bi bi-person-circle"></i></div>
+        <div (click)="logout()"><i class="bi bi-box-arrow-right"></i></div>
+     </div>
   }
 </div>
