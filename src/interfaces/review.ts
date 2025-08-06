@@ -6,4 +6,5 @@ export interface Review {
     userImage:string;
     userName:string;
     rate:number;
+    communityName:string
 }

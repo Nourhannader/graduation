@@ -18,12 +18,16 @@ body {
 /* Card Layout */
 .registration-card {
   display: flex;
-  max-width: 800px; /* أصغر من قبل */
-  width: 100%;
+  max-width: 800px;
+  /*أصغرمنقبل*/width: 100%;
   background: white;
   border-radius: 10px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
 /* Form Container */
@@ -61,6 +65,10 @@ body {
   cursor: pointer;
   border-radius: 30px;
   transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
 }
 
 .role-toggle input[type="radio"]:checked + label {

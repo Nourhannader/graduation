@@ -1,0 +1,28 @@
+<div class="table-container">
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Community</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let renter of allRenters">
+        <td>{{ renter.firstName }}</td>
+        <td>{{ renter.lastName }}</td>
+        <td>{{ renter.userName }}</td>
+        <td>{{ renter.email }}</td>
+        <td>{{ renter.communityName }}</td>
+        <td>
+          <span class="status" [ngClass]="renter.isActive ? 'active' : 'inactive'">
+            {{ renter.isActive ? 'Active' : 'Inactive' }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

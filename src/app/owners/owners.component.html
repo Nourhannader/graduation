@@ -1,0 +1,46 @@
+<div class="table-container">
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Community</th>
+        <th>Units</th>
+        <th>Ads</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let owner of allOwners ; let i = index"
+      [ngStyle]="{'animation-delay': (i * 100)+ 'ms'}">
+        <td>{{ owner?.firstName }}</td>
+        <td>{{ owner?.lastName }}</td>
+        <td>{{ owner?.userName }}</td>
+        <td>{{ owner?.email }}</td>
+        <td>{{ owner?.communityName }}</td>
+        <td>{{owner?.unitCount}}</td>
+        <td>{{owner?.adCount}}</td>
+        <td>
+          <span class="status" [ngClass]="owner.isActive ? 'active' : 'inactive'">
+            {{ owner?.isActive ? 'Active' : 'Inactive' }}
+          </span>
+        </td>
+        <td>
+            <button (click)="openTransfer(owner.id)" class="transfer"> 
+            Transfer
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+@if(transfer==true)
+{
+    <div class="background">
+
+    </div>
+}

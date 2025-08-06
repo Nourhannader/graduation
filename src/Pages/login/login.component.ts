@@ -68,7 +68,12 @@ export class LoginComponent {
           localStorage.setItem('userName',response.userName)
           localStorage.setItem('image',response.image)
           this._AuthService.saveUser()
+          if(response.role == 'Admin'){
+            this._router.navigate(['/adminHome/DashBoard'])
+          }
+          else{
           this._router.navigate(['/home'])
+          }
           this.loading=false
       },error:(err)=>{
         console.log(err);

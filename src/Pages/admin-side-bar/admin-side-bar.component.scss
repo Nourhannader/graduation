@@ -1,0 +1,100 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: white;
+  color: #3a74b3;;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info {
+  text-align: center;
+  img{
+    width: 150px;
+  }
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.sidebar nav a {
+  color: #3a74b3;
+  text-decoration: none;
+  width: 90%;
+  position: relative;
+  overflow: hidden;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-10px);
+  opacity: 0;
+  animation: slideIn 0.5s forwards;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transform: translateX(-10px);
+  -moz-transform: translateX(-10px);
+  -ms-transform: translateX(-10px);
+  -o-transform: translateX(-10px);
+}
+
+.sidebar nav a:nth-child(1) { animation-delay: 0.1s; }
+.sidebar nav a:nth-child(2) { animation-delay: 0.2s; }
+.sidebar nav a:nth-child(3) { animation-delay: 0.3s; }
+.sidebar nav a:nth-child(4) { animation-delay: 0.4s; }
+.sidebar nav a.logout   { 
+  animation-delay: 0.6s; 
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+.sidebar nav a:hover {
+  background:rgb(238, 237, 237);
+  transform: translateX(0px);
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.sidebar nav a i {
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+.sidebar nav a:hover i {
+  transform: rotate(360deg);
+}
+
+
+.sidebar nav a::after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  background: #3a74b3;
+  width: 0%;
+  left: 0;
+  bottom: 0;
+  transition: width 0.3s ease-in-out;
+}
+
+.sidebar nav a:hover::after {
+  width: 100%;
+}
+
+.sidebar nav a.active-link {
+  background-color: rgba(188, 218, 250, 0.4);
+  font-weight: bold;
+  border-radius: 8px;
+  border-right: 3px solid #3a74b3;
+}
