@@ -17,6 +17,12 @@ export class AppComponent {
   title = 'graduation';
 
   currentUrl: string = '';
+//   isTransparentNavbar = false;
+
+// onRouteChange(component: any) {
+//   const currentRoute = window.location.pathname;
+//   this.isTransparentNavbar = currentRoute === '/home'; 
+// }
 
   constructor(private router: Router) {
     this.router.events

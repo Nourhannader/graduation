@@ -55,7 +55,9 @@ footer{
     margin-top: 10px;
 
 }
-
+.footer-contact p{
+    margin-bottom: 0;
+}
 .footer-terms{
     display: flex;
     flex-direction: column;
@@ -70,3 +72,26 @@ a{
     text-decoration: none;
 }
 
+.footer-social{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    
+}
+.footer-social div{
+    position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #598fca;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(58, 116, 179, 0.2);
+}
+.footer-social i{
+  font-size: 1.2rem;
+}

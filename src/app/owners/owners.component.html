@@ -58,7 +58,7 @@
     <tbody>
       <tr *ngFor="let owner of allOwners ; let i = index"
       [ngStyle]="{'animation-delay': (i * 100)+ 'ms'}">
-        @if(owner?.id!= transferDTO.oldOwnerId && owner?.isActive==true)
+        @if(owner?.id!= transferDTO.oldOwnerId && owner?.isActive==true && owner?.unitCount==0)
         {
           <td>{{ owner?.firstName }} {{ owner?.lastName }}</td>
           <td></td>
