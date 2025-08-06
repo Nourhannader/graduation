@@ -35,6 +35,7 @@ openTransfer(oldOwner:string)
 {
 this.oldOwnerId=oldOwner
 this.transfer=true
+console.log(oldOwner)
 }
 
 }

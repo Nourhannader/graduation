@@ -49,7 +49,7 @@ export interface Renters{
 }
 
 export interface Owners{
-  Id:string,
+  id:string,
   firstName:string,
   lastName:string,
   userName:string,
