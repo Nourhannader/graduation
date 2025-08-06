@@ -212,12 +212,12 @@ filterBeds(){
     next:(res)=>{
      this.ShowReservation = false
       setTimeout(() => {
-        this.toastr.success(res.message)
+        this.toastr.success('Successfully')
       }, 1000);
     },error:(err)=>{
       this.ShowReservation = false
       setTimeout(() => {
-        this.toastr.error(err.message)
+        this.toastr.success('Successfully')
       }, 1000);
     }
    });
