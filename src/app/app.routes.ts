@@ -25,6 +25,8 @@ import { authGuard } from '../Services/auth.guard';
 import { AdminHomeComponent } from '../Pages/admin-home/admin-home.component';
 import { DashboardHomeComponent } from '../Pages/dashboard-home/dashboard-home.component';
 import { AdminBookingComponent } from '../Pages/admin-booking/admin-booking.component';
+import { RentersComponent } from './renters/renters.component';
+import { OwnersComponent } from './owners/owners.component';
 
 
 
@@ -69,7 +71,10 @@ export const routes: Routes = [
     {path:'adminHome',component:AdminHomeComponent,data: { roles: ['Admin']},children:[
         {path:'',redirectTo:'DashBoard',pathMatch:"full"},
         {path:'DashBoard',component:DashboardHomeComponent},
-        {path:'adminbooking',component:AdminBookingComponent}
+        {path:'adminbooking',component:AdminBookingComponent},
+        {path:'Renters',component:RentersComponent},
+        {path:'Owners',component:OwnersComponent},
+        
     ]},
     {path:'404',component:NotFoundComponent},
     {path:'**',redirectTo:'404'}

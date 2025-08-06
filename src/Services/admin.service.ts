@@ -37,6 +37,36 @@ export interface ProfitCommunity{
   profit:number
 }
 
+export interface Renters{
+  firstName:string,
+  lastName:string,
+  userName:string,
+  email:string,
+  role:string,
+  communityName:string,
+  isActive:boolean
+
+}
+
+export interface Owners{
+  Id:string,
+  firstName:string,
+  lastName:string,
+  userName:string,
+  email:string,
+  role:string,
+  communityName:string,
+  unitCount:number,
+  adCount:number,
+  isActive:boolean
+
+}
+
+export interface Transfer{
+  comunityName:string,
+  profit:number
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -67,4 +97,19 @@ export class AdminService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
     return this._HttpClient.get<AllReser[]>('http://localhost:5267/api/Admin/AllReservation',{headers})
   }
+
+ getAllRenters():Observable<Renters[]>{
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
+    return this._HttpClient.get<Renters[]>('http://localhost:5267/api/Admin/Renters', {headers})
+}
+
+getAllOwners():Observable<Owners[]>{
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
+    return this._HttpClient.get<Owners[]>('http://localhost:5267/api/Admin/Owners', {headers})
+}
+
+TransferTo(transfer:Transfer):Observable<any>{
+const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
+    return this._HttpClient.post('http://localhost:5267/api/Admin/Transfer',transfer, {headers})
+}
 }
