@@ -104,10 +104,12 @@ button[type="submit"] {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+    box-shadow: 0 2px 8px rgba(58, 116, 179, 0.2);
+
 }
 
 button[type="submit"]:hover {
-  background-color: #2c5a8a;
+  background-color: #2a5a93;
   transform: translateY(-2px);
 }
 

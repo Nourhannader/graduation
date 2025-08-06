@@ -61,7 +61,7 @@
         -o-border-radius: 20px;
 
         &:hover {
-            background-color: #2d649e;
+            background-color:#2a5a93 ;
         }
     }
 
@@ -70,7 +70,7 @@
     &:hover  .overlay{
       visibility:visible;
     }
-    
+
     &:hover .btn-group{
     visibility:visible;
     }
@@ -78,7 +78,7 @@
         position: absolute;
         top: 10px;
         left: 2px;
-        background: #2d649e;
+        background: #3a74b3;
         color: white;
         border-radius: 20px;
         -webkit-border-radius: 20px;
@@ -87,7 +87,7 @@
         -o-border-radius: 20px;
 
         p
-        {  
+        {
             margin: 0;
             padding: 2px 4px;
             font-size: 15px;
@@ -107,13 +107,13 @@
      -moz-transition: all .3s ease-in;
      -ms-transition: all .3s ease-in;
      -o-transition: all .3s ease-in;
- 
+
     button
      {
        outline: none;
        border: none;
        color: white;
-       background-color: #2d649e;
+       background-color: #3a74b3;
        border-radius: 50%;
        -webkit-border-radius: 50%;
        -moz-border-radius: 50%;
@@ -136,6 +136,6 @@
      z-index: 999;
      text-align: center;
      width: 300px;
-    
+
 
 }

@@ -25,7 +25,7 @@
 }
 
 .table-header {
-  background:  #7fa8d1 ;
+  background:  #3a74b3 ;
   color: white;
   font-size: 0.9rem;
   text-transform: uppercase;
@@ -77,7 +77,7 @@
 }
 
 .pay-button {
-  background: #7fa8d1;
+  background: #3a74b3;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -91,7 +91,7 @@
 }
 
 .pay-button:hover {
-  box-shadow: 0 4px 12px rgba(58, 116, 179, 0.3);
+  background-color: #2a5a93;
 }
 
 .button-icon {

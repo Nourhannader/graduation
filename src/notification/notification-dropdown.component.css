@@ -21,7 +21,7 @@
 
 .notification-icon:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(58, 116, 179, 0.3);
+  background:  #2a5a93;
 }
 
 .notification-icon i {
@@ -75,7 +75,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background: linear-gradient(to right, #3a74b3 0%, #3a74b3 10%, #7fa8d1 100%);
+  background:  #3a74b3;
   color: white;
 }
 
