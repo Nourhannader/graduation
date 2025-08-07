@@ -47,7 +47,7 @@ navigateToHome(){
   if(this.role === 'Owner'){
     this._router.navigate(['/ownerHome'])
     this.isShow=false
-  }else if(this.role === 'Rener'){
+  }else if(this.role === 'Renter'){
     this._router.navigate(['/RenterHome'])
     this.isShow=false
   }else if(this.role === 'Admin'){
