@@ -69,7 +69,7 @@ export class AdsSingleComponent implements OnInit {
     info.bathrooms = parseInt(bathroomMatch[1]);
   }
 
-  const areaMatch = text.match(/(\d+)\s*(square\s*meters|sqm|m²)/i);
+  const areaMatch = text.match(/(\d+)\s*(square\s*meters|sqm|m)/i);
   if (areaMatch) {
     info.area = parseInt(areaMatch[1]);
   }
