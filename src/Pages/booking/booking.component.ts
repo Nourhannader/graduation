@@ -1,9 +1,10 @@
 import { ReservationService } from './../../Services/reservation.service';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { AllReservation } from '../../interfaces/all-reservation';
 import { MonthGroup, TransformedReservation } from '../../interfaces/transformed-reservation';
 import { CommonModule } from '@angular/common';
 import { log } from 'console';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { log } from 'console';
   templateUrl: './booking.component.html',
   styleUrl: './booking.component.scss'
 })
-export class BookingComponent implements OnInit {
+export class BookingComponent implements OnInit ,OnDestroy {
+  private subscription: Subscription[] = [];
   reservations:AllReservation[]=[]
   loading:boolean=false
   transformedReservations: TransformedReservation[] = [];
@@ -32,7 +34,7 @@ export class BookingComponent implements OnInit {
 
   getAllReservation(status: string ) {
     this.activeStatus = status;
-      this._ReservationService.AllReservation().subscribe({
+     const sub= this._ReservationService.AllReservation().subscribe({
 
       next:(data) =>{
         const today = new Date();
@@ -55,7 +57,7 @@ export class BookingComponent implements OnInit {
         this.loading=false
       }
     })
-    
+    this.subscription.push(sub);
     
   }
 
@@ -96,7 +98,7 @@ export class BookingComponent implements OnInit {
   if (value === 'Edit') {
     return; 
   }
-  this._ReservationService.EditReservation(value,id).subscribe({
+  const sub=this._ReservationService.EditReservation(value,id).subscribe({
     next:(res)=>{
       console.log(`result${res.message}`);
       this.getAllReservation(value)
@@ -106,7 +108,11 @@ export class BookingComponent implements OnInit {
       
     }
   })
-
+  this.subscription.push(sub);
   }
+  ngOnDestroy(): void {
+  this.subscription.forEach(sub => sub.unsubscribe());
+  this.subscription=[]
+}
 }
 

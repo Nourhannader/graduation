@@ -1,9 +1,10 @@
 import { EditPostComponent } from './../edit-post/edit-post.component';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Owner } from '../../interfaces/owner';
 import { AuthService } from '../../Services/auth.service';
 import { Comm, CommunityService } from '../../Services/community.service';
+import { Subscription } from 'rxjs';
 ;
 
 @Component({
@@ -12,7 +13,8 @@ import { Comm, CommunityService } from '../../Services/community.service';
   templateUrl: './owner-info.component.html',
   styleUrl: './owner-info.component.scss'
 })
-export class OwnerInfoComponent implements OnInit {
+export class OwnerInfoComponent implements OnInit ,OnDestroy{
+  private subscriptions: Subscription[] = [];
   user:Owner={
     firstName: '',
     lastName: '',
@@ -26,6 +28,9 @@ export class OwnerInfoComponent implements OnInit {
   EditNameForm!: FormGroup; 
   newName!:Comm
   openToEdit:boolean=false
+  showPopup:boolean = false;
+  selectedFile: File | null = null;
+  previewUrl: string | ArrayBuffer | null = null;
 
   
   _communityService=inject(CommunityService)
@@ -38,7 +43,7 @@ export class OwnerInfoComponent implements OnInit {
   }
 
   GetUserdata() {
-    this._authService.GetUserInfo().subscribe({
+   const sub= this._authService.GetUserInfo().subscribe({
       next: (response) => {
         this.user = response;
         console.log('User data fetched successfully:', response);
@@ -48,13 +53,14 @@ export class OwnerInfoComponent implements OnInit {
         console.error('Error fetching user data:', error);
       }       
   })
+    this.subscriptions.push(sub);
 
 }
 
 
 getCommunityName()
 {
-  this._communityService.GetCommunityName().subscribe({
+ const sub=  this._communityService.GetCommunityName().subscribe({
           next: res => {
             this.currentName=res.name
             
@@ -63,7 +69,7 @@ getCommunityName()
             console.error(err);
           }
         });
-  
+  this.subscriptions.push(sub);
 }
 
 openToEditComm():void
@@ -83,7 +89,7 @@ UpdateName()
 if(this.EditNameForm.valid)
 {
         this.newName=this.EditNameForm.value
-        this._communityService.updateCommunity(this.newName).subscribe({
+      const sub= this._communityService.updateCommunity(this.newName).subscribe({
         next: res => {
           this.openToEdit=false
           this.getCommunityName()
@@ -92,9 +98,46 @@ if(this.EditNameForm.valid)
           console.error(err);
         }
       });
+      this.subscriptions.push(sub);
     } else {
       this.EditNameForm.markAllAsTouched();
     }
 }
 
+onImageSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+
+    // Preview
+    if (this.selectedFile) {
+      const reader = new FileReader();
+      reader.onload = () => this.previewUrl = reader.result;
+      reader.readAsDataURL(this.selectedFile);
+    }
+  }
+  uploadImage() {
+    if (!this.selectedFile) return;
+
+    const formData = new FormData();
+    formData.append('Image', this.selectedFile);
+
+   const sub= this._authService.EditUserImage(formData).subscribe({
+      next: (res) => {
+        this.user.image = res.data! ; 
+        localStorage.setItem('image',res.data!)
+        this.closePopup();
+      },
+      error: err => console.error(err)
+    });
+    this.subscriptions.push(sub);
+  }
+
+  closePopup() {
+    this.showPopup = false;
+    this.selectedFile = null;
+    this.previewUrl = null;
+  }
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 }

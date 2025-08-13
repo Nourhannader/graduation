@@ -1,9 +1,10 @@
-import { Component, Output, EventEmitter, AfterViewInit, ChangeDetectorRef, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, AfterViewInit, ChangeDetectorRef, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Post, PostService } from '../../Services/post.service';
 import Modal from 'bootstrap/js/dist/modal';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 // import { Modal } from 'bootstrap';
 
 
@@ -16,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 
-export class AddPostComponent implements OnInit  {
+export class AddPostComponent implements OnInit ,OnDestroy  {
 
   @ViewChild('createPostModal',{static:false}) createPostModal!: ElementRef;
 
@@ -30,7 +31,7 @@ export class AddPostComponent implements OnInit  {
   selectedImageUrl: string | null = null;
   userName:string=''
   image:string=''
-
+  private subscriptions:Subscription[]= [];
   constructor(private postService: PostService , private cd:ChangeDetectorRef,private toastr:ToastrService) {}
 
   ngOnInit(): void {
@@ -66,7 +67,7 @@ export class AddPostComponent implements OnInit  {
       formData.append('image', this.selectedFile);
     }
 
-    this.postService.createPost(formData).subscribe({
+    const sub=this.postService.createPost(formData).subscribe({
       next: (newPost) => {
         this.postAdded.emit(newPost.postId);
         this.resetForm();
@@ -85,6 +86,7 @@ export class AddPostComponent implements OnInit  {
         },500);
       }
     });
+    this.subscriptions.push(sub);
   }
 
   resetForm() {
@@ -113,4 +115,10 @@ closeModal() {
   onImageError(event: any) {
     event.target.style.display = 'none';
   }
+
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
 }
+}
+

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NotificationService } from '../Services/notification.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-notification-dropdown',
@@ -10,7 +11,8 @@ import { NotificationService } from '../Services/notification.service';
   templateUrl: './notification-dropdown.component.html',
   styleUrls: ['./notification-dropdown.component.css']
 })
-export class NotificationDropdownComponent implements OnInit{
+export class NotificationDropdownComponent implements OnInit,OnDestroy{
+  private subscriptions: Subscription[] = [];
   showNotifications = false;
   unreadCount = 0;
   notifications: any[] = [];
@@ -18,10 +20,11 @@ export class NotificationDropdownComponent implements OnInit{
   constructor(private notificationService: NotificationService) {}
 
   ngOnInit(): void {
-  this.notificationService.unreadCount$.subscribe(count => {
+  const sub=this.notificationService.unreadCount$.subscribe(count => {
     this.unreadCount = count;
   });
   this.loadNotifications();
+  this.subscriptions.push(sub);
 }
 
   toggleNotifications(): void {
@@ -32,7 +35,7 @@ export class NotificationDropdownComponent implements OnInit{
   }
 
   loadNotifications(): void {
-    this.notificationService.getNotifications().subscribe({
+  const sub=  this.notificationService.getNotifications().subscribe({
       next: (data) => {
         console.log(data)
         this.notifications = data.slice(0, 3); 
@@ -40,10 +43,11 @@ export class NotificationDropdownComponent implements OnInit{
         this.notificationService.setUnreadCount(this.unreadCount);
       }
     });
+    this.subscriptions.push(sub);
   }
 
   markAsRead(id: number): void {
-    this.notificationService.markAsRead(id).subscribe({
+   const sub= this.notificationService.markAsRead(id).subscribe({
       next: (res) => {
         console.log(res)
         const notification = this.notifications.find(n => n.id === id);
@@ -56,6 +60,7 @@ export class NotificationDropdownComponent implements OnInit{
         console.error('Error marking notification as read:', err);
       }
     });
+    this.subscriptions.push(sub);
 
   }
 
@@ -63,4 +68,9 @@ export class NotificationDropdownComponent implements OnInit{
   {
     this.showNotifications=false
   }
+
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+}
 }

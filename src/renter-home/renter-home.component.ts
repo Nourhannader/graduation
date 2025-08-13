@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../Services/auth.service';
 import { ReviewService } from '../Services/review.service';
@@ -6,6 +6,7 @@ import { GetStartedService, RenterSSN } from '../Services/get-started.service';
 import { Renter } from '../interfaces/renter';
 import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -14,8 +15,8 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './renter-home.component.html',
   styleUrl: './renter-home.component.css'
 })
-export class RenterHomeComponent implements OnInit {
-
+export class RenterHomeComponent implements OnInit ,OnDestroy {
+  private subscriptions: Subscription[] = [];
   _authService = inject(AuthService);
   _reviewService = inject(ReviewService); 
   _getStartedService = inject(GetStartedService); 
@@ -27,6 +28,9 @@ export class RenterHomeComponent implements OnInit {
   SSN:RenterSSN = { SSN: '' };
   stars: number[] = [1, 2, 3, 4, 5];
   selectedRating: number = 0;
+  showPopup:boolean = false;
+  selectedFile: File | null = null;
+  previewUrl: string | ArrayBuffer | null = null;
 
 
   GetStartedForm: FormGroup = new FormGroup({
@@ -46,7 +50,7 @@ export class RenterHomeComponent implements OnInit {
   }
 
   GetUserdata() {
-    this._authService.GetUserInfo().subscribe({
+   const sub= this._authService.GetUserInfo().subscribe({
       next: (response) => {
         this.renter = response;
         if(this.renter.communityId==null)
@@ -60,7 +64,8 @@ export class RenterHomeComponent implements OnInit {
         // console.error('Error fetching user data:', error);
       }       
   })
-
+  this.subscriptions.push(sub);
+  
 }
 
 
@@ -76,7 +81,7 @@ submitReview() {
     formData.append('content', this.AddReviewForm.get('content')?.value);
     formData.append('rate', this.AddReviewForm.get('rate')?.value);
 
-    this._reviewService.addReview(formData).subscribe({
+   const sub= this._reviewService.addReview(formData).subscribe({
       next: (response) => {
         // console.log('Review added successfully:', response);
         this.AddReviewForm.reset();
@@ -89,6 +94,7 @@ submitReview() {
         this.toastr.error("Failed to add your review.")
       }
     });
+    this.subscriptions.push(sub);
   }
 }
 
@@ -121,7 +127,7 @@ submitGetStarted() {
     
     this.SSN.SSN = this.GetStartedForm.get('SSN')?.value; 
     // console.log(this.SSN);
-    this._getStartedService.GetStarted(formData).subscribe({
+   const sub= this._getStartedService.GetStarted(formData).subscribe({
       next: (response) => {
         // console.log('Get started data submitted successfully:', response);
         this.GetStartedForm.reset();
@@ -134,6 +140,7 @@ submitGetStarted() {
         this.toastr.error("Failed to submit your ID")
       }
     });
+    this.subscriptions.push(sub);
   }
 
 }
@@ -143,6 +150,41 @@ setRating(rating: number) {
   this.selectedRating = rating;
   this.AddReviewForm.get('rate')?.setValue(rating);
 }
+onImageSelected(event: any) {
+    this.selectedFile = event.target.files[0];
 
+    // Preview
+    if (this.selectedFile) {
+      const reader = new FileReader();
+      reader.onload = () => this.previewUrl = reader.result;
+      reader.readAsDataURL(this.selectedFile);
+    }
+  }
+  uploadImage() {
+    if (!this.selectedFile) return;
 
+    const formData = new FormData();
+    formData.append('Image', this.selectedFile);
+
+   const sub= this._authService.EditUserImage(formData).subscribe({
+      next: (res) => {
+        this.renter.image = res.data! ; 
+        localStorage.setItem('image',res.data!)
+        this.closePopup();
+      },
+      error: err => console.error(err)
+    });
+    this.subscriptions.push(sub);
+  }
+
+  closePopup() {
+    this.showPopup = false;
+    this.selectedFile = null;
+    this.previewUrl = null;
+  }
+
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 }

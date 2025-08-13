@@ -1,9 +1,10 @@
 
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ReviewService } from '../../Services/review.service';
 import { Review } from '../../interfaces/review';
 import { RatingstarComponent } from '../ratingstar/ratingstar.component';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 
 
@@ -14,7 +15,8 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './review.component.html',
   styleUrl: './review.component.scss'
 })
-export class ReviewComponent implements OnInit {
+export class ReviewComponent implements OnInit ,OnDestroy{
+    private subscriptions: Subscription[] = [];
    reviews:Review[]=[];
    review!:Review
    userName: string | null | undefined;
@@ -38,7 +40,7 @@ export class ReviewComponent implements OnInit {
 
 
   getAllReview(){
-    this._ReviewService.getAllReviews().subscribe({
+   const sub= this._ReviewService.getAllReviews().subscribe({
       next:(data) => {
         this.reviews=data
         this.review=this.reviews[this.currentSlideIndex]
@@ -48,6 +50,7 @@ export class ReviewComponent implements OnInit {
         this.loading=false
       }
     })
+    this.subscriptions.push(sub);
   
   }
   
@@ -83,7 +86,7 @@ export class ReviewComponent implements OnInit {
   }
 
   delete(id:number){
-      this._ReviewService.delete(id).subscribe({
+    const sub=  this._ReviewService.delete(id).subscribe({
         next:(res)=>{
           setTimeout(() => {
           this.toastr.success(`${res.message}`);
@@ -94,6 +97,11 @@ export class ReviewComponent implements OnInit {
         }, 500);
         }
       })
+    this.subscriptions.push(sub);
   }
 
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 }

@@ -1,8 +1,9 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RentService } from '../Services/rent.service';
 import { Rent } from '../interfaces/Rent';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-unpaid-rents',
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
   templateUrl: './unpaid-rents.component.html',
   styleUrls: ['./unpaid-rents.component.css']
 })
-export class UnpaidRentsComponent implements OnInit {
+export class UnpaidRentsComponent implements OnInit ,OnDestroy {
+  private subscriptions:Subscription[]=[]
 
   _router = inject(Router);
   unpaidRents: Rent[] = [];
@@ -53,7 +55,7 @@ this.getUnPaid();
 
 getUnPaid()
 {
-  this.rentService.getUnpaidRents().subscribe({
+  const sub =this.rentService.getUnpaidRents().subscribe({
     next: (data) => {
       this.unpaidRents = data;
       console.log('Fetched unpaid rents:', data);
@@ -62,6 +64,11 @@ getUnPaid()
       console.error('Error fetching unpaid rents:', error);
     }
   });
+  this.subscriptions.push(sub);
 }
 
+ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 }

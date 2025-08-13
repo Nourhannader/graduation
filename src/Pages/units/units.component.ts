@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { UnitComponent } from '../unit/unit.component';
 import { Unit } from '../../interfaces/unit';
 import { UnitsService } from '../../Services/units.service';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 
 
@@ -13,8 +14,8 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './units.component.html',
   styleUrl: './units.component.scss'
 })
-export class UnitsComponent implements OnInit {
-
+export class UnitsComponent implements OnInit ,OnDestroy{
+  private subscriptions: Subscription[] = [];
   units:Unit[]=[]
   searchTerm: string = '';
   showFilters: boolean = false;
@@ -66,7 +67,7 @@ export class UnitsComponent implements OnInit {
     if(this.filterAll === 'all') {
       this.getAll();
     }else{
-       this._unitsService.filterUnits(this.selectedStatus, this.selectedType).subscribe({
+      const sub= this._unitsService.filterUnits(this.selectedStatus, this.selectedType).subscribe({
       next: (data) => {
         this.units = data;
         console.log('Filtered units:', this.units);
@@ -75,6 +76,7 @@ export class UnitsComponent implements OnInit {
         console.error('Error filtering units:', err);
       }
     });
+    this.subscriptions.push(sub);
     }
   this.showFilters = false;
     
@@ -82,7 +84,7 @@ export class UnitsComponent implements OnInit {
 
 
   getAll(){
-    this._unitsService.getAllUnit().subscribe({
+   const sub= this._unitsService.getAllUnit().subscribe({
       next:(data)=>{
         this.units=data;
         console.log(this.units);
@@ -92,6 +94,7 @@ export class UnitsComponent implements OnInit {
         this.loading=false
       }
     });
+    this.subscriptions.push(sub);
   }
 
   searchUnits(){
@@ -100,7 +103,7 @@ export class UnitsComponent implements OnInit {
       return;
     }
 
-    this._unitsService.searchUnits(this.searchTerm).subscribe({
+   const sub= this._unitsService.searchUnits(this.searchTerm).subscribe({
       next: (data) => {
         this.units = data;
         console.log('Search results:', this.units);
@@ -109,6 +112,7 @@ export class UnitsComponent implements OnInit {
         console.error('Error searching units:', err);
       }
     });
+    this.subscriptions.push(sub);
   }
 
   updateSearch(event: Event) {
@@ -119,7 +123,7 @@ export class UnitsComponent implements OnInit {
   
   DeleteUnit(id: number) {
     console.log('Delete unit with ID:', id);
-    this._unitsService.deleteUnit(id).subscribe({
+   const sub= this._unitsService.deleteUnit(id).subscribe({
       next: (res) => {
         setTimeout(() => {
           this.toastr.success('unit deleted successfully');
@@ -132,6 +136,12 @@ export class UnitsComponent implements OnInit {
         }, 1000);
       }
     });
+    this.subscriptions.push(sub);
   }
+
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 
 }

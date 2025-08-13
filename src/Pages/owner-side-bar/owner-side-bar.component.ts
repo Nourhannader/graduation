@@ -1,7 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-owner-side-bar',
@@ -9,9 +10,9 @@ import { AuthService } from '../../Services/auth.service';
   templateUrl: './owner-side-bar.component.html',
   styleUrl: './owner-side-bar.component.css'
 })
-export class OwnerSideBarComponent implements OnInit{
+export class OwnerSideBarComponent implements OnInit,OnDestroy{
 
-
+   private subscriptions: Subscription[] = [];
   firstName:string=''
   lastName:string=''
   email:string=''
@@ -24,7 +25,7 @@ export class OwnerSideBarComponent implements OnInit{
   }
 
   GetUserdata() {
-    this._authService.GetUserInfo().subscribe({
+   const sub= this._authService.GetUserInfo().subscribe({
       next: (response) => {
         this.firstName=response.firstName
         this.lastName=response.lastName
@@ -36,6 +37,10 @@ export class OwnerSideBarComponent implements OnInit{
         console.error('Error fetching user data:', error);
       }
   })
-
+    this.subscriptions.push(sub);
 }
+ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 }

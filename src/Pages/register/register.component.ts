@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { AuthService } from '../../Services/auth.service';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy{
+  private subscriptions: Subscription[] = [];
   registerForm!: FormGroup
   apiError:string=''
   showConfirmPassword: boolean = false;
@@ -143,7 +145,7 @@ export class RegisterComponent {
       this.loading=true
      })
     
-      this._AuthService.register(formData).subscribe({
+     const sub= this._AuthService.register(formData).subscribe({
         next:(res)=>{
           console.log(res);
           this.registrationSuccess=!this.registrationSuccess;
@@ -157,7 +159,7 @@ export class RegisterComponent {
 
         }
       })
-      
+      this.subscriptions.push(sub);
    }else{
     this.registerForm.markAllAsTouched();
    }
@@ -166,5 +168,8 @@ export class RegisterComponent {
  Login(){
   this._router.navigate(['/login'])
  }
-
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 }

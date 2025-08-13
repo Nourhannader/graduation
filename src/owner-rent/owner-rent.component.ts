@@ -1,8 +1,9 @@
 
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { RentService } from '../Services/rent-owner.service';
 import { ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-owner-rent',
@@ -11,7 +12,8 @@ import { CommonModule } from '@angular/common';
     imports: [CommonModule, ReactiveFormsModule],
 
 })
-export class OwnerRentComponent implements OnInit {
+export class OwnerRentComponent implements OnInit,OnDestroy {
+  private subscriptions:Subscription[]=[];
   rentForm!: FormGroup;
   rents: any[] = [];
   filteredRents: any[] = [];
@@ -34,7 +36,7 @@ export class OwnerRentComponent implements OnInit {
   }
 
   fetchRents(month: number, year: number) {
-    this.rentService.getMonthRents(month, year).subscribe({
+   const sub= this.rentService.getMonthRents(month, year).subscribe({
       next: (data) => {
         console.log('Fetched rents:', data);
         this.rents = data;
@@ -45,6 +47,7 @@ export class OwnerRentComponent implements OnInit {
         console.error('Error fetching rents:', error);
       }
     }); 
+    this.subscriptions.push(sub);
   }
 
   applyFilter() {
@@ -60,6 +63,10 @@ export class OwnerRentComponent implements OnInit {
     const { month, year } = this.rentForm.value;
     this.fetchRents(month, year);
   }
-
+ 
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+}
 
 }

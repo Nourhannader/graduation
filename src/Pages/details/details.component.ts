@@ -1,7 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UnitsService } from '../../Services/units.service';
 import { Unit } from '../../interfaces/unit';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { Unit } from '../../interfaces/unit';
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
-export class DetailsComponent implements OnInit{
+export class DetailsComponent implements OnInit , OnDestroy{
+  private subscriptions: Subscription[] = [];
   unitId:number |null = null;
   unit: Unit | undefined;
 
@@ -24,7 +26,7 @@ export class DetailsComponent implements OnInit{
 
   ngOnInit(): void {
     this.unitId=Number(this._ActivatedRoute.snapshot.paramMap.get('id'));
-    this._UnitsService.getUnitById(this.unitId).subscribe({
+    const sub =this._UnitsService.getUnitById(this.unitId).subscribe({
       next:(data)=>{
         this.unit=data;
         console.log(this.unit);
@@ -44,7 +46,7 @@ export class DetailsComponent implements OnInit{
       }
     })
     
-
+    this.subscriptions.push(sub);
   }
 
   nextImage() {
@@ -63,4 +65,8 @@ export class DetailsComponent implements OnInit{
     this._router.navigate([`/ownerHome/editUnit/${this.unitId}`])
   }
 
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 }

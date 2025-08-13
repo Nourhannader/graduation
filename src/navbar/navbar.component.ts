@@ -1,16 +1,17 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router'
 import { AuthService } from '../Services/auth.service';
 import { CommonModule } from '@angular/common';
 import { NotificationDropdownComponent } from '../notification/notification-dropdown.component';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-navbar',
   imports: [RouterLink, RouterOutlet, CommonModule, NotificationDropdownComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit {
-
+export class NavbarComponent implements OnInit , OnDestroy {
+private subcriptions: Subscription[] = [];
 isLoggedIn:boolean=false
 isShow:boolean=false
 role!:string
@@ -23,12 +24,13 @@ _router=inject(Router)
 
 constructor(){
 
-  this._authService.userData.subscribe({
+ const sub= this._authService.userData.subscribe({
     next:(res)=>{
       this.isLoggedIn =res ? true : false;
       console.log(res)
     }
   })
+  this.subcriptions.push(sub);
 }
 
 ngOnInit():void{
@@ -61,5 +63,9 @@ ShowDrop(){
 closeMenue()
 {
   this.isShow=false
+}
+ngOnDestroy(): void {
+  this.subcriptions.forEach(sub => sub.unsubscribe());
+  this.subcriptions=[]
 }
 }

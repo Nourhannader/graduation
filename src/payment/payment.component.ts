@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, inject } from '@angular/core';
+import { Component, OnInit, Input, inject, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentService } from '../Services/payment.service';
 import { FormsModule } from '@angular/forms';
 import e from 'express';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-payment',
@@ -11,7 +12,8 @@ import e from 'express';
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css']
 })
-export class PaymentComponent implements OnInit {
+export class PaymentComponent implements OnInit ,OnDestroy {
+  private subscriptions: Subscription[] = [];
   rentId: number | null = null;
   fullName = '';
   cardNumber = '';
@@ -48,7 +50,7 @@ export class PaymentComponent implements OnInit {
     }
 
       else{
-        this._PaymentService.pay(this.rentId).subscribe({
+       const sub= this._PaymentService.pay(this.rentId).subscribe({
           next: (response) => {
             console.log('Payment successful:', response);
             alert("Payment successful");
@@ -58,9 +60,14 @@ export class PaymentComponent implements OnInit {
             alert("Payment failed");
           }
         });
+      this.subscriptions.push(sub);
     }
 
   }
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 }
 
 //////////////////////////////////////////stripe///////////////////////////////////////////

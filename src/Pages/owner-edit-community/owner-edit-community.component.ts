@@ -1,8 +1,9 @@
 import { Router } from '@angular/router';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Comm, CommunityService } from '../../Services/community.service';
 import { Community } from '../../interfaces/community';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-owner-edit-community',
@@ -11,7 +12,8 @@ import { Community } from '../../interfaces/community';
   styleUrl: './owner-edit-community.component.css'
 })
 
-export class OwnerEditCommunityComponent {
+export class OwnerEditCommunityComponent implements OnDestroy {
+  private subscriptions: Subscription[] = [];
   currentName!:string
   EditNameForm!: FormGroup; 
   newName!:Comm
@@ -19,7 +21,7 @@ export class OwnerEditCommunityComponent {
   _router=inject(Router)
 
   ngOnInit(): void {
-    this._communityService.GetCommunityName().subscribe({
+   const sub= this._communityService.GetCommunityName().subscribe({
         next: res => {
           this.currentName=res.name
           
@@ -27,11 +29,8 @@ export class OwnerEditCommunityComponent {
         error: err => {
           console.error(err);
         }
-
-
-        
       });
-
+        this.subscriptions.push(sub);
         this.EditNameForm = new FormGroup({
         Name: new FormControl(this.currentName, Validators.required),
         
@@ -46,7 +45,7 @@ UpdateName(){
         //console.log(this.EditNameForm.value)
         this.newName=this.EditNameForm.value
         //console.log(this.newName)
-        this._communityService.updateCommunity(this.newName).subscribe({
+       const sub= this._communityService.updateCommunity(this.newName).subscribe({
         next: res => {
           // console.log(res)
           this._router.navigate(['/ownerHome/units'])
@@ -56,12 +55,16 @@ UpdateName(){
           console.error(err);
         }
       });
+      this.subscriptions.push(sub);
     } else {
       this.EditNameForm.markAllAsTouched();
     }
 }
 
-
+ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 
 
 }

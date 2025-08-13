@@ -1,9 +1,10 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { UserLogin } from '../../interfaces/user-login';
 import { Owner } from '../../interfaces/owner';
+import { Subscription } from 'rxjs';
 
 
 
@@ -13,7 +14,8 @@ import { Owner } from '../../interfaces/owner';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
+  private subscriptions: Subscription[] = [];
   loginForm!: FormGroup
   apiError:string=''
   showPassword:boolean=false;
@@ -41,7 +43,7 @@ export class LoginComponent {
    this.showPassword=!this.showPassword;
   }
  ForgotPassword(){
-
+   this._router.navigate(['/request-password']);
  }
  async Login(){
    
@@ -60,7 +62,7 @@ export class LoginComponent {
     }
     this.loading=true
     await this.delay(1000);
-    this._AuthService.Login(uerLogin).subscribe({
+   const sub= this._AuthService.Login(uerLogin).subscribe({
       next:async (response)=>{
         console.log(response);
           localStorage.setItem('role',response.role)
@@ -81,6 +83,7 @@ export class LoginComponent {
         this.loading=false
       }
     })
+    this.subscriptions.push(sub);
    }else{
     this.loginForm.markAllAsTouched();
    }
@@ -92,5 +95,9 @@ export class LoginComponent {
 
  Register(){
   this._router.navigate(['/register']);
+ }
+ ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
  }
 }

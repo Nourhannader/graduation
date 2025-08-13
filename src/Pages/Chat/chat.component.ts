@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from '../../Services/chat.service';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -11,10 +12,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent{
+export class ChatComponent implements OnDestroy{
     ask:boolean=false
     _chatService=inject(ChatService);              
-
+     private subscription:Subscription[]=[];
 
     // /////////////////
 
@@ -36,7 +37,7 @@ export class ChatComponent{
     this.chatForm.reset();
 
     // Simulate API response
-    this._chatService.getAnswer(userText).subscribe({
+   const sub= this._chatService.getAnswer(userText).subscribe({
       next: (response) => {
 
         this.messages.push({ sender: 'bot', text: response.answer });
@@ -49,6 +50,7 @@ export class ChatComponent{
             this.messages.push({ sender: 'bot', text: 'Sorry, I could not process your request.' });
             }
     });
+    this.subscription.push(sub);
   }
 
    openChat(): void {
@@ -64,5 +66,10 @@ export class ChatComponent{
   this.ask = false;
   this.messages = []; 
   console.log("Chat closed");
+}
+
+ngOnDestroy(): void {
+  this.subscription.forEach(sub => sub.unsubscribe());
+  this.subscription=[]
 }
 }

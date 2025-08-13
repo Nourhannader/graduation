@@ -1,11 +1,12 @@
 import { AdsVsReservations, Profit, ProfitCommunity } from './../../Services/admin.service';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ChartConfiguration, ChartData, ChartOptions } from 'chart.js';
 import { NgChartsModule } from 'ng2-charts';
 import { ChartType, ChartTypeRegistry } from 'chart.js';
 import { ExecException } from 'child_process';
 import { AdminService, numbers } from '../../Services/admin.service';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 type NumbersKey = keyof numbers;
 
@@ -15,7 +16,8 @@ type NumbersKey = keyof numbers;
   templateUrl: './dashboard-home.component.html',
   styleUrl: './dashboard-home.component.scss'
 })
-export class DashboardHomeComponent implements OnInit {
+export class DashboardHomeComponent implements OnInit,OnDestroy {
+  private subscriptions: Subscription[] = [];
   loading:boolean=false
   generalNumbers!:numbers;
   adsReservation:AdsVsReservations[]=[]
@@ -70,7 +72,7 @@ cards: { label: string; key: NumbersKey; icon: string,color:string,colorIcon:str
   }
 
   getAllNumbers(){
-    this._AdminService.getNumbers().subscribe({
+   const sub= this._AdminService.getNumbers().subscribe({
       next:(res)=>{
         this.generalNumbers=res
         this.doughnutChartData = {
@@ -102,6 +104,7 @@ cards: { label: string; key: NumbersKey; icon: string,color:string,colorIcon:str
         
       }
     })
+    this.subscriptions.push(sub);
   }
 
   //users
@@ -121,7 +124,7 @@ public chartOptions: ChartConfiguration<'doughnut'>['options'] = {
 };
 //ads vs Reservation
 getAdsReservation(){
-   this._AdminService.getadsVsReservayion().subscribe({
+  const sub= this._AdminService.getadsVsReservayion().subscribe({
     next:(res) => {
       this.adsReservation=res
       console.log(this.adsReservation);
@@ -134,6 +137,7 @@ getAdsReservation(){
       
     }
    })
+  this.subscriptions.push(sub);
 }
 
 public barChartOptions: ChartConfiguration<'bar'>['options'] = {
@@ -153,7 +157,7 @@ public barChartType: 'bar' = 'bar';
 
 //profit
 getProfit(){
-  this._AdminService.getProfitPermonth().subscribe({
+ const sub= this._AdminService.getProfitPermonth().subscribe({
     next:(data) => {
       this.profitData=data
       this.lineChartData.labels = this.profitData.map(p => p.month);
@@ -197,7 +201,7 @@ public lineChartData: ChartConfiguration<'line'>['data'] = {
 
   //profitpercommunity
   getProfitCommunity(){
-    this._AdminService.getProfitCommunity().subscribe({
+   const sub= this._AdminService.getProfitCommunity().subscribe({
       next:(res) => {
         this.profitPerCommunity=res
         // this.pieChartData.labels = ['Green Valley', 'Palm Hills', 'Madinaty'];
@@ -220,6 +224,7 @@ public lineChartData: ChartConfiguration<'line'>['data'] = {
         
       }
     })
+    this.subscriptions.push(sub);
   }
   public pieChartType: 'pie' = 'pie';
   public pieChartOptions: ChartConfiguration<'pie'>['options'] = {
@@ -238,5 +243,8 @@ public lineChartData: ChartConfiguration<'line'>['data'] = {
     }
   }
 };
-
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+}
 }

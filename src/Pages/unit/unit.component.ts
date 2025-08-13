@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { Unit } from '../../interfaces/unit';
 import { UnitsService } from '../../Services/units.service';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-unit',
@@ -16,6 +17,7 @@ export class UnitComponent implements OnInit,OnDestroy {
   @Input() item!: Unit;
 
   @Output() delete = new EventEmitter<number>();
+  private subscriptions: Subscription[] = [];
   currentImage: string = '';
   private imageIndex = 0;
   private imageInterval: any;
@@ -64,6 +66,8 @@ export class UnitComponent implements OnInit,OnDestroy {
       clearInterval(this.imageInterval);
     }
      this.observer?.disconnect();
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions = [];
   }
 
   onEdit(){
@@ -94,7 +98,7 @@ export class UnitComponent implements OnInit,OnDestroy {
   onAddAds(){
     const unit=this.item
 
-    this._AdvertisementService.AddAds(unit.id).subscribe({
+  const sub=  this._AdvertisementService.AddAds(unit.id).subscribe({
       next:(res) =>{
         
         setTimeout(() => {
@@ -106,6 +110,8 @@ export class UnitComponent implements OnInit,OnDestroy {
         }, 1000);
       }
     })
+  this.subscriptions.push(sub);
   }
+  
 
 }

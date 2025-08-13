@@ -1,9 +1,10 @@
 import { JsonPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UnitsService } from '../../Services/units.service';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-owner-add-unit',
@@ -11,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './owner-add-unit.component.html',
   styleUrl: './owner-add-unit.component.css'
 })
-export class OwnerAddUnitComponent {
+export class OwnerAddUnitComponent implements OnDestroy {
+  private subscriptions: Subscription[] = [];
     constructor(private toastr: ToastrService){}
     _unitsService=inject(UnitsService)
 
@@ -97,7 +99,7 @@ onFileSelected(event: any, imageKey: string) {
 
 
       console.log(formData)
-      this._unitsService.AddUnit(formData).subscribe({
+     const sub= this._unitsService.AddUnit(formData).subscribe({
         next:(res)=>{
           console.log(res);
           this.toastr.success("Your new unit has been added successfully")
@@ -110,12 +112,16 @@ onFileSelected(event: any, imageKey: string) {
           this.toastr.error("Can't add your unit")
         }
       })
+      this.subscriptions.push(sub);
     }
     else
     {
       this.AddUnitForm.markAllAsTouched()
     }
   }
-
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 
 }

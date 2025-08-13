@@ -36,6 +36,8 @@ export class AppComponent {
     return this.currentUrl.startsWith('/login') || 
     this.currentUrl.startsWith('/register') || 
     this.currentUrl.startsWith('/adminHome') ||
+    this.currentUrl.startsWith('/reset-password') ||
+    this.currentUrl.startsWith('/request-password') ||
     this.currentUrl.startsWith('/404') ;
   }
 }

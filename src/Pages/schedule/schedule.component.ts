@@ -1,6 +1,7 @@
-import { Component,  inject, OnInit } from '@angular/core';
+import { Component,  inject, OnDestroy, OnInit } from '@angular/core';
 import { AdsByOwner, AdvertisementService, Appointment, AppointmentByOwner } from '../../Services/advertisement.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-schedule',
@@ -8,7 +9,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.scss'
 })
-export class ScheduleComponent implements OnInit {
+export class ScheduleComponent implements OnInit ,OnDestroy {
+  private subscriptions: Subscription[] = [];
   selectedDate = new Date();
   showAdd:boolean=false
   form!:FormGroup
@@ -64,7 +66,7 @@ export class ScheduleComponent implements OnInit {
  }
  
  getAdsAvailable(){
-  this._AdvertisementService.getByOwner().subscribe({
+  const sub =this._AdvertisementService.getByOwner().subscribe({
     next:(data)=>{
       this.AdsAvailable=data
       console.log(this.AdsAvailable);
@@ -73,6 +75,7 @@ export class ScheduleComponent implements OnInit {
       
     }
   })
+  this.subscriptions.push(sub);
  }
  
 renderAppointments() {
@@ -142,7 +145,7 @@ renderAppointments() {
     }
     console.log(appointment);
     
-    this._AdvertisementService.AddAppointment(appointment).subscribe({
+   const sub= this._AdvertisementService.AddAppointment(appointment).subscribe({
       next:(res)=>{
         console.log(res.message);
         this.getAllAppointment();
@@ -151,6 +154,7 @@ renderAppointments() {
         
       }
     })
+    this.subscriptions.push(sub);
     this.close();
     
   }
@@ -158,7 +162,7 @@ renderAppointments() {
  }
  
  getAllAppointment(){
-  this._AdvertisementService.getAppointmentByOwner().subscribe({
+ const sub= this._AdvertisementService.getAppointmentByOwner().subscribe({
     next:(data)=>{
       this.AllAppointment=data
       console.log(this.AllAppointment);
@@ -169,10 +173,12 @@ renderAppointments() {
       
     }
   })
+  this.subscriptions.push(sub);
  }
 
+
  DeleteClick(id:number){
-   this._AdvertisementService.deleteAppointment(id).subscribe({
+  const sub= this._AdvertisementService.deleteAppointment(id).subscribe({
     next:(res)=>{
       console.log(res.message);
       this.getAllAppointment();
@@ -181,7 +187,7 @@ renderAppointments() {
       
     }
    })
-
+  this.subscriptions.push(sub);
  }
 
 convertToDate(fullDay: string, hour: string): Date {
@@ -223,6 +229,9 @@ formatToSqlDate(date: Date): string {
 
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.0000000`;
 }
-
+ ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 
 }

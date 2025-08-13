@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, output } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, output, OnDestroy } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { PostService, Post, Comment } from '../Services/post.service';
 import { EditPostComponent } from '../Pages/edit-post/edit-post.component';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-post',
@@ -14,13 +15,15 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent {
+export class PostComponent implements OnDestroy {
+
   @Input() post!: Post;
   @Output() toggleLiked = new EventEmitter<number>();
   @Output() postDeleted = new EventEmitter<string>();
   @Output() postUpdated = new EventEmitter<number>();
   @Output() fireUser=new EventEmitter<number>();
 
+  private subscriptions: Subscription[] = [];
   editing = false;
   showComments = false;
   isLiking = false;
@@ -51,7 +54,7 @@ export class PostComponent {
     if (!confirm('Are you sure you want to delete this post')) return;
 
     this.isDeleting = true;
-    this.postService.deletePost(this.post.postId).subscribe({
+    const sub =this.postService.deletePost(this.post.postId).subscribe({
       next: () => {
         this.postDeleted.emit(String(this.post.postId));
         this.fireUser.emit(this.post.postId);
@@ -68,12 +71,13 @@ export class PostComponent {
         },500)
       }
     });
+    this.subscriptions.push(sub);
   }
 
   toggleLike() {
     this.isLiking = true;
 
-    this.postService.reactToPost(Number(this.post.postId)).subscribe({
+    const sub =this.postService.reactToPost(Number(this.post.postId)).subscribe({
       next: (res) => {
         console.log(res.message);
         
@@ -87,6 +91,7 @@ export class PostComponent {
         console.error('Error toggling like', err);
       }
     });
+    this.subscriptions.push(sub);
   }
 
   toggleComments() {
@@ -94,7 +99,7 @@ export class PostComponent {
 
     if (this.showComments && this.comments.length === 0) {
       this.loadingComments = true;
-      this.postService.getComments(this.post.postId).subscribe({
+     const sub= this.postService.getComments(this.post.postId).subscribe({
         next: (comments) => {
           console.log('Comments loaded:', comments);
           this.comments = comments;
@@ -106,6 +111,7 @@ export class PostComponent {
           console.error('Error loading comments:', err);
         }
       });
+      this.subscriptions.push(sub);
     }
 
     // setTimeout(() => {
@@ -126,7 +132,7 @@ export class PostComponent {
       postId: this.post.postId
     };
 
-    this.postService.addComment(commentData).subscribe({
+   const sub= this.postService.addComment(commentData).subscribe({
       next: (newComment) => {
         this.getAllComments();
         this.post.commentCount++;
@@ -140,6 +146,7 @@ export class PostComponent {
         console.error('Error adding comment:', err);
       }
     });
+    this.subscriptions.push(sub);
   }
 
 
@@ -147,7 +154,7 @@ export class PostComponent {
 
   deleteComment(commentId: number, index: number) {
     
-    this.postService.deleteComment(commentId).subscribe({
+   const sub= this.postService.deleteComment(commentId).subscribe({
       next: () => {
         this.comments.splice(index, 1);
         this.post.commentCount--;
@@ -158,10 +165,11 @@ export class PostComponent {
         console.error('Error deleting comment:', err);
       }
     });
+    this.subscriptions.push(sub);
   }
 
   getAllComments(): void {
-    this.postService.getComments(this.post.postId).subscribe({
+    const sub=this.postService.getComments(this.post.postId).subscribe({
       next: (comments) => {
         this.comments = comments;
       },
@@ -170,6 +178,8 @@ export class PostComponent {
         console.error('Error loading comments:', err);
       }
   })
+    this.subscriptions.push(sub);
+  
 }
 
 
@@ -184,4 +194,8 @@ export class PostComponent {
       minute: '2-digit'
     });
   }
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 }

@@ -21,8 +21,6 @@
 
 .notification-icon:hover {
   transform: scale(1.05);
-  background:  #2a5a93;
-  color: white;
 }
 
 .notification-icon i {

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RentService } from '../Services/rent.service';
 import { Rent } from '../interfaces/Rent';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-renter-history',
@@ -10,7 +11,8 @@ import { Rent } from '../interfaces/Rent';
   templateUrl: './renter-history.component.html',
   styleUrls: ['./renter-history.component.css']
 })
-export class RenterHistoryComponent implements OnInit {
+export class RenterHistoryComponent implements OnInit ,OnDestroy{
+  private subscriptions:Subscription[]=[]
   historyRents: Rent[] = [];
 
   constructor(private rentService: RentService) {}
@@ -42,7 +44,7 @@ export class RenterHistoryComponent implements OnInit {
 
 
 getHistory(){
-  this.rentService.getHistoryRents().subscribe({
+ const sub=  this.rentService.getHistoryRents().subscribe({
     next: (data) => {
       this.historyRents = data;
       console.log('Fetched history rents:', data);       
@@ -51,5 +53,11 @@ getHistory(){
       console.error('Error fetching history rents:', error);
     }
   });
+  this.subscriptions.push(sub);
 }
+
+ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 }

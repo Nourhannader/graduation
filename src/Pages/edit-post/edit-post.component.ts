@@ -1,10 +1,11 @@
 
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Output, ViewChild, EventEmitter, inject, input, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Output, ViewChild, EventEmitter, inject, input, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PostService } from '../../Services/post.service';
 import Modal from 'bootstrap/js/dist/modal';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -13,8 +14,8 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './edit-post.component.html',
   styleUrl: './edit-post.component.scss'
 })
-export class EditPostComponent implements OnInit {
-
+export class EditPostComponent implements OnInit,OnDestroy {
+  private subscriptions: Subscription[] = [];
   description = '';
   isSubmitting = false;
   error: string | null = null;
@@ -66,7 +67,7 @@ export class EditPostComponent implements OnInit {
     else if (this.selectedFile) {
       formData.append('image', this.selectedFile);
     }
-    this._postService.updatePost(this.postId,formData).subscribe({
+   const sub= this._postService.updatePost(this.postId,formData).subscribe({
       next: (res) => {
         this.postedited.emit(res.postId);
         this.closeModal();
@@ -84,7 +85,7 @@ export class EditPostComponent implements OnInit {
         this.isSubmitting = false;
       }
     });
-     
+    this.subscriptions.push(sub); 
   }
 
   // openModal() {
@@ -104,7 +105,7 @@ export class EditPostComponent implements OnInit {
   }
 
   openModal(){
-    this._postService.getPostById(this.postId).subscribe({
+   const sub= this._postService.getPostById(this.postId).subscribe({
       next: (post) => {
         console.log(post)
         this.description = post.content;
@@ -119,6 +120,11 @@ export class EditPostComponent implements OnInit {
         console.error(err);
       }
     });
+    this.subscriptions.push(sub);
   }
-
+   
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 }

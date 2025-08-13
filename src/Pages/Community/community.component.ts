@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Advertisement } from '../../interfaces/advertisement';
 import { AdvertisementService } from '../../Services/advertisement.service';
 import { RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -22,6 +23,7 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./community.component.css'],
 })
 export class CommunityComponent implements OnInit , OnDestroy {
+  private subscriptions:Subscription[]=[]
   posts: Post[] = [];
   topUsers: TopUser[] = [];
   twoAds:Advertisement[]=[];
@@ -61,7 +63,7 @@ export class CommunityComponent implements OnInit , OnDestroy {
 
   loadPosts() {
     this.loading = true;
-    this.postService.getAllPosts().subscribe({
+   const sub= this.postService.getAllPosts().subscribe({
       next: (res: Post[]) => {
         this.posts = res;
         this.loading = false;
@@ -71,6 +73,7 @@ export class CommunityComponent implements OnInit , OnDestroy {
         this.loading = false;
       },
     });
+    this.subscriptions.push(sub);
   }
 
   onFireUser(postId:number){
@@ -93,7 +96,7 @@ export class CommunityComponent implements OnInit , OnDestroy {
   }
 
   GetUserCommunity() {
-    this._communityService.GetUserCommunity().subscribe({
+   const sub= this._communityService.GetUserCommunity().subscribe({
       next: (res) => {
         this.user = res;
 
@@ -105,10 +108,11 @@ export class CommunityComponent implements OnInit , OnDestroy {
         console.error('Error fetching user community:', err);
       }
     });
+    this.subscriptions.push(sub);
   }
 
   GetTopUsers() {
-    this._communityService.GetTopUsers().subscribe({
+   const sub= this._communityService.GetTopUsers().subscribe({
       next: (res) => {
         console.log('Top Users Response:', res);
         this.topUsers = res;
@@ -118,10 +122,11 @@ export class CommunityComponent implements OnInit , OnDestroy {
         console.error('Error fetching top users:', err);
       }
     });
+    this.subscriptions.push(sub);
   }
 
   getTwoAds(){
-    this._AdvertisementService.getTwoAds().subscribe({
+   const sub= this._AdvertisementService.getTwoAds().subscribe({
       next:(res) => {
         this.twoAds=res
         this.image1=this.twoAds[0].image1!
@@ -132,9 +137,12 @@ export class CommunityComponent implements OnInit , OnDestroy {
         
       }
     })
+    this.subscriptions.push(sub);
   }
  
   ngOnDestroy() {
     clearInterval(this.intervalId);
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions = [];
 }
 }

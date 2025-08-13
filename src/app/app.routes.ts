@@ -27,6 +27,8 @@ import { DashboardHomeComponent } from '../Pages/dashboard-home/dashboard-home.c
 import { AdminBookingComponent } from '../Pages/admin-booking/admin-booking.component';
 import { RentersComponent } from './renters/renters.component';
 import { OwnersComponent } from './owners/owners.component';
+import { ResetPasswordComponent } from '../Pages/reset-password/reset-password.component';
+import { RequestResetPasswordComponent } from '../Pages/request-reset-password/request-reset-password.component';
 
 
 
@@ -76,6 +78,8 @@ export const routes: Routes = [
         {path:'Owners',component:OwnersComponent},
         
     ]},
+    { path: 'reset-password', component: ResetPasswordComponent ,canActivate:[guardRedirectGuard]},
+    {path:'request-password',component:RequestResetPasswordComponent,canActivate:[guardRedirectGuard]},
     {path:'404',component:NotFoundComponent},
     {path:'**',redirectTo:'404'}
 

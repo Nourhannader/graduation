@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { AdsSingleComponent } from '../ads-single/ads-single.component';
 import { Advertisement } from '../../interfaces/advertisement';
 import { AdvertisementService } from '../../Services/advertisement.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AppointmentAv } from '../../interfaces/appointmentAv';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 
 
@@ -15,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './advertisements.component.html',
   styleUrl: './advertisements.component.scss'
 })
-export class AdvertisementsComponent implements OnInit {
+export class AdvertisementsComponent implements OnInit ,OnDestroy {
   showPrice = false;
   showBeds = false;
   showTypes = false;
@@ -35,7 +36,7 @@ export class AdvertisementsComponent implements OnInit {
   times:string[]=[];
   appointmentForm!:FormGroup
   _AdvertisementService=inject(AdvertisementService)
-
+ private subscription: Subscription[]=[];
    constructor(private fb: FormBuilder,private toastr:ToastrService) {}
   ngOnInit(): void {
     this.loading=true
@@ -59,7 +60,7 @@ export class AdvertisementsComponent implements OnInit {
   }
 
   getAllAdvertisements(){
-    this._AdvertisementService.getAllAds().subscribe({
+    const sub =this._AdvertisementService.getAllAds().subscribe({
       next:(data) =>{
         console.log(data);
         this.advertisements=data;
@@ -70,10 +71,11 @@ export class AdvertisementsComponent implements OnInit {
         this.loading=false
       }
     })
+    this.subscription.push(sub);
   }
    
   delete(id:number){
-    this._AdvertisementService.DeleteAds(id).subscribe({
+   const sub= this._AdvertisementService.DeleteAds(id).subscribe({
       next:(res) =>{
         setTimeout(() => {
           this.toastr.success(res.message);
@@ -84,6 +86,7 @@ export class AdvertisementsComponent implements OnInit {
         })
       }
     })
+    this.subscription.push(sub);
   }
 
   applyFilters() {
@@ -143,7 +146,7 @@ filterBeds(){
     this.ShowReservation=true
     this.loadingAppoint=true
     setTimeout(() => {
-      this._AdvertisementService.getAppointmentAvailble(id).subscribe({
+       const sub=this._AdvertisementService.getAppointmentAvailble(id).subscribe({
     next:(data)=>{
       this.appointment=data
       const grouped=this.groupAppointmentsByDay(this.appointment);
@@ -156,6 +159,7 @@ filterBeds(){
       this.loadingAppoint=false
     }
    })
+      this.subscription.push(sub);
   }, 1000);
      
  }
@@ -208,7 +212,7 @@ filterBeds(){
       email: temp.email,
       appointmentId: found.id
     }
-   this._AdvertisementService.AddReservarion(reservation1).subscribe({
+  const sub= this._AdvertisementService.AddReservarion(reservation1).subscribe({
     next:(res)=>{
      this.ShowReservation = false
       setTimeout(() => {
@@ -221,6 +225,7 @@ filterBeds(){
       }, 1000);
     }
    });
+    this.subscription.push(sub);
     
   }
   else{
@@ -228,4 +233,8 @@ filterBeds(){
     
   }
   }
+  ngOnDestroy(): void {
+  this.subscription.forEach(sub => sub.unsubscribe());
+  this.subscription=[]
+}
 }

@@ -39,10 +39,10 @@ body {
   text-decoration: none;
   padding: 10px 15px;
   transition: all 0.3s ease-in;
-  -webkit-transition: all 0.3s ease-in;
-  -moz-transition: all 0.3s ease-in;
-  -ms-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
+  -webkit-transition:;
+  -moz-transition:;
+  -ms-transition:;
+  -o-transition:;
 }
 
 a:hover {
@@ -153,6 +153,10 @@ a:hover {
 .content-image img:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(58, 116, 179, 0.3);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
 }
 
 .content-image ul {
@@ -209,8 +213,6 @@ a:hover {
 }
 .icon-admin div:hover{
   transform: scale(1.05);
-  background:  #2a5a93;
-  color: white;
   -webkit-transform: scale(1.05);
   -moz-transform: scale(1.05);
   -ms-transform: scale(1.05);

@@ -1,8 +1,9 @@
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { AdminService, Owners, Transfer } from '../../Services/admin.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-owners',
@@ -11,14 +12,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './owners.component.html',
   styleUrl: './owners.component.scss'
 })
-export class OwnersComponent implements OnInit{
+export class OwnersComponent implements OnInit ,OnDestroy{
 allOwners!:Owners[]
 transfer:boolean=false
 transferDTO:Transfer={
   oldOwnerId:'',
   newOwnerId:''
 }
-
+private subscriptions: Subscription[] = [];
   TransferForm: FormGroup = new FormGroup({
     newOwnerId: new FormControl(null, [Validators.required]),  
   });
@@ -31,14 +32,14 @@ ngOnInit(): void {
 }
 
 GetOwners():void{
-this._adminService.getAllOwners().subscribe({
+const sub=this._adminService.getAllOwners().subscribe({
  next:(data) => {
       this.allOwners=data
     },error:(err) =>{
       console.log(err);
     }
   })
-
+this.subscriptions.push(sub);
 
 }
 
@@ -67,8 +68,8 @@ confirmTransfer():void
   }
 
   else{
-  this._adminService.TransferTo(this.transferDTO).subscribe({
- next:(res) => {
+  const sub=this._adminService.TransferTo(this.transferDTO).subscribe({
+  next:(res) => {
       console.log(res)
       this.transfer=false
       this.toastr.success("Transfered Successfully.")
@@ -78,8 +79,13 @@ confirmTransfer():void
           this.toastr.error("Faild to Transfer.")
     }
   })
-
+  this.subscriptions.push(sub);
   }
+}
+
+ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
 }
 }
 

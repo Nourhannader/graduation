@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UnitsService } from '../../Services/units.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-owner-edit-unit',
@@ -10,7 +11,8 @@ import { UnitsService } from '../../Services/units.service';
   templateUrl: './owner-edit-unit.component.html',
   styleUrl: './owner-edit-unit.component.css'
 })
-export class OwnerEditUnitComponent implements OnInit {
+export class OwnerEditUnitComponent implements OnInit , OnDestroy {
+  private subscriptions: Subscription[] = [];
   EditUnitForm!: FormGroup; 
   selectedImages: { [key: string]: File } = {};
   existingImages = {
@@ -25,7 +27,7 @@ export class OwnerEditUnitComponent implements OnInit {
 
   ngOnInit(): void {
     this.unitId=Number(this._activatedRoute.snapshot.paramMap.get('id'));
-    this._unitService.getUnitById(this.unitId).subscribe(unit => {
+   const sub= this._unitService.getUnitById(this.unitId).subscribe(unit => {
       this.existingImages = {
         image1: `http://localhost:5267/Images/${unit.image1}`,
         image2: `http://localhost:5267/Images/${unit.image2}`,
@@ -44,6 +46,7 @@ export class OwnerEditUnitComponent implements OnInit {
 
       });
     });
+    this.subscriptions.push(sub);
   }
 
   onFileSelected(event: any, key: string) {
@@ -76,7 +79,7 @@ export class OwnerEditUnitComponent implements OnInit {
         formData.append('image3', this.selectedImages['image3']);
       }
 
-      this._unitService.EditUnit(this.unitId, formData).subscribe({
+    const sub=  this._unitService.EditUnit(this.unitId, formData).subscribe({
         next: res => {
           console.log(formData);
           console.log(res)
@@ -86,9 +89,14 @@ export class OwnerEditUnitComponent implements OnInit {
           console.error(err);
         }
       });
+      this.subscriptions.push(sub);
     } else {
       this.EditUnitForm.markAllAsTouched();
     }
   }
+  ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+ }
 }
 

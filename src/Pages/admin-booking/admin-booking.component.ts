@@ -1,7 +1,8 @@
 
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { AdminService} from '../../Services/admin.service';
 import { AllReser, MonthGroupAdmin, TransformedReservationAdmin } from '../../interfaces/all-reser';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-admin-booking',
@@ -9,7 +10,8 @@ import { AllReser, MonthGroupAdmin, TransformedReservationAdmin } from '../../in
   templateUrl: './admin-booking.component.html',
   styleUrl: './admin-booking.component.scss'
 })
-export class AdminBookingComponent implements OnInit {
+export class AdminBookingComponent implements OnInit ,OnDestroy{
+  private subscriptions: Subscription[] = [];
    AllReservation:AllReser[]=[]
    loading:boolean=false
    transformedReservations: TransformedReservationAdmin[] = [];
@@ -26,7 +28,7 @@ export class AdminBookingComponent implements OnInit {
    }
    getAllReservation(status:string){
     this.activeStatus = status;
-     this._AdminService.getALLREservation().subscribe({
+     const sub=this._AdminService.getALLREservation().subscribe({
       next:(data) => {
         this.AllReservation=data;
         console.log(data);
@@ -43,6 +45,7 @@ export class AdminBookingComponent implements OnInit {
         this.loading=false 
       }
      })
+      this.subscriptions.push(sub);
    }
    Transform(){
      this.transformedReservations = this.AllReservation.map(r => {
@@ -77,4 +80,8 @@ export class AdminBookingComponent implements OnInit {
   });
   
    }
+   ngOnDestroy(): void {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+  this.subscriptions=[]
+}
 }
