@@ -4,6 +4,8 @@ import { RentService } from '../Services/rent.service';
 import { Rent } from '../interfaces/Rent';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { PaymentService } from '../Services/payment.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-unpaid-rents',
@@ -19,7 +21,8 @@ export class UnpaidRentsComponent implements OnInit ,OnDestroy {
   unpaidRents: Rent[] = [];
   
   // @Output() navigateToPayment = new EventEmitter<number>();
-
+  _PaymentService=inject(PaymentService)
+  toastr=inject(ToastrService)
   constructor(private rentService: RentService) {}
 
   ngOnInit(): void {
@@ -48,9 +51,22 @@ this.getUnPaid();
 
   }
 
-  goToPayment(id: number) {
+  goToPayment(rentId: number) {
     // this.navigateToPayment.emit(id);
-    this._router.navigate([`payment/${id}`]);
+    // this._router.navigate([`payment/${id}`]);
+    console.log('Initiating payment for rent ID:', rentId);
+    const sub= this._PaymentService.pay(rentId).subscribe({
+          next: (response) => {
+            console.log('Payment successful:', response);
+            // alert("Payment successful");
+            window.location.href = response.url;
+          },
+          error: (err) => {
+            console.error('Payment error:', err);
+            this.toastr.error("Payment failed");
+          }
+        });
+      this.subscriptions.push(sub);
   }
 
 getUnPaid()
