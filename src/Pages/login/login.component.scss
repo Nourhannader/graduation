@@ -66,7 +66,7 @@
   border-radius: 6px;
   font-size: 0.9rem;
   transition: border-color 0.3s;
-  
+
 }
 
 .form-control:focus {
@@ -182,12 +182,16 @@
   text-align: center;
 }
 
+
 .welcome-image {
-  width: 100%;
-  max-width: 160px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+width: 170%;
+margin-right: 0px;
+margin-bottom: -40px;
+margin-left: -60px;
+height: auto;
+object-fit: contain;
 }
+
 
 .auth-welcome-section h3 {
   color: #2c3e50;
