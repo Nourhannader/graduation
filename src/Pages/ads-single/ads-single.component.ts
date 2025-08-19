@@ -53,31 +53,36 @@ export class AdsSingleComponent implements OnInit {
      this.delete.emit(this.item.adID);
    }
 
- extractFlexibleInfo(text: string): ApartmentInfo {
+extractFlexibleInfo(text: string): ApartmentInfo {
   const info: ApartmentInfo = {};
 
+  // Type
   const typeMatch = text.match(/\b(apartment|villa|flat|unit)\b/i);
   if (typeMatch) {
     info.type = typeMatch[1].toLowerCase();
   }
 
-  const bedroomMatch = text.match(/(\d+)\s*bed(room)?s?/i);
+  // Bedrooms (bed, beds, bedroom, bedrooms)
+  const bedroomMatch = text.match(/(\d+)\s*(bed(room)?s?)/i);
   if (bedroomMatch) {
     info.bedrooms = parseInt(bedroomMatch[1]);
   }
 
-  const bathroomMatch = text.match(/(\d+)\s*bath(room)?s?/i);
+  // Bathrooms (bath, baths, bathroom, bathrooms)
+  const bathroomMatch = text.match(/(\d+)\s*(bath(room)?s?)/i);
   if (bathroomMatch) {
     info.bathrooms = parseInt(bathroomMatch[1]);
   }
 
-  const areaMatch = text.match(/(\d+)\s*(square\s*meters|sqm|m)/i);
+  // Area (square meters, sqm, m2)
+  const areaMatch = text.match(/(\d+)\s*(square\s*meters?|sqm|m2)/i);
   if (areaMatch) {
     info.area = parseInt(areaMatch[1]);
   }
 
   return info;
 }
+
 
 getTimeDifference(publishDate: string | Date): string {
   const now = new Date();
