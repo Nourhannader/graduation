@@ -17,6 +17,7 @@ export class UnitComponent implements OnInit,OnDestroy {
   @Input() item!: Unit;
 
   @Output() delete = new EventEmitter<number>();
+  @Output() addAds = new EventEmitter<number>();
   private subscriptions: Subscription[] = [];
   currentImage: string = '';
   private imageIndex = 0;
@@ -97,20 +98,9 @@ export class UnitComponent implements OnInit,OnDestroy {
 
   onAddAds(){
     const unit=this.item
+    if(!unit) return;
+    this.addAds.emit(unit.id);
 
-  const sub=  this._AdvertisementService.AddAds(unit.id).subscribe({
-      next:(res) =>{
-        
-        setTimeout(() => {
-          this.toastr.success(res.message)
-        }, 1000);
-      },error:(err) => {
-        setTimeout(() => {
-          this.toastr.success(err.message)
-        }, 1000);
-      }
-    })
-  this.subscriptions.push(sub);
   }
   
 

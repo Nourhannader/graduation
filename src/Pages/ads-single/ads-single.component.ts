@@ -4,6 +4,8 @@ import { ApartmentInfo } from '../../interfaces/apartment-info';
 import { info } from 'console';
 import { AppointmentAv } from '../../interfaces/appointmentAv';
 import { AdvertisementService } from '../../Services/advertisement.service';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-ads-single',

@@ -86,7 +86,7 @@
   <div class="row row-cols-1 row-cols-md-4 g-4 unit-content">
     @for (unit of units;track $index) {
     <div class="col">
-      <app-unit (delete)="DeleteUnit($event)" [item]="unit"></app-unit>
+      <app-unit (delete)="DeleteUnit($event)" (addAds)="addAds($event)" [item]="unit"></app-unit>
     </div>
     }
   </div>
