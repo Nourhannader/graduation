@@ -4,6 +4,7 @@ import { Unit } from '../../interfaces/unit';
 import { UnitsService } from '../../Services/units.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { AdvertisementService } from '../../Services/advertisement.service';
 
 
 
@@ -24,6 +25,7 @@ export class UnitsComponent implements OnInit ,OnDestroy{
   filterAll:string = '';
   loading:boolean=false
   _unitsService=inject(UnitsService)
+  _AdvertisementService=inject(AdvertisementService)
    
   constructor(private toastr:ToastrService){}
   ngOnInit(): void {
@@ -133,6 +135,23 @@ export class UnitsComponent implements OnInit ,OnDestroy{
       error: (err) => {
         setTimeout(() => {
           this.toastr.error('Error deleting unit');
+        }, 1000);
+      }
+    });
+    this.subscriptions.push(sub);
+  }
+
+  addAds(unitId: number) {
+    const sub = this._AdvertisementService.AddAds(unitId).subscribe({
+      next: (res) => {
+        setTimeout(() => {
+          this.toastr.success(res.message);
+        }, 1000);
+        this.getAll();
+      },
+      error: (err) => {
+        setTimeout(() => {
+          this.toastr.error(err.message);
         }, 1000);
       }
     });
