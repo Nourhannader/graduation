@@ -79,7 +79,7 @@
             type="submit"
             class="btn btn-post"
             [disabled]="isSubmitting || !description.trim()">
-            <span *ngIf="!isSubmitting">Update</span>
+            <span *ngIf="!isSubmitting">Add</span>
             <span *ngIf="isSubmitting">
               <span class="spinner-border spinner-border-sm me-2" role="status"></span>
               Publishing...

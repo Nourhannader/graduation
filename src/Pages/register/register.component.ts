@@ -152,7 +152,7 @@ export class RegisterComponent implements OnDestroy{
 
     if (res.onboardingUrl) {
       // Redirect owner to Stripe onboarding
-      window.location.href = res.onboardingUrl;
+      //window.location.href = res.onboardingUrl;
     } 
     else 
       {
