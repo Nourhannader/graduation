@@ -11,7 +11,7 @@ interface Notification {
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
-  private apiUrl = 'http://localhost:5267/api/Notification';
+  private apiUrl = 'http://livana.runasp.net/api/Notification';
 
   private unreadCountSubject = new BehaviorSubject<number>(0);
   unreadCount$ = this.unreadCountSubject.asObservable(); 

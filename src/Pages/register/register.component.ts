@@ -150,15 +150,15 @@ export class RegisterComponent implements OnDestroy{
           console.log(res);
           this.registrationSuccess=!this.registrationSuccess;
 
-    if (res.onboardingUrl) {
-      // Redirect owner to Stripe onboarding
-      //window.location.href = res.onboardingUrl;
-    } 
-    else 
-      {
+    // if (res.onboardingUrl) {
+    //   // Redirect owner to Stripe onboarding
+    //   //window.location.href = res.onboardingUrl;
+    // } 
+    // else 
+    //   {
       this._router.navigate(['/login']);
       this.loading=false
-      }
+      // }
         },error:(err) => {
           console.log(err);
           this.loading=false

@@ -14,12 +14,12 @@ export class ReservationService {
 
   AllReservation():Observable<AllReservation[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<AllReservation[]>(`http://localhost:5267/api/Reservation`,{ headers });
+    return this._HttpClient.get<AllReservation[]>(`http://livana.runasp.net/api/Reservation`,{ headers });
   }
 
   EditReservation(status:string,id:number):Observable<AddAds>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.put<AddAds>(`http://localhost:5267/api/Reservation/${id}?status=${status}`,{},{headers})
+    return this._HttpClient.put<AddAds>(`http://livana.runasp.net/api/Reservation/${id}?status=${status}`,{},{headers})
   }
 
 }

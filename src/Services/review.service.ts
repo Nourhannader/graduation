@@ -23,16 +23,16 @@ export class ReviewService {
    }
 
   getAllReviews():Observable<Review[]>{
-    return this._HttpClient.get<Review[]>('http://localhost:5267/api/Review')
+    return this._HttpClient.get<Review[]>('http://livana.runasp.net/api/Review')
   }
 
   delete(id:number):Observable<DeleteReview>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.delete<DeleteReview>(`http://localhost:5267/api/Review/${id}`, { headers });
+    return this._HttpClient.delete<DeleteReview>(`http://livana.runasp.net/api/Review/${id}`, { headers });
   }
   
   addReview(info: FormData): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.post('http://localhost:5267/api/Review', info, { headers });
+    return this._HttpClient.post('http://livana.runasp.net/api/Review', info, { headers });
   }
 }

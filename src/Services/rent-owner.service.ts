@@ -12,7 +12,7 @@ _HttpClient=inject(HttpClient)
 getMonthRents(month: number, year: number):Observable<any> {
 
 const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-  return this._HttpClient.get<any>(`http://localhost:5267/api/Rent/MonthRents?month=${month}&year=${year}`, { headers });
+  return this._HttpClient.get<any>(`http://livana.runasp.net/api/Rent/MonthRents?month=${month}&year=${year}`, { headers });
   }
 
 }

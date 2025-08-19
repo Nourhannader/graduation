@@ -82,7 +82,7 @@ export class AddPostComponent implements OnInit ,OnDestroy  {
         this.error = 'faild  create post ';
         this.isSubmitting = false;
         setTimeout(() => {
-          this.toastr.error('post added successfully')
+          this.toastr.error('failed to add your post')
         },500);
       }
     });

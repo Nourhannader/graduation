@@ -14,11 +14,11 @@ export class RentService {
 
   getHistoryRents(): Observable<Rent[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Rent[]>('http://localhost:5267/api/Rent/HistoryRents', { headers });
+    return this._HttpClient.get<Rent[]>('http://livana.runasp.net/api/Rent/HistoryRents', { headers });
   }
 
   getUnpaidRents(): Observable<Rent[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Rent[]>('http://localhost:5267/api/Rent/UnpaidRents', { headers });
+    return this._HttpClient.get<Rent[]>('http://livana.runasp.net/api/Rent/UnpaidRents', { headers });
   }
 }

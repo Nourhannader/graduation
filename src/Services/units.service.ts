@@ -15,42 +15,42 @@ export class UnitsService {
 
   getAllUnit(): Observable<Unit[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Unit[]>('http://localhost:5267/api/Unit', { headers });
+    return this._HttpClient.get<Unit[]>('http://livana.runasp.net/api/Unit', { headers });
 }
 
 getUnitById(id:number): Observable<Unit> {
 
   const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Unit>(`http://localhost:5267/api/Unit/${id}`, { headers });
+    return this._HttpClient.get<Unit>(`http://livana.runasp.net/api/Unit/${id}`, { headers });
 }
 
   AddUnit(info:FormData):Observable<any>{
       const headers=new HttpHeaders().set('Authorization',`Bearer ${localStorage.getItem("token")}`);
 
-      return this._HttpClient.post('http://localhost:5267/api/Unit',info,{headers});
+      return this._HttpClient.post('http://livana.runasp.net/api/Unit',info,{headers});
   }
   
 
   filterUnits(status:string,type:string):Observable<Unit[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Unit[]>(`http://localhost:5267/api/Unit/filter?status=${status}&type=${type}`, { headers });
+    return this._HttpClient.get<Unit[]>(`http://livana.runasp.net/api/Unit/filter?status=${status}&type=${type}`, { headers });
   }
 
   searchUnits(searchTerm: string): Observable<Unit[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Unit[]>(`http://localhost:5267/api/Unit/Search?searchTerm=${searchTerm}`, { headers });
+    return this._HttpClient.get<Unit[]>(`http://livana.runasp.net/api/Unit/Search?searchTerm=${searchTerm}`, { headers });
   }
 
   deleteUnit(id:number):Observable<any>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.delete(`http://localhost:5267/api/Unit/${id}`, { headers });
+    return this._HttpClient.delete(`http://livana.runasp.net/api/Unit/${id}`, { headers });
   }
 
       EditUnit(id:number,info:FormData):Observable<any>
   {
       const headers=new HttpHeaders().set('Authorization',`Bearer ${localStorage.getItem("token")}`);
 
-      return this._HttpClient.put(`http://localhost:5267/api/Unit/${id}`,info, {headers});
+      return this._HttpClient.put(`http://livana.runasp.net/api/Unit/${id}`,info, {headers});
   }
 
 

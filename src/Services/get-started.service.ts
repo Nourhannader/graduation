@@ -16,6 +16,6 @@ _HttpClient=inject(HttpClient)
 
   GetStarted(info:FormData): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.post('http://localhost:5267/api/Renter', info, { headers });
+    return this._HttpClient.post('http://livana.runasp.net/api/Renter', info, { headers });
   }
 }

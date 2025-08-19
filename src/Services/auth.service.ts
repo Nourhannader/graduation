@@ -37,16 +37,16 @@ if(isPlatformBrowser(this._pLATFORM_ID))
   }
 
   register(info:FormData):Observable<any>{
-      return this._HttpClient.post('http://localhost:5267/api/Account/Register',info);
+      return this._HttpClient.post('http://livana.runasp.net/api/Account/Register',info);
   }
 
   Login(info:UserLogin):Observable<any>{
-    return this._HttpClient.post('http://localhost:5267/api/Account/Login',info);
+    return this._HttpClient.post('http://livana.runasp.net/api/Account/Login',info);
   }
 
   GetUserInfo():Observable<Owner>{
     const headers=new HttpHeaders().set('Authorization',`Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Owner>('http://localhost:5267/api/Account/GetUserInfo', {headers});
+    return this._HttpClient.get<Owner>('http://livana.runasp.net/api/Account/GetUserInfo', {headers});
   }
 
   saveUser()
@@ -55,15 +55,15 @@ if(isPlatformBrowser(this._pLATFORM_ID))
     this.userData.next(token)
   }
   ResetPassword(resetPassword:Resetpass):Observable<AddAds>{
-    return this._HttpClient.post<AddAds>('http://localhost:5267/api/Account/reset-password',resetPassword);
+    return this._HttpClient.post<AddAds>('http://livana.runasp.net/api/Account/reset-password',resetPassword);
   }
   RequestResetPassword(email:string):Observable<AddAds>{
-    return this._HttpClient.get<AddAds>(`http://localhost:5267/api/Account/requestPasswordreset/${email}`);
+    return this._HttpClient.get<AddAds>(`http://livana.runasp.net/api/Account/requestPasswordreset/${email}`);
   }
 
   EditUserImage(info:FormData):Observable<editImage>{
     const headers=new HttpHeaders().set('Authorization',`Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.post<editImage>('http://localhost:5267/api/Account/editImage',info, {headers});
+    return this._HttpClient.post<editImage>('http://livana.runasp.net/api/Account/editImage',info, {headers});
   }
 
   Logout(){

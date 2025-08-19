@@ -47,51 +47,51 @@ export class AdvertisementService {
 
   AddAds(id: number):Observable<AddAds>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.post<AddAds>(`http://localhost:5267/api/Advertisement/${id}`, {},{ headers });
+    return this._HttpClient.post<AddAds>(`http://livana.runasp.net/api/Advertisement/${id}`, {},{ headers });
   }
   
 
   getAllAds():Observable<Advertisement[]>{
     //const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Advertisement[]>('http://localhost:5267/api/Advertisement');
+    return this._HttpClient.get<Advertisement[]>('http://livana.runasp.net/api/Advertisement');
   }
 
    getTwoAds():Observable<Advertisement[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Advertisement[]>('http://localhost:5267/api/Advertisement/LastTwo',{headers});
+    return this._HttpClient.get<Advertisement[]>('http://livana.runasp.net/api/Advertisement/LastTwo',{headers});
   }
 
   DeleteAds(id:number):Observable<AddAds>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.delete<AddAds>(`http://localhost:5267/api/Advertisement/${id}`,{headers});
+    return this._HttpClient.delete<AddAds>(`http://livana.runasp.net/api/Advertisement/${id}`,{headers});
   }
   
   getByOwner():Observable<AdsByOwner[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<AdsByOwner[]>('http://localhost:5267/api/Advertisement/get',{headers})
+    return this._HttpClient.get<AdsByOwner[]>('http://livana.runasp.net/api/Advertisement/get',{headers})
   }
 
   AddAppointment(appoinment:Appointment):Observable<AddAds>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.post<AddAds>('http://localhost:5267/api/Appointment',appoinment,{headers})
+    return this._HttpClient.post<AddAds>('http://livana.runasp.net/api/Appointment',appoinment,{headers})
   }
 
   getAppointmentByOwner():Observable<AppointmentByOwner[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<AppointmentByOwner[]>('http://localhost:5267/api/Appointment/get',{headers})
+    return this._HttpClient.get<AppointmentByOwner[]>('http://livana.runasp.net/api/Appointment/get',{headers})
   }
 
   deleteAppointment(id:number):Observable<AddAds>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.delete<AddAds>(`http://localhost:5267/api/Appointment/${id}`,{headers})
+    return this._HttpClient.delete<AddAds>(`http://livana.runasp.net/api/Appointment/${id}`,{headers})
   }
   
   getAppointmentAvailble(id:number):Observable<AppointmentAv[]>{
-    return this._HttpClient.get<AppointmentAv[]>(`http://localhost:5267/api/Appointment/available/${id}`)
+    return this._HttpClient.get<AppointmentAv[]>(`http://livana.runasp.net/api/Appointment/available/${id}`)
   }
 
   AddReservarion(reservation:Reservation):Observable<AddAds>{
-    return this._HttpClient.post<AddAds>('http://localhost:5267/api/Reservation',reservation);
+    return this._HttpClient.post<AddAds>('http://livana.runasp.net/api/Reservation',reservation);
   }
 }
 

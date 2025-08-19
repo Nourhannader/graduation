@@ -18,17 +18,17 @@ export class CommunityService {
 
 updateCommunity(communityName: Comm): Observable<any> {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-      return this._httpClient.put<any>(`http://localhost:5267/api/Community/`, communityName, { headers });
+      return this._httpClient.put<any>(`http://livana.runasp.net/api/Community/`, communityName, { headers });
     }
 
     GetCommunityName(): Observable<Community> {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-      return this._httpClient.get<Community>(`http://localhost:5267/api/Community/`, { headers });
+      return this._httpClient.get<Community>(`http://livana.runasp.net/api/Community/`, { headers });
     }
 
     GetUserCommunity(): Observable<UserCommunity> {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-      return this._httpClient.get<UserCommunity>(`http://localhost:5267/api/Community/UserCommunity`, { headers });
+      return this._httpClient.get<UserCommunity>(`http://livana.runasp.net/api/Community/UserCommunity`, { headers });
     }
 
    GetTopUsers(): Observable<TopUser[]> {
@@ -38,7 +38,7 @@ updateCommunity(communityName: Comm): Observable<any> {
   );
 
   return this._httpClient.get<TopUser[]>(
-    `http://localhost:5267/api/Community/topActive`,
+    `http://livana.runasp.net/api/Community/topActive`,
     { headers }
   );
 }

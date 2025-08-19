@@ -14,6 +14,6 @@ export class ChatService {
     'Content-Type': 'application/json'
   });
 
-        return this._HttpClient.post<any>('http://localhost:5267/api/Chat/Chat', JSON.stringify(question), { headers });
+        return this._HttpClient.post<any>('http://livana.runasp.net/api/Chat/Chat', JSON.stringify(question), { headers });
     }
 }
