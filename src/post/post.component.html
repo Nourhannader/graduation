@@ -7,7 +7,7 @@
   </div>
 
   <div class="post-header">
-    <img [src]="'http://localhost:5267/Images/' + post?.userImage" class="user-avatar">
+    <img [src]="post?.userImage" class="user-avatar">
     <div class="user-info">
       <span class="user-name">{{ post.userName }}</span>
       <span class="post-time">{{ formatDate(post.publishDate) }}</span>
@@ -25,7 +25,7 @@
   </div>
 
   <div *ngIf="post.postImage" class="post-image">
-    <img [src]="'http://localhost:5267/Images/' + post.postImage" alt="Post image">
+    <img [src]="post.postImage" alt="Post image">
   </div>
 
   <div class="post-stats">
@@ -44,7 +44,7 @@
 
 
     <div *ngFor="let comment of comments; let i = index" class="comment">
-      <img [src]="'http://localhost:5267/Images/' + comment.userImage" class="comment-avatar">
+      <img [src]="comment.userImage" class="comment-avatar">
       <div class="comment-content">
         <div class="comment-header">
           <span class="comment-user">{{ comment.userName }}</span>

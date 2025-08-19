@@ -17,7 +17,7 @@
   <div class="d-flex ">
     <app-notification-dropdown></app-notification-dropdown>
     <div class="me-2 content-image">
-      <img [src]="'http://localhost:5267/Images/'+image"  (click)="ShowDrop()" />
+      <img [src]="image"  (click)="ShowDrop()" />
       @if(isShow){
       <ul class="list-group">
           <li class="list-group-item" (click)="navigateToHome()"><i class="bi bi-person-fill"></i> {{userName}}</li>

@@ -29,9 +29,9 @@ export class OwnerEditUnitComponent implements OnInit , OnDestroy {
     this.unitId=Number(this._activatedRoute.snapshot.paramMap.get('id'));
    const sub= this._unitService.getUnitById(this.unitId).subscribe(unit => {
       this.existingImages = {
-        image1: `http://localhost:5267/Images/${unit.image1}`,
-        image2: `http://localhost:5267/Images/${unit.image2}`,
-        image3: `http://localhost:5267/Images/${unit.image3}`
+        image1: unit.image1!,
+        image2: unit.image2!,
+        image3: unit.image3!
       };
 
       this.EditUnitForm = new FormGroup({

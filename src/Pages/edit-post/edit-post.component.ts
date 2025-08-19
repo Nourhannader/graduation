@@ -110,7 +110,7 @@ export class EditPostComponent implements OnInit,OnDestroy {
         console.log(post)
         this.description = post.content;
         this.selectedImageUrl = post.image || '';
-        this.selectedImageUrl= 'http://localhost:5267/Images/' + this.selectedImageUrl
+        this.selectedImageUrl=this.selectedImageUrl
 
          const modal = new Modal(this.createPostModal.nativeElement);
          modal.show();
