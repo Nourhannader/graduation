@@ -28,7 +28,8 @@
             {{ owner?.isActive ? 'Active' : 'Inactive' }}
           </span>
         </td>
-        @if(owner?.isActive!=false){
+        @if(owner?.isActive!=false && owner?.unitCount !=0)
+        {
         <td>
             <button (click)="openTransfer(owner.id)" class="transfer"> 
             Transfer

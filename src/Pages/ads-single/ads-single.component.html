@@ -8,7 +8,7 @@
     />
     <div class="card-img-overlay-badges">
       @if(role === 'Owner' && item.userName === userName ){
-      <span (click)="Remove()" class="badge bg-danger">Remove</span>
+      <span (click)="Remove()" class="badge bg-danger remove">Remove</span>
       }
       <span class="badge bg-dark"
         >{{ getTimeDifference(item.publishDate)}} ago</span

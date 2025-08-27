@@ -84,7 +84,7 @@ export class AdvertisementsComponent implements OnInit ,OnDestroy {
         this.getAllAdvertisements();
       },error:(err) => {
         setTimeout(() => {
-          this.toastr.success(err.message);
+          this.toastr.error(err.message);
         })
       }
     })

@@ -104,6 +104,16 @@ export class AdminService {
     return this._HttpClient.get<Renters[]>(`${this.baseUrl}/Admin/Renters`, {headers})
 }
 
+// searchRentersByCommunity(community: string): Observable<Renters[]> {
+//   const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
+//   return this._HttpClient.get<Renters[]>(`${this.baseUrl}/Admin/SearchByCommunity?community=${community}`, { headers });
+// }
+
+// RenterswithNoCommunity():Observable<Renters[]>{
+//   const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
+//   return this._HttpClient.get<Renters[]>(`${this.baseUrl}/Admin/NoCommunity`, {headers})
+// } 
+
 getAllOwners():Observable<Owners[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
     return this._HttpClient.get<Owners[]>(`${this.baseUrl}/Admin/Owners`, {headers})
