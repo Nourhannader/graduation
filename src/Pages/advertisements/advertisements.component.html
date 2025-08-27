@@ -1,4 +1,4 @@
-<div class="container-fluid ads p-4">
+<div class="container-fluid  ads p-4">
   <div
     class="filter-bar nav-filter p-3 rounded-lg shadow-sm mb-4 d-flex flex-wrap align-items-center justify-content-between gap-3"
   >
@@ -84,10 +84,10 @@
           </li>
         </ul>
       </div>
-      <button class="btn btn-outline-secondary rounded-pill bg-white filter-btn invisible" type="button">
+      <!-- <button class="btn btn-outline-secondary rounded-pill bg-white filter-btn invisible" type="button">
         More <i class="bi bi-sliders"></i>
         
-      </button>
+      </button> -->
     </div>
   </div>
   @if(loading){
@@ -102,7 +102,7 @@
     <p class="mt-2">No Addvertisements found.</p>
   </div>
   } @if(!loading && (filteredAds?.length ?? 0) > 0){
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
     @for(ads of filteredAds;track $index){
     <app-ads-single
       (AllAppointment)="getAllAppointmment($event)"

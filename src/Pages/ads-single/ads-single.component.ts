@@ -55,31 +55,38 @@ export class AdsSingleComponent implements OnInit {
 
 extractFlexibleInfo(text: string): ApartmentInfo {
   const info: ApartmentInfo = {};
+  const lowerText = text.toLowerCase();
 
   // Type
-  const typeMatch = text.match(/\b(apartment|villa|flat|unit)\b/i);
+  const typeMatch = text.match(/\b(apartment|villa|flat|unit|studio|duplex)\b/i);
   if (typeMatch) {
-    info.type = typeMatch[1].toLowerCase();
+    info.typeUnit = typeMatch[1].toLowerCase();
   }
 
-  // Bedrooms (bed, beds, bedroom, bedrooms)
-  const bedroomMatch = text.match(/(\d+)\s*(bed(room)?s?)/i);
+  // Bedrooms (bed, beds, BR, bdr)
+  const bedroomMatch = text.match(/(\d+)\s*(bed(room)?s?|br|bdr)/i);
   if (bedroomMatch) {
     info.bedrooms = parseInt(bedroomMatch[1]);
   }
 
-  // Bathrooms (bath, baths, bathroom, bathrooms)
-  const bathroomMatch = text.match(/(\d+)\s*(bath(room)?s?)/i);
+  // Bathrooms (bath, baths, bathroom, bathrooms, toilet, WC)
+  const bathroomMatch = text.match(/(\d+)\s*(bath(room)?s?|toilet|wc)/i);
   if (bathroomMatch) {
     info.bathrooms = parseInt(bathroomMatch[1]);
   }
 
-  // Area (square meters, sqm, m2)
-  const areaMatch = text.match(/(\d+)\s*(square\s*meters?|sqm|m2)/i);
-  if (areaMatch) {
-    info.area = parseInt(areaMatch[1]);
-  }
+  // Area (sqm, m2, m², square meters, sq.m, ft2)
+const areaMatch = text.match(/(\d+)\s*(sqm|m2|m²|square\s*meters?|sq\.?m|sqft|ft2)/i);
+if (areaMatch) {
+  info.areaUnit = parseInt(areaMatch[1]);
+}
 
+//status (for sale, for rent)
+  const statusMatch = text.match(/\b(for\s*(rent|sale|sell))\b/i);
+  if (statusMatch) {
+    if (/rent/i.test(statusMatch[0])) info.statusUnit = "rent";
+    if (/sale|sell/i.test(statusMatch[0])) info.statusUnit = "sale";
+  }
   return info;
 }
 
@@ -87,18 +94,29 @@ extractFlexibleInfo(text: string): ApartmentInfo {
 getTimeDifference(publishDate: string | Date): string {
   const now = new Date();
   const published = new Date(publishDate);
-  const diffMs = now.getTime() - published.getTime(); 
+  const diffMs = now.getTime() - published.getTime();
 
   const diffSeconds = Math.floor(diffMs / 1000);
   const diffMinutes = Math.floor(diffSeconds / 60);
   const diffHours = Math.floor(diffMinutes / 60);
   const diffDays = Math.floor(diffHours / 24);
 
-  if (diffDays > 0) return `${diffDays} D`;
-  if (diffHours > 0) return `${diffHours} H`;
-  if (diffMinutes > 0) return `${diffMinutes} M`;
-  return `just now`;
+  if (diffSeconds < 60) {
+    return diffSeconds + " S";
+  } else if (diffMinutes < 60) {
+    return diffMinutes + " M";
+  } else if (diffHours < 24) {
+    return diffHours + " H";
+  } else {
+    return diffDays + " D";
+  }
 }
+
+
+
+
+
+
 
  getAllAppointmment(id:number){
   this.AllAppointment.emit(id); 

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Advertisement } from '../interfaces/advertisement';
 import { AppointmentAv } from '../interfaces/appointmentAv';
 import { Reservation } from '../interfaces/reservation';
+import { environment } from '../environments/environment';
 
 
 export interface AddAds{
@@ -40,58 +41,58 @@ export interface Appointment{
   providedIn: 'root'
 })
 export class AdvertisementService {
-
+   private baseUrl=environment.apiUrl;
   _HttpClient=inject(HttpClient)
 
   constructor() { }
 
   AddAds(id: number):Observable<AddAds>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.post<AddAds>(`http://livana.runasp.net/api/Advertisement/${id}`, {},{ headers });
+    return this._HttpClient.post<AddAds>(`${this.baseUrl}/Advertisement/${id}`, {},{ headers });
   }
   
 
   getAllAds():Observable<Advertisement[]>{
     //const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Advertisement[]>('http://livana.runasp.net/api/Advertisement');
+    return this._HttpClient.get<Advertisement[]>(`${this.baseUrl}/Advertisement`);
   }
 
    getTwoAds():Observable<Advertisement[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Advertisement[]>('http://livana.runasp.net/api/Advertisement/LastTwo',{headers});
+    return this._HttpClient.get<Advertisement[]>(`${this.baseUrl}/Advertisement/LastTwo`,{headers});
   }
 
   DeleteAds(id:number):Observable<AddAds>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.delete<AddAds>(`http://livana.runasp.net/api/Advertisement/${id}`,{headers});
+    return this._HttpClient.delete<AddAds>(`${this.baseUrl}/Advertisement/${id}`,{headers});
   }
   
   getByOwner():Observable<AdsByOwner[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<AdsByOwner[]>('http://livana.runasp.net/api/Advertisement/get',{headers})
+    return this._HttpClient.get<AdsByOwner[]>(`${this.baseUrl}/Advertisement/get`,{headers})
   }
 
   AddAppointment(appoinment:Appointment):Observable<AddAds>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.post<AddAds>('http://livana.runasp.net/api/Appointment',appoinment,{headers})
+    return this._HttpClient.post<AddAds>(`${this.baseUrl}/Appointment`,appoinment,{headers})
   }
 
   getAppointmentByOwner():Observable<AppointmentByOwner[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<AppointmentByOwner[]>('http://livana.runasp.net/api/Appointment/get',{headers})
+    return this._HttpClient.get<AppointmentByOwner[]>(`${this.baseUrl}/Appointment/get`,{headers})
   }
 
   deleteAppointment(id:number):Observable<AddAds>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.delete<AddAds>(`http://livana.runasp.net/api/Appointment/${id}`,{headers})
+    return this._HttpClient.delete<AddAds>(`${this.baseUrl}/Appointment/${id}`,{headers})
   }
   
   getAppointmentAvailble(id:number):Observable<AppointmentAv[]>{
-    return this._HttpClient.get<AppointmentAv[]>(`http://livana.runasp.net/api/Appointment/available/${id}`)
+    return this._HttpClient.get<AppointmentAv[]>(`${this.baseUrl}/Appointment/available/${id}`)
   }
 
   AddReservarion(reservation:Reservation):Observable<AddAds>{
-    return this._HttpClient.post<AddAds>('http://livana.runasp.net/api/Reservation',reservation);
+    return this._HttpClient.post<AddAds>(`${this.baseUrl}/Reservation`,reservation);
   }
 }
 

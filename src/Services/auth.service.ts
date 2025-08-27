@@ -8,6 +8,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Owner } from '../interfaces/owner';
 import { AddAds } from './advertisement.service';
 import { Resetpass } from '../interfaces/resetpass';
+import { environment } from '../environments/environment';
 
 
 export interface editImage{
@@ -20,6 +21,7 @@ export interface editImage{
   providedIn: 'root'
 })
 export class AuthService {
+  private baseUrl=environment.apiUrl;
   userData:BehaviorSubject<string>=new BehaviorSubject('')
   _HttpClient=inject(HttpClient)
   _pLATFORM_ID=inject(PLATFORM_ID)
@@ -37,16 +39,16 @@ if(isPlatformBrowser(this._pLATFORM_ID))
   }
 
   register(info:FormData):Observable<any>{
-      return this._HttpClient.post('http://livana.runasp.net/api/Account/Register',info);
+      return this._HttpClient.post(`${this.baseUrl}/Account/Register`,info);
   }
 
   Login(info:UserLogin):Observable<any>{
-    return this._HttpClient.post('http://livana.runasp.net/api/Account/Login',info);
+    return this._HttpClient.post(`${this.baseUrl}/Account/Login`,info);
   }
 
   GetUserInfo():Observable<Owner>{
     const headers=new HttpHeaders().set('Authorization',`Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Owner>('http://livana.runasp.net/api/Account/GetUserInfo', {headers});
+    return this._HttpClient.get<Owner>(`${this.baseUrl}/Account/GetUserInfo`, {headers});
   }
 
   saveUser()
@@ -55,15 +57,15 @@ if(isPlatformBrowser(this._pLATFORM_ID))
     this.userData.next(token)
   }
   ResetPassword(resetPassword:Resetpass):Observable<AddAds>{
-    return this._HttpClient.post<AddAds>('http://livana.runasp.net/api/Account/reset-password',resetPassword);
+    return this._HttpClient.post<AddAds>(`${this.baseUrl}/Account/reset-password`,resetPassword);
   }
   RequestResetPassword(email:string):Observable<AddAds>{
-    return this._HttpClient.get<AddAds>(`http://livana.runasp.net/api/Account/requestPasswordreset/${email}`);
+    return this._HttpClient.get<AddAds>(`${this.baseUrl}/Account/requestPasswordreset/${email}`);
   }
 
   EditUserImage(info:FormData):Observable<editImage>{
     const headers=new HttpHeaders().set('Authorization',`Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.post<editImage>('http://livana.runasp.net/api/Account/editImage',info, {headers});
+    return this._HttpClient.post<editImage>(`${this.baseUrl}/Account/editImage`,info, {headers});
   }
 
   Logout(){

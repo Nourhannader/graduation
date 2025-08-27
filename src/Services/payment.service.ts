@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Rent } from '../interfaces/Rent';
+import { environment } from '../environments/environment';
 
  export interface RentID {
      rentID:number
@@ -10,6 +11,7 @@ import { Rent } from '../interfaces/Rent';
 
 @Injectable({ providedIn: 'root' })
 export class PaymentService {
+    private baseUrl=environment.apiUrl;
   constructor() {}
 
   _HttpClient = inject(HttpClient);
@@ -22,7 +24,7 @@ export class PaymentService {
 pay(RentId:number):Observable<{ url: string }>
 {
   const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.post<{ url: string }>(`http://livana.runasp.net/api/Payment/CreateCheckoutSession/`, {RentId}, {headers});
+    return this._HttpClient.post<{ url: string }>(`${this.baseUrl}/Payment/CreateCheckoutSession/`, {RentId}, {headers});
 }
   
 }

@@ -159,6 +159,8 @@ public barChartType: 'bar' = 'bar';
 getProfit(){
  const sub= this._AdminService.getProfitPermonth().subscribe({
     next:(data) => {
+      console.log(data);
+      
       this.profitData=data
       this.lineChartData.labels = this.profitData.map(p => p.month);
       this.lineChartData.datasets[0].data = this.profitData.map(p => p.profit);

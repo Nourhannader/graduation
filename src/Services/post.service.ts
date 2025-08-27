@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 export interface Post {
   postId: number;
@@ -51,64 +52,64 @@ export interface GetPost{
   providedIn: 'root',
 })
 export class PostService {
-
+  private baseUrl=environment.apiUrl;
   constructor(private http: HttpClient) {}
 
  
   getAllPosts(): Observable<Post[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.get<Post[]>('http://livana.runasp.net/api/Post', { headers });
+    return this.http.get<Post[]>(`${this.baseUrl}/Post`, { headers });
   }
 
   getPostById(postId:number):Observable<GetPost> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.get<GetPost>(`http://livana.runasp.net/api/Post/${postId}`, { headers });
+    return this.http.get<GetPost>(`${this.baseUrl}/Post/${postId}`, { headers });
   }
   
   
   createPost(postData: FormData): Observable<AddPostResponse> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.post<AddPostResponse>('http://livana.runasp.net/api/Post', postData, { headers });
+    return this.http.post<AddPostResponse>(`${this.baseUrl}/Post`, postData, { headers });
   }
 
   
   updatePost(postId: number, postData:FormData): Observable<postEdit> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.put<postEdit>(`http://livana.runasp.net/api/Post/${postId}`, postData, { headers });
+    return this.http.put<postEdit>(`${this.baseUrl}/Post/${postId}`, postData, { headers });
   }
 
   
   deletePost(postId: number): Observable<void> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.delete<void>(`http://livana.runasp.net/api/Post/${postId}`, { headers });
+    return this.http.delete<void>(`${this.baseUrl}/Post/${postId}`, { headers });
   }
 
   ////////////
   
   reactToPost(postId: number): Observable<PostResponse> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.post<PostResponse>(`http://livana.runasp.net/api/React`,{postId}, { headers });
+    return this.http.post<PostResponse>(`${this.baseUrl}/React`,{postId}, { headers });
   }
 
   
   getComments(postId: number): Observable<Comment[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.get<Comment[]>(`http://livana.runasp.net/api/Comment/${postId}`, { headers });
+    return this.http.get<Comment[]>(`${this.baseUrl}/Comment/${postId}`, { headers });
   }
 
   addComment( commentData: { content: string }): Observable<CommentResponse> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.post<CommentResponse>(`http://livana.runasp.net/api/Comment`, commentData, { headers });
+    return this.http.post<CommentResponse>(`${this.baseUrl}/Comment`, commentData, { headers });
   }
 
   updateComment(commentId: number, content: string): Observable<Comment> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.put<Comment>(`http://livana.runasp.net/api/Comment/${commentId}`, { content }, { headers });
+    return this.http.put<Comment>(`${this.baseUrl}/Comment/${commentId}`, { content }, { headers });
   }
 
   deleteComment(commentId: number): Observable<void> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this.http.delete<void>(`http://livana.runasp.net/api/Comment/${commentId}`, { headers });
+    return this.http.delete<void>(`${this.baseUrl}/Comment/${commentId}`, { headers });
   }
 
 }

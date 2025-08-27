@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { AllReser } from '../interfaces/all-reser';
+import { environment } from '../environments/environment';
 
 
 export interface numbers{
@@ -71,45 +72,45 @@ export interface Transfer{
   providedIn: 'root'
 })
 export class AdminService {
-
+   private baseUrl=environment.apiUrl
   _HttpClient=inject(HttpClient)
   constructor() { }
 
   getNumbers():Observable<numbers>{
    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-   return this._HttpClient.get<numbers>('http://livana.runasp.net/api/Admin/Numbers',{headers})
+   return this._HttpClient.get<numbers>(`${this.baseUrl}/Admin/Numbers`,{headers})
   }
   getadsVsReservayion():Observable<AdsVsReservations[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<AdsVsReservations[]>('http://livana.runasp.net/api/Admin/adsVsReservations',{headers})
+    return this._HttpClient.get<AdsVsReservations[]>(`${this.baseUrl}/Admin/adsVsReservations`,{headers})
   }
   getProfitPermonth():Observable<Profit[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Profit[]>('http://livana.runasp.net/api/Admin/profitsPerMonth',{headers})
+    return this._HttpClient.get<Profit[]>(`${this.baseUrl}/Admin/profitsPerMonth`,{headers})
   }
 
   getProfitCommunity():Observable<ProfitCommunity[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<ProfitCommunity[]>('http://livana.runasp.net/api/Admin/profitperCommunity',{headers})
+    return this._HttpClient.get<ProfitCommunity[]>(`${this.baseUrl}/Admin/profitperCommunity`,{headers})
   }
 
   getALLREservation():Observable<AllReser[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<AllReser[]>('http://livana.runasp.net/api/Admin/AllReservation',{headers})
+    return this._HttpClient.get<AllReser[]>(`${this.baseUrl}/Admin/AllReservation`,{headers})
   }
 
  getAllRenters():Observable<Renters[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Renters[]>('http://livana.runasp.net/api/Admin/Renters', {headers})
+    return this._HttpClient.get<Renters[]>(`${this.baseUrl}/Admin/Renters`, {headers})
 }
 
 getAllOwners():Observable<Owners[]>{
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.get<Owners[]>('http://livana.runasp.net/api/Admin/Owners', {headers})
+    return this._HttpClient.get<Owners[]>(`${this.baseUrl}/Admin/Owners`, {headers})
 }
 
 TransferTo(transfer:Transfer):Observable<any>{
 const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem("token")}`);
-    return this._HttpClient.post('http://livana.runasp.net/api/Admin/Transfer',transfer, {headers})
+    return this._HttpClient.post(`${this.baseUrl}/Admin/Transfer`,transfer, {headers})
 }
 }

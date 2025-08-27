@@ -1,6 +1,7 @@
 export interface ApartmentInfo {
-    type?: string;
+  typeUnit?: string;
   bedrooms?: number;
   bathrooms?: number;
-  area?: number;
+  areaUnit?: number;
+  statusUnit?: string;
 }

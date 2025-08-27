@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 interface Notification {
   id: number;
@@ -11,7 +12,8 @@ interface Notification {
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
-  private apiUrl = 'http://livana.runasp.net/api/Notification';
+  private baseUrl=environment.apiUrl;
+  private apiUrl = `${this.baseUrl}/Notification`;
 
   private unreadCountSubject = new BehaviorSubject<number>(0);
   unreadCount$ = this.unreadCountSubject.asObservable(); 

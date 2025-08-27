@@ -90,7 +90,10 @@ export class ReviewComponent implements OnInit ,OnDestroy{
         next:(res)=>{
           setTimeout(() => {
           this.toastr.success(`${res.message}`);
+          
         }, 500);
+         this.prevSlide();
+         this.reviews=this.reviews.filter(r=>r.id!=id)
         },error:(err)=>{
           setTimeout(() => {
           this.toastr.error(`${err.message}`);

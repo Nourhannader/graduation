@@ -7,11 +7,12 @@ import { Renter } from '../interfaces/renter';
 import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-renter-home',
-  imports: [ReactiveFormsModule,RouterLink],
+  imports: [ReactiveFormsModule,RouterLink,CommonModule],
   templateUrl: './renter-home.component.html',
   styleUrl: './renter-home.component.css'
 })
@@ -39,7 +40,7 @@ export class RenterHomeComponent implements OnInit ,OnDestroy {
 
   AddReviewForm:FormGroup=new FormGroup({
     content:new FormControl(null,[Validators.required]),  
-    rate:new FormControl(null,[Validators.required,Validators.pattern(/^[1-5]$/)])
+    rate:new FormControl(null,[Validators.required,Validators.min(1)]),
   });
 
   constructor(private toastr: ToastrService){}
@@ -146,7 +147,7 @@ submitGetStarted() {
 }
 
 /////
-setRating(rating: number) {
+setRate(rating: number) {
   this.selectedRating = rating;
   this.AddReviewForm.get('rate')?.setValue(rating);
 }

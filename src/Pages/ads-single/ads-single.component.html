@@ -1,46 +1,61 @@
 <div class="col">
-  <div class="card col-12" >    
-      <img
-        [src]="imageUrl"
-        class="card-img-top"
-        height="200"
-        alt="Property Image"
-      />
-      <div class="card-img-overlay-badges">
-        @if(role === 'Owner' && item.userName === userName ){
-          <span (click)="Remove()" class="badge bg-danger">Remove</span>
-        }
-        <span class="badge bg-dark">{{getTimeDifference(item.publishDate)}} ago</span>
-        @if(role != 'Owner'){
-          <span class="badge bg-dark text-capitalize">{{item.communityName}}</span>
-        }
-      </div>
-      <div class="slide-link">
-         <button (click)="updateImage(0)"></button>
-         <button (click)="updateImage(1)"></button>
-         <button (click)="updateImage(2)"></button>
-      </div>
-      <div class="card-body p-0">
-        <div class="property-details">
-          <div><i class="bi bi-house"></i> {{Info.bedrooms}} Beds</div>
-          <div><i class="bi bi-droplet"></i> {{Info.bathrooms }} Baths</div>
-          <div><i class="bi bi-rulers"></i> {{Info.area}} m² </div>
-          @if(item.hasAppointment && role != 'Owner'){
-          <div (click)="getAllAppointmment(item.adID)"><i class="bi bi-calendar4-week"></i>Book</div>
+  <div class="card col-12">
+    <img
+      [src]="imageUrl"
+      class="card-img-top"
+      height="200"
+      alt="Property Image"
+    />
+    <div class="card-img-overlay-badges">
+      @if(role === 'Owner' && item.userName === userName ){
+      <span (click)="Remove()" class="badge bg-danger">Remove</span>
+      }
+      <span class="badge bg-dark"
+        >{{ getTimeDifference(item.publishDate)}} ago</span
+      >
+      <span class="badge bg-dark">
+          @if(Info.statusUnit === 'rent'){
+            <i class="bi bi-key-fill"></i> For Rent
           }
+           @if(Info.statusUnit === 'sale'){
+            <i class="bi bi-house-fill"></i> For Sale
+           }
+        </span>
+      @if(role != 'Owner'){
+      <span class="badge bg-dark text-capitalize">{{
+        item.communityName
+      }}</span>
+      }
+    </div>
+    <div class="slide-link">
+      <button (click)="updateImage(0)"></button>
+      <button (click)="updateImage(1)"></button>
+      <button (click)="updateImage(2)"></button>
+    </div>
+    <div class="card-body p-0">
+      <div class="property-details">
+        
+        <div><i class="bi bi-house"></i> {{ Info.bedrooms }} Beds</div>
+        <div><i class="bi bi-droplet"></i> {{ Info.bathrooms }} Baths</div>
+        <div><i class="bi bi-rulers"></i> {{ Info.areaUnit }} m²</div>
+        @if(item.hasAppointment && role != 'Owner'){
+        <div (click)="getAllAppointmment(item.adID)">
+          <i class="bi bi-calendar4-week"></i>Book
         </div>
-        <div class="d-flex justify-content-between price">
-          <div>
-            <h5 class="card-title fw-bold">EGP{{item.price}}</h5>
-           <p class="card-text mb-0 text-capitalize">{{Info.type}}</p>
-          </div>
-          <div>
-            <p class="card-text mb-0">{{item.city}}</p>
-            <p class="card-text text-secondary" style="font-size: 0.85rem">
-              {{item.area}}, {{item.street}}
-            </p>
-          </div>
+        }
+      </div>
+      <div class="d-flex justify-content-between price">
+        <div>
+          <h5 class="card-title fw-bold">EGP{{ item.price }}</h5>
+          <p class="card-text mb-0 text-capitalize">{{ Info.typeUnit }}</p>
+        </div>
+        <div>
+          <p class="card-text mb-0">{{ item.city }}</p>
+          <p class="card-text text-secondary" style="font-size: 0.85rem">
+            {{ item.area }}, {{ item.street }}
+          </p>
         </div>
       </div>
+    </div>
   </div>
 </div>

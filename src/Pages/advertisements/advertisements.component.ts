@@ -62,8 +62,9 @@ export class AdvertisementsComponent implements OnInit ,OnDestroy {
   getAllAdvertisements(){
     const sub =this._AdvertisementService.getAllAds().subscribe({
       next:(data) =>{
-        console.log(data);
         this.advertisements=data;
+        console.log(this.advertisements);
+        
         this.filteredAds = [...this.advertisements]; 
         this.loading=false
       },error:(err) => {
@@ -94,13 +95,13 @@ export class AdvertisementsComponent implements OnInit ,OnDestroy {
   const search = this.searchTerm.trim().toLowerCase();
 
   this.filteredAds = this.advertisements.filter(ad => {
-
     if (search === '') return true;
 
     return (
       ad.city?.toLowerCase().includes(search) ||
-      ad.area?.toLowerCase().includes(search) ||
-      ad.street?.toLowerCase().includes(search)
+      ad.area?.toLowerCase().includes(search) ||   
+      ad.street?.toLowerCase().includes(search) ||
+      ad.description?.toLowerCase().includes(search)
     );
   });
 }
@@ -126,18 +127,19 @@ setBeds(beds:number|null){
   this.filterBeds();
 }
 
-filterBeds(){
-  this.filteredAds=this.advertisements.filter(ads => {
-    const bedsMatch = (() => {
-      if (this.selectedBeds == null) return true;
+filterBeds() {
+  this.filteredAds = this.advertisements.filter(ads => {
+    if (this.selectedBeds == null) return true;
 
-      const match = ads.description?.match(/(\d+)\s*beds?/i);
-      const beds = match ? parseInt(match[1]) : null;
-      return beds === this.selectedBeds;
-    })();
-    return bedsMatch;
+    const match = ads.description?.match(/(\d+)\s*[-]?\s*(bed(room)?s?|br|bdr)/i);
+    const beds = match ? parseInt(match[1]) : null;
+    if (this.selectedBeds === 4) {
+      return beds != null && beds >= 4;
+    }
+
+    return beds === this.selectedBeds;
   });
- }
+}
 
   LoadAll(){
     this.filteredAds=this.advertisements;
